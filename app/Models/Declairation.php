@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Person;
+use Illuminate\Database\Eloquent\Model;
 
 class Declairation extends Model
 {
@@ -22,7 +21,8 @@ class Declairation extends Model
         'test_date',
     ];
 
-    public function declairant(){
+    public function declairant()
+    {
         return $this->belongsTo(Person::class);
     }
 }

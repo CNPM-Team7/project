@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Family;
-use App\Models\Declairation;
+use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
@@ -35,11 +33,13 @@ class Person extends Model
         'family_id',
     ];
 
-    public function family(){
+    public function family()
+    {
         return $this->belongsTo(Family::class);
     }
 
-    public function declairations(){
+    public function declairations()
+    {
         return $this->hasMany(Declairation::class);
     }
 }

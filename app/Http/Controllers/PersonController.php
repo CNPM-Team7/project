@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\Person;
 
 class PersonController extends Controller
 {
@@ -38,7 +39,7 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Person::create($request);
     }
 
     /**
@@ -49,7 +50,7 @@ class PersonController extends Controller
      */
     public function show($id)
     {
-        //
+        $person = Person::find($id);
     }
 
     /**
@@ -60,7 +61,7 @@ class PersonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $person = Person::find($id);
     }
 
     /**
@@ -72,7 +73,7 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return Person::find($id)->update($request);
     }
 
     /**
@@ -83,6 +84,6 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Person::find($id)->delete();
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Declairation extends Model
+class Declaration extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,8 @@ class Declairation extends Model
      *
      * @var string[]
      */
+    protected $table = 'declairations';
+
     protected $fillable = [
         'person_id',
         'status',
@@ -21,7 +23,7 @@ class Declairation extends Model
         'test_date',
     ];
 
-    public function declairant()
+    public function declarant()
     {
         return $this->belongsTo(Person::class);
     }

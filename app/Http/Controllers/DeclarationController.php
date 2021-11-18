@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\Declaration;
 
 class DeclarationController extends Controller
 {
@@ -38,7 +39,7 @@ class DeclarationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Declaration::create($request);
     }
 
     /**
@@ -49,7 +50,7 @@ class DeclarationController extends Controller
      */
     public function show($id)
     {
-        //
+        $declaration = Declaration::find($id);
     }
 
     /**
@@ -60,7 +61,7 @@ class DeclarationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $declaration = Declaration::find($id);
     }
 
     /**
@@ -72,7 +73,7 @@ class DeclarationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return Declaration::find($id)->update($request);
     }
 
     /**
@@ -83,6 +84,6 @@ class DeclarationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Declaration::find($id)->delete();
     }
 }

@@ -38,8 +38,8 @@ class Person extends Model
         return $this->belongsTo(Family::class);
     }
 
-    public function declairations()
+    public function declarations()
     {
-        return $this->hasMany(Declairation::class);
+        return $this->hasMany(Declaration::class);
     }
 }

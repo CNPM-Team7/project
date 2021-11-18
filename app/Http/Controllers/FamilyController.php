@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\Family;
 
 class FamilyController extends Controller
 {
@@ -38,7 +39,7 @@ class FamilyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Family::create($request);
     }
 
     /**
@@ -49,7 +50,7 @@ class FamilyController extends Controller
      */
     public function show($id)
     {
-        //
+        $family = Family::find($id);
     }
 
     /**
@@ -60,7 +61,7 @@ class FamilyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $family = Family::find($id);
     }
 
     /**
@@ -72,7 +73,7 @@ class FamilyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return Family::find($id)->update($request);
     }
 
     /**
@@ -83,6 +84,6 @@ class FamilyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Family::find($id)->delete();
     }
 }

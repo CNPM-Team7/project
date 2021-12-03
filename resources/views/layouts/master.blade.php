@@ -18,7 +18,7 @@
 
     </head>
     <body class="antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
             <x-navigation-menu></x-navigation-menu>
 
             <!-- Page Heading -->
@@ -34,7 +34,7 @@
             <main>
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="h-screen bg-gray-300 overflow-hidden shadow-xl sm:rounded-lg p-10">
+                        <div class="h-auto bg-gray-100 overflow-hidden shadow-xl sm:rounded-lg px-10 py-5">
                             @yield('content')
                         </div>
                     </div>

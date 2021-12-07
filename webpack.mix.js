@@ -16,5 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
         require("tailwindcss"),
     ])
 ;
-
+mix.copy('node_modules/chart.js/dist/chart.js', 'public/js');
 mix.browserSync("http://127.0.0.1:8000");

@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-navigation-menu.nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Trang chủ') }}
                     </x-navigation-menu.nav-link>
 
                     <x-navigation-menu.nav-link href="{{ route('declarations.index') }}"
@@ -23,12 +23,12 @@
 
                     <x-navigation-menu.nav-link href="{{ route('person.index') }}"
                                                 :active="request()->routeIs('person.index')">
-                        {{ __('Person') }}
+                        {{ __('Nhân khẩu') }}
                     </x-navigation-menu.nav-link>
 
                     <x-navigation-menu.nav-link href="{{ route('families.index') }}"
                                                 :active="request()->routeIs('families.index')">
-                        {{ __('Family') }}
+                        {{ __('Hộ khẩu') }}
                     </x-navigation-menu.nav-link>
                 </div>
             </div>

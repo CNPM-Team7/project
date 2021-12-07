@@ -1,50 +1,26 @@
 @extends('layouts.master')
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Person') }}
+        {{ __('Thống kê') }}
     </h2>
 @endsection
 
 @section('content')
-    <div class="w-full flex flex-col">
-
-        <div class="w-full flex flex-row justify-between my-4">
-            <div class="flex justify-around gap-2">
-                <button class="border rounded bg-gray-300">
-                    Add
-                </button>
-
-                <button>
-                    Edit
-                </button>
-
-                <button>
-                    Delete
-                </button>
-            </div>
-
-            <div class="justify-self-end">
-                <label for="search">Search</label>
-                <input type="text" name="" id="search">
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="flex flex-col my-4">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="px-4 py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 flex flex-row gap-x-5 justify-center">
-                    <div class="w-auto flex-grow flex flex-col gap-y-3">
-                        <span>
-                            Dan so
+    <div class="w-full flex flex-col select-none">
+        <div class="w-full flex-col my-4">
+            <div class="w-full px-24 py-2 flex flex-row gap-x-5 justify-between">
+                    <div class="flex flex-col gap-y-3">
+                        <span class="font-bold">
+                            Tổng số nhân khẩu
                         </span>
                         <div>
-                            <span class="text-5xl font-bold ">999</span>
+                            <span class="text-5xl font-bold select-text">9999</span>
                         </div>
                     </div>
-                    <div class="w-auto flex-grow flex flex-col gap-y-3">
-                        <span>
-                            Ti le nam nu
+
+                    <div class="flex flex-col gap-y-3">
+                        <span class="font-bold">
+                            Tỉ lệ nam nữ
                         </span>
                         <div class="flex flex-row gap-x-10">
                             <div class="flex flex-row gap-x-2">
@@ -55,7 +31,7 @@
                                 </svg>
                                 <div class="flex flex-col">
                                     <span>Nam</span>
-                                    <span>2342</span>
+                                    <span class="select-text">2342</span>
                                 </div>
                             </div>
                             <div class="flex flex-row gap-x-2">
@@ -65,19 +41,168 @@
                                     <path d="M 25.099609 4 C 21.187648 4 18.442055 5.4726727 16.738281 7.7089844 C 15.034508 9.9452961 14.32484 12.825753 13.970703 15.716797 C 13.616566 18.60784 13.626852 21.539254 13.511719 23.892578 C 13.454149 25.06924 13.362796 26.101381 13.201172 26.873047 C 13.039547 27.644713 12.788443 28.114478 12.626953 28.261719 A 1.0001 1.0001 0 0 0 12.300781 29 C 12.300781 29.697222 12.684708 30.336276 13.173828 30.748047 C 13.662948 31.159818 14.255651 31.432222 14.945312 31.662109 C 16.069509 32.036842 17.623189 32.234351 19.230469 32.423828 C 19.225969 32.457098 19.230095 32.469069 19.224609 32.505859 C 18.912521 33.285288 18.184953 33.907381 17.029297 34.507812 C 15.845366 35.122937 14.303273 35.670987 12.740234 36.375 C 11.177196 37.079013 9.5759657 37.946747 8.3046875 39.300781 C 7.0334093 40.654816 6.1385476 42.511977 6.0019531 44.943359 A 1.0001 1.0001 0 0 0 7 46 L 24 46 L 30.800781 46 L 43 46 A 1.0001 1.0001 0 0 0 43.998047 44.943359 C 43.861452 42.511977 42.966592 40.654816 41.695312 39.300781 C 40.424034 37.946747 38.822804 37.079013 37.259766 36.375 C 35.696727 35.670987 34.154634 35.122937 32.970703 34.507812 C 31.810766 33.905156 31.079575 33.281571 30.769531 32.498047 C 30.765931 32.454547 30.765819 32.451099 30.761719 32.412109 C 32.501963 32.186011 34.157165 31.896479 35.332031 31.447266 C 36.03094 31.180036 36.612885 30.886987 37.083984 30.515625 C 37.555072 30.144265 38 29.629936 38 28.900391 A 1.0001 1.0001 0 0 0 37.671875 28.158203 C 37.537048 28.036016 37.306541 27.618928 37.166016 26.910156 C 37.025491 26.201385 36.955277 25.245365 36.931641 24.154297 C 36.884371 21.97216 37.008279 19.247268 36.886719 16.566406 C 36.76515 13.885545 36.421748 11.234341 35.279297 9.1171875 C 34.186364 7.0917993 32.179812 5.6696953 29.363281 5.546875 C 28.933783 5.153761 27.566089 4 25.099609 4 z M 25.099609 6 C 27.199609 6 28.269531 7.1816406 28.269531 7.1816406 A 1.0001 1.0001 0 0 0 29 7.5 C 31.426835 7.5 32.638154 8.4366853 33.517578 10.066406 C 34.397002 11.696128 34.772738 14.101565 34.888672 16.658203 C 35.004605 19.214842 34.883974 21.907528 34.933594 24.197266 C 34.958394 25.342135 35.022164 26.386115 35.203125 27.298828 C 35.324752 27.912281 35.542247 28.455518 35.839844 28.949219 C 35.616233 29.124474 35.190361 29.35897 34.617188 29.578125 C 33.465004 30.018666 31.733492 30.412286 29.705078 30.605469 A 1.0001 1.0001 0 0 0 28.802734 31.558594 C 28.762054 31.665794 28.699219 31.685871 28.699219 31.800781 C 28.699219 32.334115 28.800781 32.434115 28.800781 32.800781 A 1.0001 1.0001 0 0 0 28.861328 33.146484 C 29.413193 34.639766 30.676509 35.570201 32.048828 36.283203 C 33.421147 36.996205 34.977492 37.540732 36.439453 38.199219 C 37.901414 38.857705 39.251356 39.620831 40.236328 40.669922 C 41.017743 41.502204 41.508074 42.613674 41.771484 44 L 30.800781 44 L 24 44 L 8.2285156 44 C 8.4919259 42.613674 8.9822574 41.502204 9.7636719 40.669922 C 10.748644 39.620831 12.098586 38.857705 13.560547 38.199219 C 15.022508 37.540732 16.578853 36.996205 17.951172 36.283203 C 19.323491 35.570201 20.586807 34.639766 21.138672 33.146484 A 1.0001 1.0001 0 0 0 21.185547 32.964844 C 21.294433 32.311525 21.300781 31.899609 21.300781 31.599609 A 1.0001 1.0001 0 0 0 20.396484 30.605469 C 18.379914 30.40873 16.673802 30.128897 15.578125 29.763672 C 15.030287 29.581059 14.643691 29.372604 14.460938 29.21875 C 14.390367 29.15934 14.421087 29.162236 14.398438 29.134766 C 14.758083 28.592733 15.011507 27.983592 15.158203 27.283203 C 15.36025 26.318541 15.450145 25.208885 15.509766 23.990234 C 15.629007 21.552933 15.621715 18.680441 15.955078 15.958984 C 16.288441 13.237528 16.972524 10.699235 18.328125 8.9199219 C 19.683731 7.1406046 21.661571 6 25.099609 6 z"></path>
                                 </svg>
                                 <div class="flex flex-col">
-                                    <span>Nu</span>
+                                    <span class="select-text">Nữ</span>
                                     <span>32423</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-auto flex-grow flex flex-col">
-                        <div>
 
+                    <div class="w-24 h-full container">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+
+            <hr>
+
+            <div class="w-full h-full px-24 py-2 flex flex-row gap-x-10 justify-between">
+                <div class="w-auto flex flex-col">
+                    <spanc class="font-bold">Thống kê theo độ tuổi</spanc>
+                    <canvas id="ageChart" style="height: 250px"></canvas>
+                </div>
+
+                <div class="flex-grow flex flex-col space-y-8">
+
+                    <div class="flex flex-row justify-evenly">
+                        <div class="flex flex-col space-y-4 items-center">
+                            <span class="font-bold">Tạm trú</span>
+                            <span>9999</span>
+                        </div>
+                        <div class="flex flex-col space-y-4 items-center">
+                            <span class="font-bold">Tạm vắng</span>
+                            <span>9999</span>
+                        </div>
+                    </div>
+
+
+                    <div class="flex flex-col items-center space-y-4">
+                        <span class="font-bold">Thống kê trong khoảng thời gian</span>
+                        <div class="flex flex-row space-x-2">
+                            <label for="from_year">Từ năm</label>
+                            <select name="from_year" id="from_year">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                            </select>
+                            <label for="to_year">đến năm</label>
+                            <select name="to_year" id="to_year">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const ctx1 = document.getElementById('genderChart');
+        const genderChart = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Nam', 'Nữ'],
+                datasets: [{
+                    data: [60, 30],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins:{
+                    legend: {
+                        display: false,
+                    }
+                }
+            }
+        });
+
+    </script>
+
+    @php($data = [1, 2, 3, 4, 5, 6])
+    <script>
+        const maleData = [];
+        const male = {!! json_encode($data, JSON_HEX_TAG) !!};
+        male.forEach(element => maleData.push(element * (-1)));
+
+        const data = {
+            labels: ['Nghỉ hưu', 'Độ tuổi lao động', 'Cấp 3', 'Cấp 2', 'Cấp 1', 'Mẫu giáo'],
+            datasets: [
+                {
+                    label: 'Nam',
+                    data: maleData,
+                    backgroundColor: 'rgba(54, 162, 235, 1)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                },
+                {
+                    label: 'Nữ',
+                    data: [1, 2, 3, 4, 5, 6],
+                    backgroundColor: 'rgba(255, 99, 132, 1)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                }
+            ]
+        };
+
+        const tooltip = {
+            yAlign: 'bottom',
+            titleAlign: 'center',
+            bodyAlign: 'center',
+            callbacks:{
+                label: function (context){
+                    return `${context.dataset.label} ${Math.abs(context.raw)}`;
+                }
+            }
+        }
+
+        const config = {
+            type: 'bar',
+            data,
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+
+                        ticks: {
+                            callback: function (value, index, values){
+                                return Math.abs(value);
+                            }
+                        },
+                        stacked: true,
+                    },
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                    }
+                },
+                responsive: true,
+                plugins:{
+                    legend: {
+                        position: 'bottom',
+                        align: 'start',
+                    },
+                    tooltip: tooltip,
+                }
+            }
+        }
+
+        const ageChart = new Chart(
+            document.getElementById('ageChart'),
+            config
+        );
+    </script>
+
+
 @endsection

@@ -9,9 +9,11 @@
         <!-- Fonts -->
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-        @livewireStyles
+    @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -43,7 +45,8 @@
             </main>
         </div>
 
-        @livewire('livewire-ui-modal')
-        @livewireScripts
+        <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+        <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/datepicker.bundle.js"></script>
+
     </body>
 </html>

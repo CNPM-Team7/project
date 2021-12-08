@@ -16,11 +16,6 @@
                         {{ __('Trang chủ') }}
                     </x-navigation-menu.nav-link>
 
-                    <x-navigation-menu.nav-link href="{{ route('declarations.index') }}"
-                                                :active="request()->routeIs('declarations.index')">
-                        {{ __('Declaration') }}
-                    </x-navigation-menu.nav-link>
-
                     <x-navigation-menu.nav-link href="{{ route('person.index') }}"
                                                 :active="request()->routeIs('person.index')">
                         {{ __('Nhân khẩu') }}
@@ -29,6 +24,11 @@
                     <x-navigation-menu.nav-link href="{{ route('families.index') }}"
                                                 :active="request()->routeIs('families.index')">
                         {{ __('Hộ khẩu') }}
+                    </x-navigation-menu.nav-link>
+
+                    <x-navigation-menu.nav-link href="{{ route('declarations.index') }}"
+                                                :active="request()->routeIs('declarations.index')">
+                        {{ __('Khai báo thông tin dịch tễ') }}
                     </x-navigation-menu.nav-link>
                 </div>
             </div>

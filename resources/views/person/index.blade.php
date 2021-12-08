@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <div class="w-full flex flex-col">
+    <div class="w-full flex flex-col select-none">
 
         <div class="w-full flex flex-row justify-between my-4">
             <div class="h-auto justify-self-end flex flex-row self-end">
@@ -26,10 +26,11 @@
                 </div>
 
                 <div class="w-28 space-y-2">
-                    <button class="w-full border rounded bg-green-500 px-4 py-2">
-                        Thêm mới
-                    </button>
-
+                    <a href="{{ route('person.create') }}">
+                        <button class="w-full border rounded bg-green-500 px-4 py-2">
+                            Thêm mới
+                        </button>
+                    </a>
                     <button class="w-full border rounded bg-red-500 px-4 py-2">
                         Khai tử
                     </button>
@@ -48,19 +49,19 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-200">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                     ID
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                     Name
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                     Birthday
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                     Gender
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                     Address
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
@@ -71,25 +72,25 @@
 
                             <tbody class="bg-white divide-y divide-gray-200">
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 whitespace-nowrap select-text">
                                     <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
+                                        <span class="text-sm font-medium text-gray-500">
                                             1
-                                        </div>
+                                        </span>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 whitespace-nowrap select-text">
                                     <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
+                                        <span class="text-sm font-medium text-gray-500">
                                             Jane Cooper
-                                        </div>
+                                        </span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">28/01/2001</div>
+                                    <div class="text-sm text-gray-500">28/01/2001</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-500">
                                           Female
                                         </span>
                                 </td>
@@ -97,7 +98,7 @@
                                     Ha Noi
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-500">Edit</a>
                                 </td>
                             </tr>
 

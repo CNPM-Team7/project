@@ -73,25 +73,13 @@
                             <span>9999</span>
                         </div>
                     </div>
-
-
                     <div class="flex flex-col items-center space-y-4">
-                        <span class="font-bold">Thống kê trong khoảng thời gian</span>
-                        <div class="flex flex-row space-x-2">
-                            <label for="from_year">Từ năm</label>
-                            <select name="from_year" id="from_year">
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
-                            </select>
-                            <label for="to_year">đến năm</label>
-                            <select name="to_year" id="to_year">
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
-                            </select>
+                        <span class="font-bold">Thống kê trong năm</span>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <input datepicker datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="Select date">
                         </div>
                     </div>
                 </div>
@@ -189,6 +177,11 @@
                 },
                 responsive: true,
                 plugins:{
+                    labels: {
+                        render: 'percentage',
+                        fontColor: ['green', 'white', 'red'],
+                        precision: 2,
+                    },
                     legend: {
                         position: 'bottom',
                         align: 'start',

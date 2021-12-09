@@ -21,6 +21,7 @@ class Person extends Model
         'birthday',
         'birth_place',
         'sex',
+        'race',
         'job',
         'work_place',
         'id_number',
@@ -30,6 +31,8 @@ class Person extends Model
         'register_date',
         'owner_relation',
         'status',
+        'move_to',
+        'note',
         'family_id',
     ];
 

@@ -28,6 +28,7 @@ class PersonRequest extends FormRequest
             'birthday' => ['required'],
             'birth_place' => ['required'],
             'sex' => ['required'],
+            'race' => ['required'],
             'job' => [],
             'work_place' => [],
             'id_number' => [],
@@ -37,6 +38,8 @@ class PersonRequest extends FormRequest
             'register_date' => [],
             'owner_relation' => ['required'],
             'status' => ['required'],
+            'move_to' => [],
+            'note' => [],
             'family_id' => ['required'],
         ];
     }

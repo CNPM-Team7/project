@@ -18,8 +18,6 @@ class Family extends Model
         'owner_id',
         'house_id',
         'address',
-        'update_content',
-        'update_date',
     ];
 
     public function members()

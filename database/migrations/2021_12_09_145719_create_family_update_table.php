@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFamiliesTable extends Migration
+class CreateFamilyUpdateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateFamiliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('families', function (Blueprint $table) {
+        Schema::create('family_update', function (Blueprint $table) {
             $table->id();
-            $table->integer('owner_id');
-            $table->integer('house_id');
-            $table->string('address');
+            $table->integer('family_id');
+            $table->string('update_content');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateFamiliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('families');
+        Schema::dropIfExists('family_update');
     }
 }

@@ -29,7 +29,9 @@ class CreatePeopleTable extends Migration
             $table->date('register_date')->nullable();
             $table->string('owner_relation');
             $table->integer('status');
-            $table->integer('family_id');
+            $table->string('move_to')->nullable();
+            $table->string('note')->nullable();
+            $table->integer('family_id')->nullable();
             $table->timestamps();
         });
     }

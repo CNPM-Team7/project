@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeclairationsTable extends Migration
+class CreateDeclarationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDeclairationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('declairations', function (Blueprint $table) {
+        Schema::create('declarations', function (Blueprint $table) {
             $table->id();
             $table->integer('person_id');
             $table->integer('status');
@@ -30,6 +30,6 @@ class CreateDeclairationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('declairations');
+        Schema::dropIfExists('declarations');
     }
 }

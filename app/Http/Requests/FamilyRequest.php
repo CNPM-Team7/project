@@ -27,8 +27,6 @@ class FamilyRequest extends FormRequest
             'owner_id' => ['required'],
             'house_id' => ['required'],
             'address' => ['required'],
-            'update_content' => [],
-            'update_date' => [],
         ];
     }
 

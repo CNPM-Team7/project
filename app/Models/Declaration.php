@@ -14,7 +14,6 @@ class Declaration extends Model
      *
      * @var string[]
      */
-    protected $table = 'declairations';
 
     protected $fillable = [
         'person_id',

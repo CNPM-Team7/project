@@ -28,7 +28,7 @@ class DeclarationController extends Controller
      */
     public function create()
     {
-        //
+        return view('declaration.create');
     }
 
     /**
@@ -61,6 +61,8 @@ class DeclarationController extends Controller
      */
     public function edit($id)
     {
+        return view('declaration.edit');
+
         $declaration = Declaration::find($id);
     }
 

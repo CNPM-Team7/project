@@ -63,6 +63,7 @@ class PersonController extends Controller
      */
     public function edit($id)
     {
+        return view('person.edit');
         $person = Person::find($id);
     }
 

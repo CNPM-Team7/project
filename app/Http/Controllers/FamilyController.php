@@ -28,7 +28,7 @@ class FamilyController extends Controller
      */
     public function create()
     {
-        //
+        return view('family.create');
     }
 
     /**
@@ -61,6 +61,7 @@ class FamilyController extends Controller
      */
     public function edit($id)
     {
+        return \view('family.edit');
         $family = Family::find($id);
     }
 

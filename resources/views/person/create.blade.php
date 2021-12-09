@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('person.store') }}" method="POST" class="flex flex-col gap-y-10 select-none">
+    <form action="#" method="POST" class="flex flex-col gap-y-10 select-none">
         @csrf
         <div class="grid grid-cols-2 gap-x-14 gap-y-4">
             <x-input-text name="name" placeholder="Nguyễn Văn A" mandatory>

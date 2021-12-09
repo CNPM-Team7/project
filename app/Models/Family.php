@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Person;
 
 class Family extends Model
 {
@@ -24,6 +25,6 @@ class Family extends Model
 
     public function members()
     {
-        return $this->hasMany(Person::class);
+        return $this->hasMany(Person::class, 'family_id', 'id');
     }
 }

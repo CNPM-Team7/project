@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Person;
+use App\Models\Family;
 
 class PersonController extends Controller
 {
@@ -18,7 +19,10 @@ class PersonController extends Controller
      */
     public function index()
     {
-        return view('person.index');
+        $people = Person::all();
+        return view('person.index')->with([
+            'people' => $people
+        ]);
     }
 
     /**
@@ -28,7 +32,15 @@ class PersonController extends Controller
      */
     public function create()
     {
-        //
+        $families = Family::all();
+        $owner_name = array();
+        foreach($families as $family){
+            $owner_name[$family->id] = Person::find($family->owner_id);
+        }
+        return view('person.create')->with([
+            'families' => $families,
+            'owner_name' => $owner_name
+        ]);;
     }
 
     /**
@@ -39,7 +51,24 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        return Person::create($request);
+        Person::create([
+            'name' => $request->get('name'),
+            'birthday' => $request->get('birthday'),
+            'birth_place' => $request->get('birth_place'),
+            'sex' => $request->get('sex'),
+            'race' => $request->get('race'),
+            'job' => $request->get('job'),
+            'work_place' => $request->get('work_place'),
+            'id_number' => $request->get('id_number'),
+            'idn_receive_place' => $request->get('idn_receive_place'),
+            'idn_receive_date' => $request->get('idn_receive_date'),
+            'register_place' => $request->get('register_place'),
+            'register_date' => $request->get('register_date'),
+            'owner_relation' => $request->get('owner_relation'),
+            'status' => $request->get('status'),
+            'family_id' => $request->get('family_id'),
+        ]);
+        return redirect()->route('person.index');
     }
 
     /**
@@ -62,6 +91,23 @@ class PersonController extends Controller
     public function edit($id)
     {
         $person = Person::find($id);
+        // $people = Person::all();
+        
+        $families = Family::all();
+        $owner_name = array();
+        foreach($families as $family){
+            $owner_name[$family->id] = Person::find($family->owner_id);
+        }
+        // echo "<pre>";
+        //     print_r($family_name);
+        // echo "</pre>";
+        // dd($family_name[1]->name);
+
+        return view('person.edit')->with([
+            'person' => $person,
+            'families' => $families,
+            'owner_name' => $owner_name
+        ]);
     }
 
     /**
@@ -73,7 +119,24 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Person::find($id)->update($request);
+        Person::find($id)->update([
+            'name' => $request->get('name'),
+            'birthday' => $request->get('birthday'),
+            'birth_place' => $request->get('birth_place'),
+            'sex' => $request->get('sex'),
+            'race' => $request->get('race'),
+            'job' => $request->get('job'),
+            'work_place' => $request->get('work_place'),
+            'id_number' => $request->get('id_number'),
+            'idn_receive_place' => $request->get('idn_receive_place'),
+            'idn_receive_date' => $request->get('idn_receive_date'),
+            'register_place' => $request->get('register_place'),
+            'register_date' => $request->get('register_date'),
+            'owner_relation' => $request->get('owner_relation'),
+            'status' => $request->get('status'),
+            'family_id' => $request->get('family_id'),
+        ]);
+        return redirect()->route('person.index');
     }
 
     /**
@@ -84,6 +147,7 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        return Person::find($id)->delete();
+        Person::find($id)->delete();
+        return redirect()->route('person.index');
     }
 }

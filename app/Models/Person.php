@@ -21,6 +21,7 @@ class Person extends Model
         'birthday',
         'birth_place',
         'sex',
+        'race',
         'job',
         'work_place',
         'id_number',

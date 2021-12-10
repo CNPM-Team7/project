@@ -48,8 +48,19 @@ use Illuminate\Support\Facades\Route;
 +--------+-----------+---------------------------------+----------------------+------------------------------------------------------------+------------------------------------------+
 */
 
+Route::name('auth.')->group(function () {
+    Route::get('/login', function () {
+        return view('authenticate.login');
+    })->name('login');
 
-Route::get('/', function () {
+    Route::get('/register', function () {
+        return view('authenticate.register');
+    })->name('register');
+});
+
+
+
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 

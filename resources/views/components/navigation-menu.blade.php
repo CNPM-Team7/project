@@ -10,6 +10,19 @@
                     </a>
                 </div>
 
+                @if(request()->routeIs('auth.*'))
+                    <!-- Navigation Links -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-navigation-menu.nav-link href="{{ route('auth.login') }}" :active="request()->routeIs('auth.login')">
+                                {{ __('Đăng nhâp') }}
+                            </x-navigation-menu.nav-link>
+
+                            <x-navigation-menu.nav-link href="{{ route('auth.register') }}"
+                                                        :active="request()->routeIs('auth.register')">
+                                {{ __('Đăng ký') }}
+                            </x-navigation-menu.nav-link>
+                        </div>
+                @else
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-navigation-menu.nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -31,8 +44,11 @@
                         {{ __('Khai báo thông tin dịch tễ') }}
                     </x-navigation-menu.nav-link>
                 </div>
+
+                @endif
             </div>
 
+            @if(!request()->routeIs('auth.*'))
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
@@ -90,6 +106,7 @@
                     </svg>
                 </button>
             </div>
+            @endif
         </div>
     </div>
 </nav>

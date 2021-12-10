@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Person::factory(50)->create();
         Family::factory(20)->create();
-//        Declaration::factory(10)->create();
-
-
+        Declaration::factory(30)->create();
     }
 }

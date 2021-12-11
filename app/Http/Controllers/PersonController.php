@@ -11,6 +11,10 @@ use App\Models\Person;
 
 class PersonController extends Controller
 {
+
+    protected $statuses = ['Normal', 'Just Born', 'Just Died', 'Temporary', 'Moved', 'Dead'];
+
+    protected $genders = ['Nam', 'Nu', 'Khac'];
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +22,9 @@ class PersonController extends Controller
      */
     public function index()
     {
-        return view('person.index');
+        $query = request()->query(); // search for name
+        $people = Person::where($query)->paginate(10);
+        return view('person.index', ['people' => $people, 'statuses' => $this->statuses, 'genders' => $this->genders]);
     }
 
     /**

@@ -18,7 +18,8 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        return view('family.index');
+        $families = Family::paginate(10);
+        return view('family.index', ['families' => $families]);
     }
 
     /**
@@ -39,7 +40,8 @@ class FamilyController extends Controller
      */
     public function store(Request $request)
     {
-        return Family::create($request);
+        Family::create($request->all());
+        return redirect()->route('families.index');
     }
 
     /**

@@ -24,4 +24,9 @@ class Family extends Model
     {
         return $this->hasMany(Person::class);
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(Person::class, 'owner_id');
+    }
 }

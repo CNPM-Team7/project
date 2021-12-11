@@ -15,9 +15,11 @@
             </div>
 
             <div class="flex justify-around gap-2">
-                <button class="border rounded bg-green-500 px-4 py-2">
-                    Thêm mới
-                </button>
+                <a href="{{ route('families.create') }}">
+                    <button class="border rounded bg-green-500 px-4 py-2">
+                        Thêm mới
+                    </button>
+                </a>
 
                 <button class="border rounded bg-yellow-500 px-4 py-2">
                     Tách hộ khẩu
@@ -56,57 +58,37 @@
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($families as $family)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            1
+                                            {{ $family->house_id }}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            Jane Cooper
+                                            {{ $family->owner->name }}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    Ha Noi
+                                    {{ $family->address }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <a href="{{ route('families.edit', $family->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            2
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            Dan Cahill
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    Ha Noi
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                </td>
-                            </tr>
-                            <!-- More people... -->
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            <br>
+            <div>{{ $families->links() }}</div>
         </div>
     </div>
 @endsection

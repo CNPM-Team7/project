@@ -54,10 +54,8 @@
             </a>
         </div>
 
-        <hr>
-
         <div class="flex flex-col my-4">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
@@ -118,13 +116,31 @@
 
                             @foreach ($people as $person)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap select-text">
+                                    <td data-tooltip-target="tooltip-id_number" class="px-6 py-4 whitespace-nowrap select-text">
                                         <div class="flex items-center">
                                         <span class="text-sm font-medium text-gray-500">
                                             {{ $person->id_number }}
                                         </span>
                                         </div>
                                     </td>
+                                    <div id="tooltip-id_number" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
+                                        <div class="flex flex-col">
+                                            <span>
+                                                register date
+                                            </span>
+                                            <span>
+                                                place
+                                            </span>
+                                            <span>
+                                                recieve date
+                                            </span>
+                                            <span>
+                                                place
+                                            </span>
+                                        </div>
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+
                                     <td class="px-6 py-4 whitespace-nowrap select-text">
                                         <div class="flex items-center">
                                         <span class="text-sm font-medium text-gray-500">
@@ -132,10 +148,16 @@
                                         </span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td data-tooltip-target="tooltip-birthday" class="px-6 py-4 whitespace-nowrap">
                                         <div
                                             class="text-sm text-gray-500">{{ date('d/m/Y', strtotime($person->birthday)) }}</div>
                                     </td>
+                                    <div id="tooltip-birthday" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
+                                        <span>
+                                            birthday place
+                                        </span>
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                             bg-{{ $genderColors[$person->sex] }}-100 text-{{ $genderColors[$person->sex] }}-500">
@@ -148,10 +170,17 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $statuses[$person->status] }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td data-tooltip-target="tooltip-job" class="px-6 py-4 whitespace-nowrap">
                                         <div
                                             class="text-sm text-gray-500">{{ $person->job }}</div> {{--qua dai, rut gon bang '...'--}}
                                     </td>
+                                    <div id="tooltip-job" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
+                                        <span>
+                                            work place
+                                        </span>
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
                                             class="text-sm text-gray-500">{{ $person->family ? $person->owner_relation : 'No Info' }}</div>

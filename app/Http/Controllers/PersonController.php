@@ -12,9 +12,9 @@ use App\Models\Person;
 class PersonController extends Controller
 {
 
-    protected $statuses = ['Normal', 'Just Born', 'Just Died', 'Temporary', 'Moved', 'Dead'];
+    protected array $statuses = ['Normal', 'Just Born', 'Just Died', 'Temporary', 'Moved', 'Dead'];
 
-    protected $genders = ['Nam', 'Nu', 'Khac'];
+    protected array $genders = ['Nam', 'Nữ', 'Khác'];
     /**
      * Display a listing of the resource.
      *

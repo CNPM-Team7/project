@@ -1,37 +1,26 @@
 @extends('layouts.guest')
-@section('contents')
-    <div class="flex items-center justify-center min-h-screen bg-gray-100">
-        <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">
-            <div class="flex justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 text-blue-600" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path
-                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-center">Login to your account</h3>
-            <form action="">
-                <div class="mt-4">
-                    <div>
-                        <label class="block" for="email">Email<label>
-                                <input type="text" placeholder="Email"
-                                       class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
-                                <span class="text-xs tracking-wide text-red-600">Email field is required </span>
-                    </div>
-                    <div class="mt-4">
-                        <label class="block">Password<label>
-                                <input type="password" placeholder="Password"
-                                       class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
-                    </div>
-                    <div class="flex items-baseline justify-between">
-                        <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Login</button>
-                        <a href="#" class="text-sm text-blue-600 hover:underline">Forgot password?</a>
-                    </div>
-                </div>
-            </form>
+@section('content')
+
+    <form action="{{ route('auth.login') }}" method="POST" class="w-auto px-7 py-5 flex items-center flex-col">
+        @csrf
+        <div class="mb-6">
+            <label for="username" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Tài khoản</label>
+            <input type="text" id="username" name="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
         </div>
-    </div>
+        <div class="mb-6">
+            <label for="password" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Mật khẩu</label>
+            <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+        </div>
+        <div class="w-full flex items-start mb-6">
+            <div class="flex items-center h-5">
+                <input id="remember" aria-describedby="remember" type="checkbox" class="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
+            </div>
+            <div class="text-sm ml-3">
+                <label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Nhớ tài khoản</label>
+            </div>
+        </div>
+
+        <button type="submit" class="w-3/5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Đăng nhập</button>
+    </form>
+
 @endsection

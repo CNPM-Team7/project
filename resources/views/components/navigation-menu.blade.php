@@ -13,12 +13,12 @@
                 @if(request()->routeIs('auth.*'))
                     <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-navigation-menu.nav-link href="{{ route('auth.login') }}" :active="request()->routeIs('auth.login')">
+                            <x-navigation-menu.nav-link href="{{ route('auth.login.create') }}" :active="request()->routeIs('auth.login.create')">
                                 {{ __('Đăng nhâp') }}
                             </x-navigation-menu.nav-link>
 
-                            <x-navigation-menu.nav-link href="{{ route('auth.register') }}"
-                                                        :active="request()->routeIs('auth.register')">
+                            <x-navigation-menu.nav-link href="{{ route('auth.register.create') }}"
+                                                        :active="request()->routeIs('auth.register.create')">
                                 {{ __('Đăng ký') }}
                             </x-navigation-menu.nav-link>
                         </div>
@@ -57,6 +57,7 @@
                             <span class="inline-flex rounded-md">
                                 <button type="button"
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                    {{ Auth::user()->name }}
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -80,11 +81,10 @@
                             <div class="border-t border-gray-100"/>
 
                             <!-- Authentication -->
-                            <form method="POST" action="">
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-navigation-menu.dropdown-link href=""
-                                                                 onclick="event.preventDefault();this.closest('form').submit();">
+                                <x-navigation-menu.dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-navigation-menu.dropdown-link>
                             </form>
@@ -95,7 +95,7 @@
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open"
+                <button @click="open =! open"
                         class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"

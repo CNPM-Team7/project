@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DeclarationController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\PersonController;
@@ -48,22 +50,30 @@ use Illuminate\Support\Facades\Route;
 +--------+-----------+---------------------------------+----------------------+------------------------------------------------------------+------------------------------------------+
 */
 
-Route::name('auth.')->group(function () {
-    Route::get('/login', function () {
-        return view('authenticate.login');
-    })->name('login');
+Route::middleware('guest')->name('auth.')->group(function () {
+    Route::get('/login', [LoginController::class, 'create'])
+        ->name('login.create');
+
+    Route::post('/login', [LoginController::class, 'login'])
+        ->name('login');
 
     Route::get('/register', function () {
         return view('authenticate.register');
-    })->name('register');
+    })->name('register.create');
+
+    Route::post('/register', [RegisterController::class, 'register'])
+        ->name('register');
 });
 
+Route::middleware('auth:web')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
+    Route::post('/logout', [LoginController::class, 'logout'])
+        ->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::resource('person', PersonController::class);
-Route::resource('families', FamilyController::class);
-Route::resource('declarations', DeclarationController::class);
+    Route::resource('person', PersonController::class);
+    Route::resource('families', FamilyController::class);
+    Route::resource('declarations', DeclarationController::class);
+});

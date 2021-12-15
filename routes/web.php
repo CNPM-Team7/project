@@ -50,7 +50,8 @@ use Illuminate\Support\Facades\Route;
 +--------+-----------+---------------------------------+----------------------+------------------------------------------------------------+------------------------------------------+
 */
 
-Route::middleware('guest')->name('auth.')->group(function () {
+//Route::middleware('guest')->
+Route::name('auth.')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])
         ->name('login.create');
 
@@ -65,7 +66,7 @@ Route::middleware('guest')->name('auth.')->group(function () {
         ->name('register');
 });
 
-Route::middleware('auth:web')->group(function () {
+//Route::middleware('auth:web')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -76,4 +77,4 @@ Route::middleware('auth:web')->group(function () {
     Route::resource('person', PersonController::class);
     Route::resource('families', FamilyController::class);
     Route::resource('declarations', DeclarationController::class);
-});
+//});

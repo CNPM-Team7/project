@@ -50,8 +50,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    return view('dashboard');
+})->name('dashboard');
 
 Route::resource('person', PersonController::class);
 Route::resource('families', FamilyController::class);

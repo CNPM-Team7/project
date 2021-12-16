@@ -1,41 +1,55 @@
 @extends('layouts.master')
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Thêm mới nhân khẩu') }}
+    </h2>
+@endsection
+
 @section('content')
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="h-screen bg-white overflow-hidden shadow-xl sm:rounded-lg border border-gray-100 p-10">
-                <h2>Create</h2>
-                <form action="{{ route('person.store') }}" method="POST">
-                    @csrf
-                    name<input type="text" name="name">
-                    birthday<input type="date" name="birthday">
-                    birth_place<input type="text" name="birth_place">
-                    sex<select name="sex">
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
-                    </select>
-                    race<input type="text" name="race">
-                    job<input type="text" name="job">
-                    work_place<input type="text" name="work_place">
-                    id_number<input type="text" name="id_number">
-                    idn_receive_place<input type="text" name="idn_receive_place">
-                    idn_receive_date<input type="date" name="idn_receive_date">
-                    register_place<input type="text" name="register_place">
-                    register_date<input type="date" name="register_date">
-                    owner_relation<input type="text" name="owner_relation">
-                    status<select name="status">
-                        <option value="0">Không tiếp xúc/bị lây nhiễm</option>
-                        @for($i = 1; $i <= 4; $i++)
-                        <option value="{{ $i }}">F{{$i-1}}</option>
-                        @endfor
-                    </select>
-                    family_id<select name="family_id">
-                        @foreach($families as $family)
-                            <option value="{{ $family->id }}">{{$family->id}} - {{ $owner_name[$family->id]->name }}</option>
-                        @endforeach
-                    </select>
-                    <input type="submit" value="submit">
-                </form>
-            </div>
-        </div>
-    </div>
+    <form action="{{ route('person.store') }}" method="POST">
+        @csrf
+
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="birthday">Ngày sinh</label>
+        <input name="birthday" type="date" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="birth_place">Quê quán</label>
+        <input name="birth_place" type="text" placeholder="Văn Quán, Hà Đông, Hà Nội" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="sex">Giới tính</label>
+        <select name="sex" id="">
+            <option value="0" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">Nam</option>
+            
+        </select>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+        <label for="name">Họ và tên</label>
+        <input name="name" type="text" placeholder="Nguyễn Văn A" class="shadow appearance-none border rounded w-1/3 my-2 h-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <br>
+
+        <button class="border rounded bg-green-500 px-4 py-2">Hoàn thành</button>
+    </form>
 @endsection

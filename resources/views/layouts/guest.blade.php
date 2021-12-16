@@ -30,7 +30,7 @@
     <!-- Page Content -->
         <main>
             <div class="py-12 bg-gray-50">
-                <div class="w-auto mx-auto  sm:px-6 lg:px-8 flex justify-center">
+                <div class="w-auto mx-auto sm:px-6 lg:px-8 flex justify-center">
                     <div class="w-auto h-auto bg-gray-100 overflow-hidden shadow-xl sm:rounded-lg px-10 py-5">
                         @yield('content')
                     </div>

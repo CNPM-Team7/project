@@ -1,8 +1,31 @@
 @extends('layouts.master')
 @section('header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Nhân khẩu') }}
-    </h2>
+
+
+    <div class="flex flex-col gap-y-4">
+
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Nhân khẩu') }}
+        </h2>
+
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="{{ route('dashboard') }}" class="inline-flex items-center font-medium text-sm text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="ml-1 text-sm text-gray-400 md:ml-2 dark:text-gray-500">Nhân khẩu</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
 @endsection
 
 @section('content')
@@ -10,22 +33,31 @@
         $genderColors = ['blue', 'red', 'green']
     @endphp
     <div class="w-full flex flex-col select-none">
-        <form action="">
-            <div class="w-full flex flex-row my-4 space-x-4 items-center">
-                <label for="search_type" class="">Lọc theo</label>{{--more search input--}}
-                <select id="search_type"
-                        class="w-36 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Họ và Tên</option>
-                    <option>Số CMND/CCCD</option>
-                </select>
 
-                <label for="search">Tìm kiếm</label>
-                <input
-                    class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="search" type="text" placeholder="Nguyễn Văn A">
+        <div x-data="{ open : true }"
+            class="flex flex-row gap-x-4 h-auto"
+        >
+            <button  @click="open = !open"
+                     class="border rounded bg-green-500 px-4">Search</button>
 
-            </div>
-        </form>
+            <form x-show="open" action="">
+                <div class="w-full flex flex-row my-4 space-x-4 items-center">
+                    <label for="search_type" class="">Lọc theo</label>{{--more search input--}}
+                    <select id="search_type"
+                            class="w-36 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Họ và Tên</option>
+                        <option>Số CMND/CCCD</option>
+                    </select>
+
+                    <label for="search">Tìm kiếm</label>
+                    <input
+                        class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="search" type="text" placeholder="Nguyễn Văn A">
+
+                </div>
+            </form>
+        </div>
+
         <div class="w-full flex flex-row select-none space-x-8 justify-end justify-between px-10">
             <a>
                 <button class="border rounded bg-yellow-500 px-4 py-2">

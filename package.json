@@ -24,6 +24,7 @@
         "alpinejs": "^3.7.0",
         "chart.js": "^3.6.2",
         "chartjs-adapter-luxon": "^1.1.0",
+        "chartjs-plugin-datalabels": "^2.0.0",
         "luxon": "^2.1.1"
     }
 }

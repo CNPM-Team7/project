@@ -1,8 +1,25 @@
 @extends('layouts.master')
 @section('header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Thống kê') }}
-    </h2>
+
+
+    <div class="flex flex-col gap-y-4">
+
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Thống kê') }}
+        </h2>
+
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <div class="flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+
+                        <span class="ml-1 text-sm text-gray-400 md:ml-2 dark:text-gray-500">Trang chủ</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
 @endsection
 
 @section('content')
@@ -204,33 +221,53 @@
 
     </div>
 
+    <script src="{{ asset('js/chart.js') }}"></script>
     <script>
-        const ctx1 = document.getElementById('genderChart');
-        const genderChart = new Chart(ctx1, {
-            type: 'pie',
-            data: {
-                labels: ['Nam', 'Nữ'],
-                datasets: [{
-                    data: [60, 30],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                    ],
-                    borderWidth: 1
-                }]
+
+        const data1 = [{
+            data: [30, 70],
+            labels: ['Nam', 'Nữ'],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1,
+        }];
+
+        const options1 = {
+            tooltips: {
+                enabled: false
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
+            plugins: {
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        let sum = 0;
+                        let dataArr = ctx.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(2) + "%";
+                        return percentage;
+                    },
+                    color: '#fff',
+                },
+                legend:{
+                    enabled: false,
                 }
             }
+        };
+
+        const myChart = new Chart(document.getElementById("genderChart").getContext('2d'), {
+            type: 'pie',
+            data: {
+                datasets: data1
+            },
+            // plugins: [ChartDataLabels],
+            options: options1
         });
 
     </script>

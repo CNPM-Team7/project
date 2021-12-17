@@ -32,41 +32,67 @@
     @php
         $genderColors = ['blue', 'red', 'green']
     @endphp
-    <div class="w-full flex flex-col select-none">
-
-        <div x-data="{ open : true }"
-            class="flex flex-row gap-x-4 h-auto"
-        >
+    <div x-data="{ open : true }"
+        class="flex flex-row gap-x-4 h-auto"
+    >
+    <div class="flex flex-row my-4 space-x-4 items-center">
             <button  @click="open = !open"
-                     class="border rounded bg-green-500 px-4">Search</button>
-
-            <form x-show="open" action="">
-                <div class="w-full flex flex-row my-4 space-x-4 items-center">
-                    <label for="search_type" class="">Lọc theo</label>{{--more search input--}}
-                    <select id="search_type"
-                            class="w-36 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected value="name">Họ và Tên</option>
-                        <option value="id_number">Số CMND/CCCD</option>
-                    </select>
-    
-                    <label for="search">Tìm kiếm</label>
-                    <input
-                        class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="search" type="text" placeholder="Nguyễn Văn A">
-                        <button class="border rounded bg-blue-500 px-4 py-2" onclick="search()">Tìm</button>
-                </div>
-            </form>
+                        class="border rounded bg-green-500 px-4">Search</button>
         </div>
+        <div x-show="open" class="w-full flex flex-row my-4 space-x-4 items-center"> {{-- TODO each input on separate line, and make it not eyeball-hurting --}}
+            <div class="w-full flex flex-row my-4 space-x-4 items-center">
+                <label for="name">Họ và Tên</label>
+                <input
+                    class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name">
+
+            </div>
+            <div class="w-full flex flex-row my-4 space-x-4 items-center">
+                <label for="id_number">CMND</label>
+                <input
+                    class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="id_number">
+
+            </div>
+            <div class="w-full flex flex-row my-4 space-x-4 items-center">
+                <label for="status">Trang thai</label>
+                <select id="status"
+                            class="w-36 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">All</option>
+                            @foreach ($statuses as $index => $status)
+                                <option value="{{ $index }}">{{ $status }}</option>
+                            @endforeach
+                    </select>
+
+            </div>
+            <div class="w-full flex flex-row my-4 space-x-4 items-center">
+                <button class="border rounded bg-blue-500 px-4 py-2" onclick="search()">Tìm</button>
+            </div>
+        </div>
+    </div>
+    <div class="w-full flex flex-col select-none">
 
         <script>
             function search(){
-                let searchType = document.getElementById('search_type').value
-                let searchContent = document.getElementById('search').value
                 const urlSearchParams = new URLSearchParams(window.location.search);
+                let queryParams = ['name', 'id_number', 'status']
+                for(let param of queryParams){
+                    let val = document.getElementById(param).value
+                    if(val) urlSearchParams.set(param, val)
+                    else urlSearchParams.delete(param)
+                }
                 const params = Object.fromEntries(urlSearchParams.entries());
-                urlSearchParams.set(searchType, searchContent)
                 window.location.search = urlSearchParams.toString()
             }
+
+            function setSearchParams(){
+                const urlSearchParams = new URLSearchParams(window.location.search);
+                const params = Object.fromEntries(urlSearchParams.entries());
+                for(let i in params){
+                    document.getElementById(i).value = params[i]
+                }
+            }
+            setSearchParams()
         </script>
 
         <div class="w-full flex flex-row select-none space-x-8 justify-end justify-between px-10">
@@ -185,7 +211,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap select-text">
                                         <div class="flex items-center">
                                         <span class="text-sm font-medium text-gray-500">
-                                            {{ $person->name }}
+                                            <a href="{{ route('person.show', $person->id) }}">{{ $person->name }}</a>
                                         </span>
                                         </div>
                                     </td>
@@ -202,7 +228,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                             bg-{{ $genderColors[$person->sex] }}-100 text-{{ $genderColors[$person->sex] }}-500">
-                                            {{ $genders[$person->sex] }} {{--set fixed length--}}
+                                            {{ $genders[$person->sex] }} {{-- TODO set fixed length --}}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -213,7 +239,7 @@
                                     </td>
                                     <td data-tooltip-target="tooltip-job" class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm text-gray-500">{{ $person->job }}</div> {{--qua dai, rut gon bang '...'--}}
+                                            class="text-sm text-gray-500">{{ $person->job }}</div> {{-- TODO qua dai, rut gon bang '...' --}}
                                     </td>
                                     <div id="tooltip-job" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
                                         <span>
@@ -228,7 +254,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div> {{--nhan vao se ra trang info famliy--}}
+                                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div> {{-- TODO nhan vao se ra trang info famliy --}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->note ?? 'Empty' }}</div>
@@ -236,9 +262,11 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Here' }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">{{--show, edit and delete--}}
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO pretify these :>> --}}
+                                        <a href="{{ route('person.show', $person->id) }}"
+                                            class="text-green-600 hover:text-green-500">Show</a>
                                         <a href="{{ route('person.edit', $person->id) }}"
-                                           class="text-indigo-600 hover:text-indigo-500">Edit</a>
+                                            class="text-indigo-600 hover:text-indigo-500">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

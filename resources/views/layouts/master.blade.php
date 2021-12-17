@@ -9,7 +9,7 @@
     <!-- Fonts -->
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"/>
+    <link rel="stylesheet" href="/css/flowbite.min.css"/>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 

@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Person;
+use App\Http\Requests\PersonRequest;
 
 class PersonController extends Controller
 {
@@ -22,8 +23,15 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $query = request()->query(); // search for name
-        $people = Person::where($query)->paginate(10);
+        $query = request()->query();
+        unset($query['page']);
+
+        $likeQuery = [];
+        foreach($query as $key => $value){
+            $likeQuery[] = [$key, 'like', '%'.$value.'%'];
+        }
+
+        $people = Person::where($likeQuery)->paginate(10);
         return view('person.index', ['people' => $people, 'statuses' => $this->statuses, 'genders' => $this->genders]);
     }
 
@@ -34,7 +42,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('person.create');
+        return view('person.create', ['statuses' => $this->statuses, 'genders' => $this->genders]);
     }
 
     /**
@@ -43,11 +51,10 @@ class PersonController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(PersonRequest $request)
     {
-        dd($request->input());
-
-        return Person::create($request);
+        $id = Person::create($this->filterRequest($request)); // TODO cant insert birthday
+        return redirect()->route('person.show', $id);
     }
 
     /**
@@ -59,6 +66,7 @@ class PersonController extends Controller
     public function show($id)
     {
         $person = Person::find($id);
+        return view('person.show', ['person' => $person, 'statuses' => $this->statuses, 'genders' => $this->genders]);
     }
 
     /**
@@ -69,8 +77,8 @@ class PersonController extends Controller
      */
     public function edit($id)
     {
-        return view('person.edit');
         $person = Person::find($id);
+        return view('person.edit', ['person' => $person, 'statuses' => $this->statuses, 'genders' => $this->genders]);
     }
 
     /**
@@ -80,9 +88,10 @@ class PersonController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(PersonRequest $request, $id)
     {
-        return Person::find($id)->update($request);
+        Person::find($id)->update($this->filterRequest($request));
+        return redirect()->route('person.show', $id);
     }
 
     /**
@@ -94,5 +103,13 @@ class PersonController extends Controller
     public function destroy($id)
     {
         return Person::find($id)->delete();
+    }
+
+    public function filterRequest($request){
+        $data = $request->all();
+        $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
+        if(isset($data['idn_receive_date'])) $data['idn_receive_date'] = date('Y-m-d', strtotime($data['idn_receive_date']));
+        if(isset($data['register_date'])) $data['register_date'] = date('Y-m-d', strtotime($data['register_date']));
+        return $data;
     }
 }

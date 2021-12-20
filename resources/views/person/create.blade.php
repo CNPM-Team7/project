@@ -39,7 +39,7 @@
         <form action="{{ route('person.store') }}" method="POST" class="flex flex-col gap-y-10 select-none" style="width: 900px">
             @csrf
             <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
-                <x-input-text name="name" placeholder="Nguyễn Văn A" mandatory>
+                <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory>
                     Họ và tên
                 </x-input-text>
 
@@ -50,7 +50,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                             </div>
-                            <input id="birthday" name="birthday" datepicker="" datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                            <input id="birthday" name="birthday" datepicker="" datepicker-buttons datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
 
                 </div>
 
-                <x-input-text name="birth_place" mandatory>
+                <x-input-text name="birth_place" class="w-5/12" mandatory>
                     Nơi sinh
                 </x-input-text>
 
@@ -74,7 +74,7 @@
                     <span class="text-red-500">(*)</span>
                 </div>
 
-                <x-input-text name="race" mandatory>
+                <x-input-text name="race" class="w-5/12" mandatory>
                     Dân tộc
                 </x-input-text>
 
@@ -90,11 +90,11 @@
                     <span class="text-red-500">(*)</span>
                 </div>
 
-                <x-input-text name="owner_relation" mandatory>
+                <x-input-text name="owner_relation" class="w-5/12" mandatory>
                     Vai trò với chủ hộ
                 </x-input-text>
 
-                <x-input-text name="family_id"> {{--lam 1 cai seach hay gi do--}}
+                <x-input-text name="family_id" class="w-5/12"> {{--lam 1 cai seach hay gi do--}}
                     ID Ho Khau
                 </x-input-text>
 
@@ -110,19 +110,19 @@
                     Tôn giáo
                 </x-input-text> --}}
 
-                <x-input-text name="job">
+                <x-input-text name="job" class="w-5/12">
                     Nghề nghiệp
                 </x-input-text>
 
-                <x-input-text name="work_place">
+                <x-input-text name="work_place" class="w-5/12">
                     Nơi làm việc
                 </x-input-text>
 
-                <x-input-text name="id_number">
+                <x-input-text name="id_number" class="w-5/12">
                     Số CMND/CCCD
                 </x-input-text>
 
-                <x-input-text name="idn_receive_place">
+                <x-input-text name="idn_receive_place" class="w-5/12">
                     Nơi cấp
                 </x-input-text>
 
@@ -133,12 +133,13 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                             </div>
-                            <input id="birthday" name="idn_receive_date" datepicker="" datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                            <input id="birthday" name="idn_receive_date" datepicker="" datepicker-buttons datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                         </div>
                     </div>
+                    <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
                 </div>
 
-                <x-input-text name="register_place">
+                <x-input-text name="register_place" class="w-5/12">
                     Nơi dang ki
                 </x-input-text>
 
@@ -149,12 +150,13 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                             </div>
-                            <input id="birthday" name="register_date" datepicker="" datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                            <input id="birthday" name="register_date" datepicker="" datepicker-buttons datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                         </div>
                     </div>
+                    <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
                 </div>
 
-                <x-input-text name="move_to">
+                <x-input-text name="move_to" class="w-5/12">
                     Địa chỉ sap chuyển đến
                 </x-input-text>
 

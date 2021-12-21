@@ -72,7 +72,6 @@
 
 
             <div class="h-auto w-full flex flex-row items-center pt-4 space-x-8">
-                {{-- TODO each input on separate line, and make it not eyeball-hurting --}}
                 <div class="flex w-full items-center justify-between">
                     <label for="name">
                         Ho va ten
@@ -169,7 +168,7 @@
 
                             @foreach ($people as $person)
                                 <tr>
-                                    <td data-tooltip-target="tooltip-id_number"
+                                    <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
                                         class="px-6 py-4 whitespace-nowrap select-text">
                                         <div class="flex items-center">
                                         <span class="text-sm font-medium text-gray-500">
@@ -177,17 +176,17 @@
                                         </span>
                                         </div>
                                     </td>
-                                    <div id="tooltip-id_number" role="tooltip"
+                                    <div id="tooltip-id_number {{ $person->id_number }}" role="tooltip"
                                          class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
                                         <div class="flex flex-col">
                                             <span>
-                                                Register Date: <u>{{ $person->register_date }}</u>
+                                                Register Date: <u>{{ date('d/m/Y', strtotime($person->register_date)) }}</u>
                                             </span>
                                             <span>
                                                 Register Place: <u>{{ $person->register_place }}</u>
                                             </span>
                                             <span>
-                                                Receive Date: <u>{{ $person->idn_receive_date }}</u>
+                                                Receive Date: <u>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</u>
                                             </span>
                                             <span>
                                                 Receive Place: <u>{{ $person->idn_receive_place }}</u>
@@ -203,11 +202,12 @@
                                         </span>
                                         </div>
                                     </td>
-                                    <td data-tooltip-target="tooltip-birthday" class="px-6 py-4 whitespace-nowrap">
+                                    <td data-tooltip-target="tooltip-birthday {{ $person->id_number }}"
+                                        class="px-6 py-4 whitespace-nowrap">
                                         <div
                                             class="text-sm text-gray-500">{{ date('d/m/Y', strtotime($person->birthday)) }}</div>
                                     </td>
-                                    <div id="tooltip-birthday" role="tooltip"
+                                    <div id="tooltip-birthday {{ $person->id_number }}" role="tooltip"
                                          class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
                                         <span>
                                             Birthday Place: <u>{{ $person->birth_place }}</u>
@@ -215,10 +215,13 @@
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                            bg-{{ $genderColors[$person->sex] }}-100 text-{{ $genderColors[$person->sex] }}-500">
-                                            {{ $genders[$person->sex] }} {{-- TODO set fixed length, lam tuong tu voi table cua person.show --}}
-                                        </span>
+                                        <div
+                                            class="flex flex-row py-0.5 justify-center rounded-full bg-{{ $genderColors[$person->sex] }}-100">
+                                            <span
+                                                class="text-xs leading-5 font-semibold text-{{ $genderColors[$person->sex] }}-500">
+                                                {{ $genders[$person->sex] }}
+                                            </span>
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->race }}</div>
@@ -226,15 +229,27 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $statuses[$person->status] }}</div>
                                     </td>
-                                    <td data-tooltip-target="tooltip-job" class="px-6 py-4 whitespace-nowrap">
-                                        <div
-                                            class="text-sm text-gray-500">{{ $person->job }}</div> {{-- TODO qua dai, rut gon bang '...' --}}
+                                    <td data-tooltip-target="tooltip-job {{ $person->id_number }}"
+                                        class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">
+                                            <p class="truncate w-20">
+                                                {{ $person->job }}
+                                            </p>
+                                        </div>
+
                                     </td>
-                                    <div id="tooltip-job" role="tooltip"
+                                    <div id="tooltip-job {{ $person->id_number }}" role="tooltip"
                                          class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
-                                        <span>
-                                            Work Place: <u>{{ $person->work_place }}</u>
-                                        </span>
+
+                                        <div class="flex flex-col">
+                                            <span>
+                                                Job: <u>{{ $person->job }}</u>
+                                            </span>
+                                            <span>
+                                                Work Place: <u>{{ $person->work_place }}</u>
+                                            </span>
+                                        </div>
+
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
 
@@ -252,11 +267,23 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Here' }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO pretify these :>> --}}
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="{{ route('person.show', $person->id) }}"
-                                           class="text-green-600 hover:text-green-500">Show</a>
+                                           class="text-green-600 hover:text-green-500">
+                                            <div class="flex flex-row space-x-2">
+                                                <i class="material-icons-outlined text-base">visibility</i>
+                                                <span class="pt-0.5">Show</span>
+                                            </div>
+
+                                        </a>
                                         <a href="{{ route('person.edit', $person->id) }}"
-                                           class="text-indigo-600 hover:text-indigo-500">Edit</a>
+                                           class="text-indigo-600 hover:text-indigo-500">
+                                            <div class="flex flex-row space-x-2">
+                                                <i class="material-icons-outlined text-base">edit</i>
+                                                <span class="pt-0.5">Edit</span>
+                                            </div>
+
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

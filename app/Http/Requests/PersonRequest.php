@@ -40,7 +40,7 @@ class PersonRequest extends FormRequest
             'status' => ['required'],
             'move_to' => [],
             'note' => [],
-            'family_id' => ['required'],
+            'family_id' => [''],
         ];
     }
 

@@ -8,6 +8,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Family;
+use App\Models\Person;
+use App\Http\Requests\FamilyRequest;
 
 class FamilyController extends Controller
 {
@@ -18,7 +20,7 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        $families = Family::paginate(10);
+        $families = Family::paginate(10); // TODO search
         return view('family.index', ['families' => $families]);
     }
 
@@ -38,10 +40,10 @@ class FamilyController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(FamilyRequest $request)
     {
-        Family::create($request->all());
-        return redirect()->route('families.index');
+        Family::create($request->all()); // TODO check owner id exist
+        return redirect()->route('families.show');
     }
 
     /**
@@ -53,6 +55,10 @@ class FamilyController extends Controller
     public function show($id)
     {
         $family = Family::find($id);
+        $statuses = ['Normal', 'Just Born', 'Just Died', 'Temporary', 'Moved', 'Dead'];
+        $genders = ['Nam', 'Nữ', 'Khác'];
+
+        return view('family.show', ['family' => $family, 'statuses' => $statuses, 'genders' => $genders]);
     }
 
     /**
@@ -63,8 +69,8 @@ class FamilyController extends Controller
      */
     public function edit($id)
     {
-        return \view('family.edit');
         $family = Family::find($id);
+        return view('family.edit', ['family' => $family]);
     }
 
     /**
@@ -74,9 +80,10 @@ class FamilyController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(FamilyRequest $request, $id)
     {
-        return Family::find($id)->update($request);
+        Family::find($id)->update($request->all());
+        return redirect()->route('families.show');
     }
 
     /**
@@ -87,6 +94,33 @@ class FamilyController extends Controller
      */
     public function destroy($id)
     {
-        return Family::find($id)->delete();
+        Family::find($id)->delete();
+        return redirect()->route('families.index');
+    }
+
+    public function split(){
+        $data = request()->all();
+        $family_id = Family::create([
+            'house_id' => $data['house_id'],
+            'owner_id' => $data['owner_id'],
+            'address' => $data['address'],
+        ])->id;
+
+        foreach($data['members'] as $id => $relation){
+            Person::find($id)->update([
+                'family_id' => $family_id, 
+                'owner_relation' => $relation,
+            ]);
+        }
+    }
+
+    public function splitView()
+    {
+        return view('family.split');
+    }
+
+    public function members($id)
+    {
+        return Family::find($id)->members;
     }
 }

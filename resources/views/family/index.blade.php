@@ -22,7 +22,7 @@
                 </a>
 
                 <button class="border rounded bg-yellow-500 px-4 py-2">
-                    Tách hộ khẩu
+                    <a href="{{ route('families.splitView') }}">Tách hộ khẩu</a>
                 </button>
 
                 <button class="border rounded bg-red-500 px-4 py-2">
@@ -63,14 +63,14 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            {{ $family->house_id }}
+                                            <a href="{{ route('families.show', $family->id) }}">{{ $family->house_id }}</a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            {{ $family->owner->name }}
+                                            {{ $family->owner->name ?? '' }}
                                         </div>
                                     </div>
                                 </td>
@@ -78,6 +78,7 @@
                                     {{ $family->address }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{{ route('families.show', $family->id) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                                     <a href="{{ route('families.edit', $family->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                 </td>
                             </tr>

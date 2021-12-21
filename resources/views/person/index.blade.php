@@ -217,7 +217,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                             bg-{{ $genderColors[$person->sex] }}-100 text-{{ $genderColors[$person->sex] }}-500">
-                                            {{ $genders[$person->sex] }} {{-- TODO set fixed length --}}
+                                            {{ $genders[$person->sex] }} {{-- TODO set fixed length, lam tuong tu voi table cua person.show --}}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -244,7 +244,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div> {{-- TODO nhan vao se ra trang info famliy --}}
+                                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->note ?? 'Empty' }}</div>

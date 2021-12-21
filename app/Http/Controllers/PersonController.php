@@ -102,7 +102,8 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        return Person::find($id)->delete();
+        Person::find($id)->delete();
+        return redirect()->route('person.index');
     }
 
     public function filterRequest($request){

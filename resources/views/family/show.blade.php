@@ -1,58 +1,21 @@
 @extends('layouts.master')
 @section('header')
-
-    <div class="flex flex-col gap-y-4">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Thêm mới nhân khẩu') }}
-        </h2>
-
-
-        <nav class="flex" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center font-medium text-sm text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                        Trang chủ
-                    </a>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <a href="{{ route('person.index') }}" class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Nhân khẩu</a>
-                    </div>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Chi tiet nhân khẩu</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
-    </div>
-
-
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __('Chi tiet ho khẩu') }} {{-- TODO check tung trang xem tieu de da dung chua, da chuyen het text ve tieng viet chua, the <title> cung phai co noi dung giong tieu de --}}
+    </h2>
 @endsection
 
 @section('content')
-<button><a href="{{ route('person.edit', $person->id) }}">Edit</a></button>
-<form method="POST" action="{{ route('person.destroy', $person->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
+<button><a href="{{ route('families.edit', $family->id) }}">Edit</a></button>
+<form method="POST" action="{{ route('families.destroy', $family->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
     {{ csrf_field() }}
     <input name="_method" value="DELETE" style="display: none;" />
     <button type="submit">Delete</button>
 </form>
-    {{-- TODO show moi thong tin trong DB --}}
-    @if($person->family_id)
-        <div> {{-- TODO pretify these --}}
-            ID Ho Khau: <a href="{{ route('families.show', $person->family_id) }}">{{ $person->family_id }}</a>
-        </div>
-        <div>
-            Chu Ho Khau: <a href="{{ route('person.show', $person->family->owner->id) }}">{{ $person->family->owner->name }}</a>
-        </div>
-        <div>
-            Quan he voi Chu Ho Khau: {{ $person->owner_relation }}
-        </div>
-        <div>Cac thanh vien trong Ho Khau:</div>
+    <div>House Id: {{ $family->house_id }}</div>
+    <div>Address: {{ $family->address }}</div>
+    <div>Chu ho: <a href="{{ route('families.show', $family->owner->id) }}">{{ $family->owner->name }}</a></div>
+    <div>Thanh vien</div>
         @php
             $genderColors = ['blue', 'red', 'green']
         @endphp
@@ -112,7 +75,7 @@
             <tbody class="bg-white divide-y divide-gray-200">
 
 
-            @foreach ($person->family->members as $person)
+            @foreach ($family->members as $person)
                 <tr>
                     <td data-tooltip-target="tooltip-id_number" class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
@@ -185,7 +148,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div
-                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div>
+                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div> {{-- TODO nhan vao se ra trang info famliy --}}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-500">{{ $person->note ?? 'Empty' }}</div>
@@ -203,6 +166,4 @@
             @endforeach
             </tbody>
         </table>
-    @endif
-
 @endsection

@@ -79,6 +79,14 @@ Route::name('auth.')->group(function () {
         ->name('logout');
 
     Route::resource('person', PersonController::class);
+
+    Route::name('families.')->prefix('families')->group(function () {
+        Route::get('/split', [FamilyController::class, 'splitView'])->name('splitView');
+        Route::get('/members/{id}', [FamilyController::class, 'members']);
+        Route::post('/split', [FamilyController::class, 'split']);
+    }); // must declare these routes before resource routes
+    
     Route::resource('families', FamilyController::class);
+    
     Route::resource('declarations', DeclarationController::class);
 //});

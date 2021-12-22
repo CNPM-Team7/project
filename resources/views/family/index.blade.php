@@ -11,7 +11,9 @@
         <div class="w-full flex flex-row justify-between my-4">
             <div class="justify-self-end flex flex-row">
                 <label for="search" class="w-28 self-center">Tìm kiếm</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Nguyễn Văn A">
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="search" type="text" placeholder="Nguyễn Văn A">
             </div>
 
             <div class="flex justify-around gap-2">
@@ -42,13 +44,16 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-200">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Mã hộ khẩu
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Họ tên chủ hộ
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Địa chỉ
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
@@ -59,29 +64,45 @@
 
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($families as $family)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            <a href="{{ route('families.show', $family->id) }}">{{ $family->house_id }}</a>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                <a href="{{ route('families.show', $family->id) }}">{{ $family->house_id }}</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            {{ $family->owner->name ?? '' }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $family->owner->name ?? '' }}
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $family->address }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('families.show', $family->id) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
-                                    <a href="{{ route('families.edit', $family->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $family->address }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+
+                                        <a href="{{ route('families.show', $family->id) }}"
+                                           class="text-green-600 hover:text-green-500">
+                                            <div class="flex flex-row space-x-2">
+                                                <i class="material-icons-outlined text-base">visibility</i>
+                                                <span class="pt-0.5">Show</span>
+                                            </div>
+
+                                        </a>
+                                        <a href="{{ route('families.edit', $family->id) }}"
+                                           class="text-indigo-600 hover:text-indigo-500">
+                                            <div class="flex flex-row space-x-2">
+                                                <i class="material-icons-outlined text-base">edit</i>
+                                                <span class="pt-0.5">Edit</span>
+                                            </div>
+
+                                        </a>
+
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>

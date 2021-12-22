@@ -38,7 +38,8 @@
 
         <form action="{{ route('person.update', $person->id) }}" method="POST" class="flex flex-col gap-y-10 select-none" style="width: 900px">
             @csrf
-            <input name="_method" value="PUT" style="display: none;" />
+            @method('PUT')
+
             <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
                 <x-input-text name="name" class="w-5/12" value="{{ $person->name }}" mandatory>
                     Họ và tên

@@ -1,11 +1,6 @@
 @extends('layouts.master')
 @section('header')
     <div class="flex flex-col gap-y-4">
-
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Nhân khẩu') }}
-        </h2>
-
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -267,7 +262,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Here' }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO them button khai bao tam tru/tam vang, khai bao covid --}}
                                         <a href="{{ route('person.show', $person->id) }}"
                                            class="text-green-600 hover:text-green-500">
                                             <div class="flex flex-row space-x-2">

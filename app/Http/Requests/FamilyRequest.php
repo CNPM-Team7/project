@@ -24,7 +24,7 @@ class FamilyRequest extends FormRequest
     public function rules()
     {
         return [
-            'owner_id' => ['required'],
+            'owner_id' => ['required', 'exists:people,id'],
             'house_id' => ['required'],
             'address' => ['required'],
         ];

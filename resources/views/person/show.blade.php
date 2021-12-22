@@ -1,12 +1,6 @@
 @extends('layouts.master')
 @section('header')
-
     <div class="flex flex-col gap-y-4">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Thêm mới nhân khẩu') }}
-        </h2>
-
-
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -47,14 +41,9 @@
             </ol>
         </nav>
     </div>
-
-
 @endsection
 
 @section('content')
-
-    {{-- TODO show moi thong tin trong DB --}}
-
     <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid" style="width: 900px">
 
         <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
@@ -123,86 +112,109 @@
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>ID Ho Khau</span>
-                <span>{{ $person->family_id }}</span>
+                <span>{{ $person->family_id ?? 'Chưa điền' }}</span>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Nghề nghiệp</span>
-                <span>{{ $person->job }}</span>
+                <span>{{ $person->job ?? 'Chưa điền' }}</span>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Nơi làm việc</span>
-                <span>{{ $person->work_place }}</span>
+                <span>{{ $person->work_place ?? 'Chưa điền' }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Số CMND/CCCD</span>
-                <span>{{ $person->id_number }}</span>
+                <span>{{ $person->id_number ?? 'Chưa điền' }}</span>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Nơi cấp</span>
-                <span>{{ $person->idn_receive_place }}</span>
+                <span>{{ $person->idn_receive_place ?? 'Chưa điền' }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Ngày cap</span>
-                <span>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</span>
+                <span>{{ date('d/m/Y', strtotime($person->idn_receive_date)) ?? 'Chưa điền' }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Nơi dang ki</span>
-                <span>{{ $person->register_place }}</span>
+                <span>{{ $person->register_place ?? 'Chưa điền' }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Ngày dang ki</span>
-                <span>{{ date('d/m/Y', strtotime($person->register_date)) }}</span>
+                <span>{{ date('d/m/Y', strtotime($person->register_date)) ?? 'Chưa điền' }}</span>
             </div>
         </div>
+        
+        @if($person->move_to)
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Địa chỉ sap chuyển đến</span>
                 <span>{{ $person->move_to }}</span>
             </div>
         </div>
+        @endif
 
+        @if($person->note)
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Ghi chú</span>
                 <p>{{ $person->note }}</p>
             </div>
         </div>
+        @endif
     </div>
 
 
     @if($person->family_id)
-        <div> {{-- TODO pretify these --}}
-            ID Ho Khau: <a href="{{ route('families.show', $person->family_id) }}">{{ $person->family_id }}</a>
+    <br><br>
+    <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid" style="width: 900px">
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>ID Ho Khau:</span>
+                <p><a href="{{ route('families.show', $person->family_id) }}"><u>{{ $person->family_id }}</u></a></p>
+            </div>
         </div>
-        <div>
-            Chu Ho Khau: <a
-                href="{{ route('person.show', $person->family->owner->id) }}">{{ $person->family->owner->name }}</a>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Chu Ho Khau:</span>
+                <p><a href="{{ route('person.show', $person->family->owner->id) }}"><u>{{ $person->family->owner->name }}</u></a></p>
+            </div>
         </div>
-        <div>
-            Quan he voi Chu Ho Khau: {{ $person->owner_relation }}
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Quan he voi Chu Ho Khau:</span>
+                <p>{{ $person->owner_relation }}</p>
+            </div>
         </div>
-        <div>Cac thanh vien trong Ho Khau:</div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Cac thanh vien trong Ho Khau:</span>
+            </div>
+        </div>
+        
         @php
             $genderColors = ['blue', 'red', 'green']
         @endphp
-        <table class="min-w-full divide-y divide-gray-200">
+        <table class="min-w-full divide-y divide-gray-200"> {{-- TODO overflow auto --}}
             <thead class="bg-gray-200">
             <tr>
                 <th scope="col"
@@ -381,6 +393,7 @@
             @endforeach
             </tbody>
         </table>
+    </div>
     @endif
 
 @endsection

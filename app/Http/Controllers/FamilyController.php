@@ -42,8 +42,8 @@ class FamilyController extends Controller
      */
     public function store(FamilyRequest $request)
     {
-        Family::create($request->all()); // TODO check owner id exist
-        return redirect()->route('families.show');
+        $family_id = Family::create($request->all())->id;
+        return redirect()->route('families.show', $family_id);
     }
 
     /**
@@ -83,7 +83,7 @@ class FamilyController extends Controller
     public function update(FamilyRequest $request, $id)
     {
         Family::find($id)->update($request->all());
-        return redirect()->route('families.show');
+        return redirect()->route('families.show', $id);
     }
 
     /**

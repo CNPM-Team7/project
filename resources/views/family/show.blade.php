@@ -1,21 +1,90 @@
 @extends('layouts.master')
 @section('header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Chi tiet ho khẩu') }} {{-- TODO check tung trang xem tieu de da dung chua, da chuyen het text ve tieng viet chua, the <title> cung phai co noi dung giong tieu de --}}
-    </h2>
+<div class="flex flex-col gap-y-4">
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+                <a href="{{ route('dashboard') }}"
+                   class="inline-flex items-center font-medium text-sm text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                    </svg>
+                    Trang chủ
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                    <a href="{{ route('families.index') }}"
+                       class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Hộ khẩu</a>
+                </div>
+            </li>
+            <li aria-current="page">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Chi tiet hộ khẩu</span>
+                </div>
+            </li>
+        </ol>
+    </nav>
+</div>
+        {{-- TODO check tung trang xem tieu de da dung chua, da chuyen het text ve tieng viet chua, the <title> cung phai co noi dung giong tieu de --}}
 @endsection
 
 @section('content')
-<button><a href="{{ route('families.edit', $family->id) }}">Edit</a></button>
-<form method="POST" action="{{ route('families.destroy', $family->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
-    {{ csrf_field() }}
-    <input name="_method" value="DELETE" style="display: none;" />
-    <button type="submit">Delete</button>
-</form>
-    <div>House Id: {{ $family->house_id }}</div>
-    <div>Address: {{ $family->address }}</div>
-    <div>Chu ho: <a href="{{ route('families.show', $family->owner->id) }}">{{ $family->owner->name }}</a></div>
-    <div>Thanh vien</div>
+    <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
+        <a href="{{ route('families.edit', $family->id) }}">
+            <button class="w-44 border rounded bg-yellow-500 px-4 py-2">
+                Edit
+            </button>
+        </a>
+
+        <form method="POST" action="{{ route('families.destroy', $family->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+        </form>
+    </div>
+
+    <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+        <div class="flex w-full items-center justify-between">
+            <span>House Id:</span>
+            <p>{{ $family->house_id }}</p>
+        </div>
+    </div>
+
+    <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+        <div class="flex w-full items-center justify-between">
+            <span>Address:</span>
+            <p>{{ $family->address }}</p>
+        </div>
+    </div>
+
+    <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+        <div class="flex w-full items-center justify-between">
+            <span>Chu ho:</span>
+            <p><a href="{{ route('families.show', $family->owner->id) }}"><u>{{ $family->owner->name }}</u></a></p>
+        </div>
+    </div>
+
+    <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+        <div class="flex w-full items-center justify-between">
+            <span>Thanh vien</span>
+        </div>
+    </div>
+
         @php
             $genderColors = ['blue', 'red', 'green']
         @endphp
@@ -58,14 +127,6 @@
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Family Owner
                 </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Note
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Move to
-                </th>
                 <th scope="col" class="relative px-6 py-3">
                     <span class="sr-only">Edit</span>
                 </th>
@@ -80,7 +141,7 @@
                     <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
                         class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
-                        <span class="text-sm font-medium text-gray-500">
+                        <span class="text-sm font-medium text-gray-500"> {{-- TODO mark the hoverable field some how --}}
                             {{ $person->id_number }}
                         </span>
                         </div>
@@ -107,7 +168,7 @@
                     <td class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
                         <span class="text-sm font-medium text-gray-500">
-                            <a href="{{ route('person.show', $person->id) }}">{{ $person->name }}</a>
+                            <a href="{{ route('person.show', $person->id) }}"><u>{{ $person->name }}</u></a>
                         </span>
                         </div>
                     </td>
@@ -164,18 +225,13 @@
 
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div
-                            class="text-sm text-gray-500">{{ $person->family ? $person->owner_relation : 'No Info' }}</div>
+                            class="text-sm text-gray-500">{{ $person->family ? $person->owner_relation : 'Chưa điền' }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div
-                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div>
+                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'Chưa điền' }}</div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $person->note ?? 'Empty' }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Here' }}</div>
-                    </td>
+
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a href="{{ route('person.show', $person->id) }}"
                            class="text-green-600 hover:text-green-500">

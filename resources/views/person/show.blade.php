@@ -10,20 +10,37 @@
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center font-medium text-sm text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                    <a href="{{ route('dashboard') }}"
+                       class="inline-flex items-center font-medium text-sm text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                        </svg>
                         Trang chủ
                     </a>
                 </li>
                 <li>
                     <div class="flex items-center">
-                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        <a href="{{ route('person.index') }}" class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Nhân khẩu</a>
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        <a href="{{ route('person.index') }}"
+                           class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Nhân
+                            khẩu</a>
                     </div>
                 </li>
                 <li aria-current="page">
                     <div class="flex items-center">
-                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
                         <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Chi tiet nhân khẩu</span>
                     </div>
                 </li>
@@ -35,19 +52,148 @@
 @endsection
 
 @section('content')
-<button><a href="{{ route('person.edit', $person->id) }}">Edit</a></button>
-<form method="POST" action="{{ route('person.destroy', $person->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
-    {{ csrf_field() }}
-    <input name="_method" value="DELETE" style="display: none;" />
-    <button type="submit">Delete</button>
-</form>
+
     {{-- TODO show moi thong tin trong DB --}}
+
+    <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid" style="width: 900px">
+
+        <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
+            <a href="{{ route('person.edit', $person->id) }}">
+                <button class="w-44 border rounded bg-yellow-500 px-4 py-2">
+                    Edit
+                </button>
+            </a>
+
+            <form method="POST" action="{{ route('person.destroy', $person->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+            </form>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Họ và tên</span>
+                <span>{{ $person->name }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Ngày, tháng, năm sinh</span>
+                <span>{{ date('d/m/Y',strtotime($person->birthday)) }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Nơi sinh</span>
+                <span>{{ $person->birth_place }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Giới tính</span>
+                <span>{{ $person->name }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Dân tộc</span>
+                <span>{{ $person->race }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Trạng thái</span>
+                <span>{{ $person->status }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Vai trò với chủ hộ</span>
+                <span>{{ $person->owner_relation }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>ID Ho Khau</span>
+                <span>{{ $person->family_id }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Nghề nghiệp</span>
+                <span>{{ $person->job }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Nơi làm việc</span>
+                <span>{{ $person->work_place }}</span>
+            </div>
+        </div>
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Số CMND/CCCD</span>
+                <span>{{ $person->id_number }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Nơi cấp</span>
+                <span>{{ $person->idn_receive_place }}</span>
+            </div>
+        </div>
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Ngày cap</span>
+                <span>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</span>
+            </div>
+        </div>
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Nơi dang ki</span>
+                <span>{{ $person->register_place }}</span>
+            </div>
+        </div>
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Ngày dang ki</span>
+                <span>{{ date('d/m/Y', strtotime($person->register_date)) }}</span>
+            </div>
+        </div>
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Địa chỉ sap chuyển đến</span>
+                <span>{{ $person->move_to }}</span>
+            </div>
+        </div>
+
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+            <div class="flex w-full items-center justify-between">
+                <span>Ghi chú</span>
+                <p>{{ $person->note }}</p>
+            </div>
+        </div>
+    </div>
+
+
     @if($person->family_id)
         <div> {{-- TODO pretify these --}}
             ID Ho Khau: <a href="{{ route('families.show', $person->family_id) }}">{{ $person->family_id }}</a>
         </div>
         <div>
-            Chu Ho Khau: <a href="{{ route('person.show', $person->family->owner->id) }}">{{ $person->family->owner->name }}</a>
+            Chu Ho Khau: <a
+                href="{{ route('person.show', $person->family->owner->id) }}">{{ $person->family->owner->name }}</a>
         </div>
         <div>
             Quan he voi Chu Ho Khau: {{ $person->owner_relation }}

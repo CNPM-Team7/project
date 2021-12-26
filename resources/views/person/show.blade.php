@@ -53,7 +53,8 @@
                 </button>
             </a>
 
-            <form method="POST" action="{{ route('person.destroy', $person->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
+            <form method="POST"
+                  action="{{ route('person.destroy', $person->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
@@ -164,7 +165,7 @@
         @if($person->move_to)
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Địa chỉ sap chuyển đến</span>
+                <span>Địa chỉ sap chuyển đến</span> {{-- TODO cần thảo luận thêm  --}}
                 <span>{{ $person->move_to }}</span>
             </div>
         </div>

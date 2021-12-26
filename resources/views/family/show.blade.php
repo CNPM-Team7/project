@@ -133,7 +133,7 @@
             </tr>
             </thead>
 
-            <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-white divide-y divide-gray-200">
 
 
             @foreach ($family->members as $person)
@@ -152,21 +152,21 @@
                             <span>
                                 Register Date: <u>{{ date('d/m/Y', strtotime($person->register_date)) }}</u>
                             </span>
-                            <span>
+                        <span>
                                 Register Place: <u>{{ $person->register_place }}</u>
                             </span>
                             <span>
                                 Receive Date: <u>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</u>
                             </span>
-                            <span>
+                        <span>
                                 Receive Place: <u>{{ $person->idn_receive_place }}</u>
                             </span>
-                        </div>
-                        <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
 
-                    <td class="px-6 py-4 whitespace-nowrap select-text">
-                        <div class="flex items-center">
+                <td class="px-6 py-4 whitespace-nowrap select-text">
+                    <div class="flex items-center">
                         <span class="text-sm font-medium text-gray-500">
                             <a href="{{ route('person.show', $person->id) }}"><u>{{ $person->name }}</u></a>
                         </span>

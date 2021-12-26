@@ -13,7 +13,7 @@ use App\Http\Requests\PersonRequest;
 class PersonController extends Controller
 {
 
-    protected array $statuses = ['Normal', 'Just Born', 'Just Died', 'Temporary', 'Moved', 'Dead'];
+    protected array $statuses = ['Bình thường', 'Mới sinh', 'Just Died', 'Tạm trú', 'Đã chuyển đi', 'Dead'];
 
     protected array $genders = ['Nam', 'Nữ', 'Khác'];
     /**
@@ -112,5 +112,13 @@ class PersonController extends Controller
         if(isset($data['idn_receive_date'])) $data['idn_receive_date'] = date('Y-m-d', strtotime($data['idn_receive_date']));
         if(isset($data['register_date'])) $data['register_date'] = date('Y-m-d', strtotime($data['register_date']));
         return $data;
+    }
+
+    public function staying(Request $request){
+        dd($request);
+    }
+
+    public function absent(Request $request){
+        dd($request);
     }
 }

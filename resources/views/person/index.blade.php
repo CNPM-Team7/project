@@ -40,13 +40,13 @@
         <div class="w-full items-center divide-gray-300 divide-y divide-solid">
 
             <div class="w-full select-none flex flex-row justify-between mb-4">
-                <a>
+                <a href="{{ route('staying.create') }}">
                     <button class="w-44 border rounded bg-yellow-500 px-4 py-2">
                         Khai báo tạm trú
                     </button>
                 </a>
 
-                <a>
+                <a href="{{ route('absent') }}">
                     <button class="w-44 border rounded bg-blue-500 px-4 py-2">
                         Khai báo tạm vắng
                     </button>
@@ -69,7 +69,7 @@
             <div class="h-auto w-full flex flex-row items-center pt-4 space-x-8">
                 <div class="flex w-full items-center justify-between">
                     <label for="name">
-                        Ho va ten
+                        Họ và tên
                     </label>
                     <input name="name" id="name" type="text"
                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="w-full flex flex-row space-x-4 items-center">
-                    <label for="status" class="w-auto">Trang thai</label>
+                    <label for="status" class="w-auto">Trạng thái</label>
                     <select id="status"
                             class="flex-grow bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="">All</option>
@@ -110,50 +110,51 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    ID Number
+                                    SỐ ID
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Name
+                                    Họ và tên
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Birthday
+                                    Ngày sinh
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Gender
+                                    Giới tính
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Race
+                                    Dân tộc
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Status
+                                    Trạng thái
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Job
+                                    Công việc
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Owner Relation
+                                    Quan hệ với chủ hộ
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Family Owner
+                                    Tên chủ hộ
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Note
+                                    Ghi chú
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Move to
+                                    Chuyển đến từ
                                 </th>
-                                <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>

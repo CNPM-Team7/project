@@ -83,37 +83,37 @@
         let selected = [];
         let selectedClass = 'text-red-500';
 
-        function getMembers(){
+        function getMembers() {
             let familyId = document.getElementById('family_id').value
             fetch("/families/members/" + familyId)
-            .then(response => response.json())
-            .then(data => {
-                members = data
-                const membersDiv = document.getElementById('members')
-                membersDiv.innerHTML = ''
+                .then(response => response.json())
+                .then(data => {
+                    members = data
+                    const membersDiv = document.getElementById('members')
+                    membersDiv.innerHTML = ''
 
-                members.forEach((element, index) => {
-                    let isSelected = false
-                    for(let i in selected){
-                        if(selected[i].id == element.id){
-                            isSelected = true
-                            break
+                    members.forEach((element, index) => {
+                        let isSelected = false
+                        for (let i in selected) {
+                            if (selected[i].id == element.id) {
+                                isSelected = true
+                                break
+                            }
                         }
-                    }
-                    membersDiv.innerHTML += `
-                        <div id="memberNo.${ index }" onclick="select(${ index })" class="${ isSelected ? 'text-red-500' : '' }">
-                            ${ element.name }
-                        </div> 
+                        membersDiv.innerHTML += `
+                        <div id="memberNo.${index}" onclick="select(${index})" class="${isSelected ? 'text-red-500' : ''}">
+                            ${element.name}
+                        </div>
                     `
-                }); // TODO show more imprtant data of each member
-            })
+                    }); // TODO show more imprtant data of each member
+                })
         }
 
-        function select(memberIndex){
+        function select(memberIndex) {
             const memberDiv = document.getElementById('memberNo.' + memberIndex)
-            if(memberDiv.classList.contains('text-red-500')){
-                for(let i in selected){
-                    if(selected[i].id == members[memberIndex].id){
+            if (memberDiv.classList.contains('text-red-500')) {
+                for (let i in selected) {
+                    if (selected[i].id == members[memberIndex].id) {
                         selected.splice(i, 1)
                         break
                     }
@@ -152,8 +152,8 @@
             fetch("/families/split", {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
                 },
                 body: JSON.stringify(data),
             }).then(response => { // TODO redirect to families index

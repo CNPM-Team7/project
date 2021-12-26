@@ -57,7 +57,7 @@
           style="width: 900px">
         @csrf
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
-            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory>
+            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory> {{-- TODO 1 file, all required field, back end, validate --}}
                 Họ và tên
             </x-input-text>
 

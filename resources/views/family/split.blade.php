@@ -69,14 +69,14 @@
     {{-- TODO tim theo ten thanh vien? --}}
     <div id="members"></div>
     <br>
-    <div>SELECTED:</div>
+    <div>SELECTED:</div> {{-- TODO FE css these, pretify button --}}
     <div id="selected"></div>
     <br>
     <x-input-text name="owner_id" mandatory>
         Owner ID
     </x-input-text>
     <br>
-    <button onclick="done()" class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button> {{-- TODO make it center --}}
+    <button onclick="done()" class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button> {{-- TODO FE make it center --}}
 
     <script>
         let members = [];
@@ -105,7 +105,7 @@
                             ${element.name}
                         </div>
                     `
-                    }); // TODO show more imprtant data of each member
+                    });
                 })
         }
 
@@ -133,7 +133,7 @@
                         ${ element.name } (ID: ${ element.id })
                     </x-input-text>
                 `
-            }); // TODO css cho dep hon
+            }); // TODO FE css cho dep hon
         }
 
         function done(){

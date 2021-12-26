@@ -40,7 +40,7 @@
         </ol>
     </nav>
 </div>
-        {{-- TODO check tung trang xem tieu de da dung chua, da chuyen het text ve tieng viet chua, the <title> cung phai co noi dung giong tieu de --}}
+        {{-- TODO check tung trang xem tieu de da dung chua, da chuyen het text ve tieng viet chua, the <title> cung phai co noi dung giong tieu de, sua icon --}}
 @endsection
 
 @section('content')
@@ -141,7 +141,7 @@
                     <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
                         class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
-                        <span class="text-sm font-medium text-gray-500"> {{-- TODO mark the hoverable field some how --}}
+                        <span class="text-sm font-medium text-gray-500"> {{-- TODO ghi chu va in nghieng cac truong hover duoc --}}
                             {{ $person->id_number }}
                         </span>
                         </div>

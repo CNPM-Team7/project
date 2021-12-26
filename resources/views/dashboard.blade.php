@@ -232,7 +232,7 @@
     <script>
 
         const data1 = [{
-            data: [30, 70],
+            data: [30, 70], // TODO chart
             labels: ['Nam', 'Nữ'],
             backgroundColor: [
                 'rgba(255, 99, 132, 1)',

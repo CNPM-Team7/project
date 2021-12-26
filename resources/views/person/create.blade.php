@@ -202,10 +202,6 @@
                 <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
             </div>
 
-            <x-input-text name="move_to" class="w-5/12">
-                Địa chỉ sap chuyển đến
-            </x-input-text>
-
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full justify-between">
                     <label for="note">

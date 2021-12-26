@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Declaration;
+use App\Models\Person;
 
 class DeclarationController extends Controller
 {
@@ -18,7 +19,8 @@ class DeclarationController extends Controller
      */
     public function index()
     {
-        return view('declaration.index');
+        $declarations = Declaration::orderBy('id', 'desc')->paginate(10);
+        return view('declaration.index', ['declarations' => $declarations]);
     }
 
     /**
@@ -26,9 +28,10 @@ class DeclarationController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('declaration.create');
+        $person = Person::find($id);
+        return view('declaration.create', ['person' => $person]);
     }
 
     /**
@@ -39,7 +42,8 @@ class DeclarationController extends Controller
      */
     public function store(Request $request)
     {
-        return Declaration::create($request);
+        Declaration::create($this->filterRequest($request));
+        return redirect()->route('declarations.index');
     }
 
     /**
@@ -51,6 +55,8 @@ class DeclarationController extends Controller
     public function show($id)
     {
         $declaration = Declaration::find($id);
+        $person = Person::find($declaration->person_id);
+        return view('declaration.show', ['declaration' => $declaration, 'person' => $person]);
     }
 
     /**
@@ -61,9 +67,9 @@ class DeclarationController extends Controller
      */
     public function edit($id)
     {
-        return view('declaration.edit');
-
         $declaration = Declaration::find($id);
+        $person = Person::find($declaration->person_id);
+        return view('declaration.edit', ['declaration' => $declaration, 'person' => $person]);
     }
 
     /**
@@ -75,7 +81,8 @@ class DeclarationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Declaration::find($id)->update($request);
+        Declaration::find($id)->update($this->filterRequest($request));
+        return redirect()->route('declarations.index');
     }
 
     /**
@@ -87,5 +94,12 @@ class DeclarationController extends Controller
     public function destroy($id)
     {
         return Declaration::find($id)->delete();
+    }
+
+    public function filterRequest($request){
+        $data = $request->all();
+        if(isset($data['test_date'])) $data['test_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['test_date'])));
+        if(isset($data['isolation_date'])) $data['isolation_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['isolation_date'])));
+        return $data;
     }
 }

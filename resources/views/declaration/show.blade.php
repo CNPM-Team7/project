@@ -6,8 +6,9 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('declarations.store') }}" method="POST" class="flex flex-col gap-y-10 select-none">
+    <form action="{{ route('declarations.update', $declaration->id) }}" method="POST" class="flex flex-col gap-y-10 select-none">
         @csrf
+        @method('PUT')
         <div class="grid grid-cols-2 gap-x-14 gap-y-4">
             <x-input-text name="name" class="w-5/12" value="{{ $person->name }}" disabled>
                 Họ và tên
@@ -42,7 +43,7 @@
                             </svg>
                         </div>
                         <input name="" datepicker="" datepicker-format="dd/mm/yyyy" type="text"
-                            value="{{ $person->birthday }}" disabled
+                            value="{{ date('d/m/Y',strtotime($person->birthday)) }}" disabled
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                         >
                     </div>
@@ -58,7 +59,7 @@
                     <label for="isolation_level"
                            class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Mức độ cách
                         ly</label>
-                    <select id="status" name="status"
+                    <select id="gender" name="status"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="0">F0</option>
                         <option value="1">F1</option>
@@ -84,14 +85,14 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input name="isolation_date" datepicker="" datepicker-format="dd/mm/yyyy" type="text"
+                        <input name="isolation_date" datepicker="" datepicker-format="dd/mm/yyyy" type="text" value="{{ date('d/m/Y',strtotime($declaration->isolation_date)) }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                         >
                     </div>
                 </div>
             </div>
 
-            <x-input-text name="test_result"> {{-- TODO select ket qua --}}
+            <x-input-text name="test_result" value="{{ $declaration->test_result }}">
                 Kết quả test covid
             </x-input-text>
             
@@ -107,7 +108,7 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy" type="text"
+                        <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy" type="text" value="{{ date('d/m/Y',strtotime($declaration->test_date)) }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                         >
                     </div>
@@ -116,8 +117,7 @@
         </div>
 
         <input name="person_id" value="{{ $person->id }}" style="display: none;" />
-        <input id="health_state" name="health_state" value="{}" style="display: none;" />
-
+        <input id="health_state" name="health_state" value="{{ $declaration->health_state ?? '{}' }}" style="display: none;" />
         <div>
             <p class="text-base font-medium text-gray-900 inline mb-2 dark:text-gray-400">
                 Theo vòng 14 ngày qua, Anh/Chị có đến khu vực, tỉnh, thành phố, quốc gia/vùng lãnh thổ nào có dịch?
@@ -186,5 +186,14 @@
             health[key] = value
             document.getElementById('health_state').value = JSON.stringify(health)
         }
+
+        function setDeclaration(){
+            health = JSON.parse("{{ $declaration->health_state }}".replaceAll('&quot;', '\"') || '{}')
+            for(let key in health){
+                let checked = health[key] ? 'Yes' : 'No'
+                document.querySelector('input[name=' + key + '][value=' + checked + ']').checked = true
+            }
+        }
+        setDeclaration()
     </script>
-@endsection
+@endsection {{-- TODO FE make all inputs become divs --}}

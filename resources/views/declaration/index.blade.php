@@ -19,7 +19,7 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Person_ID
+                                    Person ID
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
@@ -27,11 +27,15 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Test_Result
+                                    Test Result
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Test_Date
+                                    Test Date
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                    Isolation Date
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
@@ -41,33 +45,37 @@
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($declarations as $declaration)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            27
+                                            {{ $declaration->id }}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            -1
+                                            {{ $declaration->status == 3 ? '> F2' : 'F' . $declaration->status }}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            2
+                                            {{ $declaration->test_result }}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">20/12/2021</div>
+                                    <div class="text-sm text-gray-900">{{ $declaration->test_date }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ $declaration->isolation_date }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href=""
+                                    <a href="{{ route('declarations.show', $declaration->id) }}"
                                        class="text-green-600 hover:text-green-500">
                                         <div class="flex flex-row space-x-2">
                                             <i class="material-icons-outlined text-base">visibility</i>
@@ -75,7 +83,7 @@
                                         </div>
 
                                     </a>
-                                    <a href=""
+                                    <a href="{{ route('declarations.edit', $declaration->id) }}"
                                        class="text-indigo-600 hover:text-indigo-500">
                                         <div class="flex flex-row space-x-2">
                                             <i class="material-icons-outlined text-base">edit</i>
@@ -85,57 +93,14 @@
                                     </a>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            14
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            2
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            1
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">22/10/2020</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href=""
-                                       class="text-green-600 hover:text-green-500">
-                                        <div class="flex flex-row space-x-2">
-                                            <i class="material-icons-outlined text-base">visibility</i>
-                                            <span class="pt-0.5">Show</span>
-                                        </div>
-
-                                    </a>
-                                    <a href=""
-                                       class="text-indigo-600 hover:text-indigo-500">
-                                        <div class="flex flex-row space-x-2">
-                                            <i class="material-icons-outlined text-base">edit</i>
-                                            <span class="pt-0.5">Edit</span>
-                                        </div>
-
-                                    </a>
-                                </td>
-                            </tr>
-
+                            @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <br>
+            {{ $declarations->links() }}
         </div>
     </div>
 @endsection

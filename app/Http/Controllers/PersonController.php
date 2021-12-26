@@ -16,6 +16,12 @@ class PersonController extends Controller
     protected array $statuses = ['Bình thường', 'Mới sinh', 'Just Died', 'Tạm trú', 'Đã chuyển đi', 'Dead'];
 
     protected array $genders = ['Nam', 'Nữ', 'Khác'];
+
+    public function dashboard()
+    {
+        return view('dashboard'); // TODO return data
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +37,7 @@ class PersonController extends Controller
             $likeQuery[] = [$key, 'like', '%'.$value.'%'];
         }
 
-        $people = Person::where($likeQuery)->paginate(10);
+        $people = Person::where($likeQuery)->orderBy('id', 'desc')->paginate(10);
         return view('person.index', ['people' => $people, 'statuses' => $this->statuses, 'genders' => $this->genders]);
     }
 
@@ -53,7 +59,7 @@ class PersonController extends Controller
      */
     public function store(PersonRequest $request)
     {
-        $id = Person::create($this->filterRequest($request)); // TODO cant insert birthday
+        $id = Person::create($this->filterRequest($request));
         return redirect()->route('person.show', $id);
     }
 
@@ -108,9 +114,9 @@ class PersonController extends Controller
 
     public function filterRequest($request){
         $data = $request->all();
-        $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
-        if(isset($data['idn_receive_date'])) $data['idn_receive_date'] = date('Y-m-d', strtotime($data['idn_receive_date']));
-        if(isset($data['register_date'])) $data['register_date'] = date('Y-m-d', strtotime($data['register_date']));
+        $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
+        if(isset($data['idn_receive_date'])) $data['idn_receive_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['idn_receive_date'])));
+        if(isset($data['register_date'])) $data['register_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['register_date'])));
         return $data;
     }
 

@@ -19,6 +19,8 @@ class CreateDeclarationsTable extends Migration
             $table->integer('status');
             $table->integer('test_result')->nullable();
             $table->date('test_date')->nullable();
+            $table->date('isolation_date')->nullable();
+            $table->string('health_state')->nullable();
             $table->timestamps();
         });
     }

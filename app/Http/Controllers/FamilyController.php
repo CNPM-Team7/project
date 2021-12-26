@@ -20,7 +20,7 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        $families = Family::paginate(10); // TODO search
+        $families = Family::orderBy('id', 'desc')->paginate(10); // TODO search
         return view('family.index', ['families' => $families]);
     }
 

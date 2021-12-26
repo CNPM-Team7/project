@@ -20,6 +20,8 @@ class Declaration extends Model
         'status',
         'test_result',
         'test_date',
+        'isolation_date',
+        'health_state',
     ];
 
     public function declarant()

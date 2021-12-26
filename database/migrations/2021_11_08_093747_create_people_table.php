@@ -20,6 +20,7 @@ class CreatePeopleTable extends Migration
             $table->string('birth_place');
             $table->integer('sex');
             $table->string('race');
+            $table->string('phone_number')->nullable(); // TODO FE add phone number input field
             $table->string('job')->nullable();
             $table->string('work_place')->nullable();
             $table->integer('id_number')->nullable();

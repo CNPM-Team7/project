@@ -37,12 +37,8 @@ Route::name('auth.')->group(function () {
 
 //Route::middleware('auth:web')->group(function () {
 
-Route::get('', function () {
-    return view('dashboard');
-});
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('', [PersonController::class, 'dashboard']);
+Route::get('/dashboard', [PersonController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/profile', function () {
     return view('authenticate.profile');
@@ -75,6 +71,8 @@ Route::name('families.')->prefix('families')->group(function () {
 }); // must declare these routes before resource routes
 
 Route::resource('families', FamilyController::class);
+
+Route::get('/declarations/create/{id}', [DeclarationController::class, 'create'])->name('declarations.create');
 
 Route::resource('declarations', DeclarationController::class);
 //});

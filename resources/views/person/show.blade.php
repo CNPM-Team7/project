@@ -64,7 +64,8 @@
                 </button>
             </a>
 
-            <form method="POST" action="{{ route('person.destroy', $person->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
+            <form method="POST"
+                  action="{{ route('person.destroy', $person->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
@@ -122,7 +123,7 @@
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>ID Ho Khau</span>
+                <span>ID hộ khẩu</span>
                 <span>{{ $person->family_id }}</span>
             </div>
         </div>
@@ -155,25 +156,25 @@
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Ngày cap</span>
+                <span>Ngày cấp</span>
                 <span>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Nơi dang ki</span>
+                <span>Nơi đăng kí</span>
                 <span>{{ $person->register_place }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Ngày dang ki</span>
+                <span>Ngày đăng kí</span>
                 <span>{{ date('d/m/Y', strtotime($person->register_date)) }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Địa chỉ sap chuyển đến</span>
+                <span>Địa chỉ sap chuyển đến</span> {{-- TODO cần thảo luận thêm  --}}
                 <span>{{ $person->move_to }}</span>
             </div>
         </div>

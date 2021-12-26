@@ -9,6 +9,14 @@
         </div>
         <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
     </div>
-    <small class="text-red-500">{{ $errors->first($name) ?? '123' }}</small> {{-- TODO make this right under input and then replace '123' with '' --}} {{-- TODO khong hieu lam? --}}
+
+    @if($errors->any())
+        <div class="w-auto flex flex-row items-center gap-x-2 pt-1">
+            <div class="flex w-full items-center justify-between">
+                <div></div>
+                <small {{ $attributes ->merge(['class' => 'text-red-500']) }}>{{ $errors->first($name) ?? '123' }}asd</small></div>
+            <span class="text-red-500 invisible">(*)</span>
+        </div>
+    @endif
 </div>
 

@@ -35,11 +35,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Edit
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Delete
+                                    Action
                                 </th>
                             </tr>
                             </thead>
@@ -71,10 +67,22 @@
                                     <div class="text-sm text-gray-900">20/12/2021</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                                    <a href=""
+                                       class="text-green-600 hover:text-green-500">
+                                        <div class="flex flex-row space-x-2">
+                                            <i class="material-icons-outlined text-base">visibility</i>
+                                            <span class="pt-0.5">Show</span>
+                                        </div>
+
+                                    </a>
+                                    <a href=""
+                                       class="text-indigo-600 hover:text-indigo-500">
+                                        <div class="flex flex-row space-x-2">
+                                            <i class="material-icons-outlined text-base">edit</i>
+                                            <span class="pt-0.5">Edit</span>
+                                        </div>
+
+                                    </a>
                                 </td>
                             </tr>
 
@@ -104,13 +112,25 @@
                                     <div class="text-sm text-gray-900">22/10/2020</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                                    <a href=""
+                                       class="text-green-600 hover:text-green-500">
+                                        <div class="flex flex-row space-x-2">
+                                            <i class="material-icons-outlined text-base">visibility</i>
+                                            <span class="pt-0.5">Show</span>
+                                        </div>
+
+                                    </a>
+                                    <a href=""
+                                       class="text-indigo-600 hover:text-indigo-500">
+                                        <div class="flex flex-row space-x-2">
+                                            <i class="material-icons-outlined text-base">edit</i>
+                                            <span class="pt-0.5">Edit</span>
+                                        </div>
+
+                                    </a>
                                 </td>
                             </tr>
-                            
+
                         </table>
                     </div>
                 </div>

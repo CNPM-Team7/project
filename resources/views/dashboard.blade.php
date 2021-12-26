@@ -12,7 +12,11 @@
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
                     <div class="flex items-center">
-                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                        </svg>
 
                         <span class="ml-1 text-sm text-gray-400 md:ml-2 dark:text-gray-500">Trang chủ</span>
                     </div>
@@ -152,7 +156,6 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
 
 
-
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap select-text">
                                         <div class="flex items-center">
@@ -170,7 +173,8 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm text-gray-500">1231</div>
+                                            class="text-sm text-gray-500">1231
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
@@ -185,15 +189,18 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm text-gray-500">abc</div> {{--qua dai, rut gon bang '...'--}}
+                                            class="text-sm text-gray-500">abc
+                                        </div> {{--qua dai, rut gon bang '...'--}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm text-gray-500">abc</div>
+                                            class="text-sm text-gray-500">abc
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm text-gray-500">abc</div> {{--nhan vao se ra trang info famliy--}}
+                                            class="text-sm text-gray-500">abc
+                                        </div> {{--nhan vao se ra trang info famliy--}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">abc</div>
@@ -255,7 +262,7 @@
                     },
                     color: '#fff',
                 },
-                legend:{
+                legend: {
                     enabled: false,
                 }
             }

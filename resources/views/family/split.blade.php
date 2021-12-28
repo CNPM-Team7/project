@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('header')
-<div class="flex flex-col gap-y-4">
     <div class="flex flex-col gap-y-4">
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -36,7 +35,8 @@
                                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                   clip-rule="evenodd"></path>
                         </svg>
-                        <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Tach hộ khẩu</span>
+                        <span
+                            class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Tách hộ khẩu</span>
                     </div>
                 </li>
             </ol>
@@ -45,38 +45,43 @@
 @endsection
 
 @section('content')
-    <x-input-text name="house_id" mandatory>
-        House ID
-    </x-input-text>
+    <div class="flex flex-col space-y-10">
+        <div class="flex flex-col w-80">
+            <x-input-text name="house_id" mandatory>
+                House ID
+            </x-input-text>
 
-    <x-input-text name="address" mandatory>
-        Address
-    </x-input-text>
+            <x-input-text name="address" mandatory>
+                Address
+            </x-input-text>
 
-    <div>
-        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
-            <div class="flex w-full items-center justify-between">
-                <label>
-                    Family ID
-                </label>
-                <input id="family_id" onchange="getMembers()" 
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" /> 
+            <div>
+                <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
+                    <div class="flex w-full items-center justify-between">
+                        <label>
+                            Family ID
+                        </label>
+                        <input id="family_id" onchange="getMembers()"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                    </div>
+                    <span class="text-red-500">(*)</span>
+                </div>
             </div>
-            <span class="text-red-500">(*)</span>
-        </div>
-    </div>
 
-    {{-- TODO tim theo ten thanh vien? --}}
-    <div id="members"></div>
-    <br>
-    <div>SELECTED:</div> {{-- TODO FE css these, pretify button --}}
-    <div id="selected"></div>
-    <br>
-    <x-input-text name="owner_id" mandatory>
-        Owner ID
-    </x-input-text>
-    <br>
-    <button onclick="done()" class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button> {{-- TODO FE make it center --}}
+            {{-- TODO tim theo ten thanh vien? --}}
+            <div id="members"></div>
+            <br>
+            <div>SELECTED:</div> {{-- TODO FE css these, pretify button --}}
+            <div id="selected"></div>
+            <br>
+            <x-input-text name="owner_id" mandatory>
+                Owner ID
+            </x-input-text>
+        </div>
+        <button onclick="done()" class="w-32 border rounded bg-green-500 px-4 py-2 self-center">
+            Hoàn thành
+        </button>
+    </div>
 
     <script>
         let members = [];
@@ -129,22 +134,22 @@
 
             selected.forEach((element, index) => {
                 selectedDiv.innerHTML += `
-                    <x-input-text name="memberRelationNo.${ element.id }" value="${ element.owner_relation }" placeholder="Con">
-                        ${ element.name } (ID: ${ element.id })
+                    <x-input-text name="memberRelationNo.${element.id}" value="${element.owner_relation}" placeholder="Con">
+                        ${element.name} (ID: ${element.id})
                     </x-input-text>
                 `
             }); // TODO FE css cho dep hon
         }
 
-        function done(){
-            if(selected.length == 0) return alert('Haven\'t select any one.')
+        function done() {
+            if (selected.length == 0) return alert('Haven\'t select any one.')
             let data = {
                 'house_id': document.querySelector('input[name=house_id]').value,
                 'address': document.querySelector('input[name=address]').value,
                 'owner_id': document.querySelector('input[name=owner_id]').value,
                 'members': {},
             }
-            if(!data.house_id || !data.address || !data.owner_id) return alert('Required field can\'t be blank.')
+            if (!data.house_id || !data.address || !data.owner_id) return alert('Required field can\'t be blank.')
             selected.forEach(member => {
                 data.members[member.id] = document.getElementById('memberRelationNo.' + member.id).value || 'Con'
             })

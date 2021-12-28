@@ -148,6 +148,10 @@
                 Nơi làm việc
             </x-input-text>
 
+            <x-input-text name="phone_number" class="w-5/12">
+                Số điện thoại
+            </x-input-text>
+
             <x-input-text name="id_number" class="w-5/12">
                 Số CMND/CCCD
             </x-input-text>
@@ -213,7 +217,9 @@
                 <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
             </div>
         </div>
-        <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
+        <x-button-outline class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28 self-center">
+            Hoàn thành
+        </x-button-outline>
     </form>
 
 @endsection

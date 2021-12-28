@@ -74,5 +74,5 @@ Route::resource('families', FamilyController::class);
 
 Route::get('/declarations/create/{id}', [DeclarationController::class, 'create'])->name('declarations.create');
 
-Route::resource('declarations', DeclarationController::class);
+Route::resource('declarations', DeclarationController::class)->except(['create']);
 //});

@@ -41,15 +41,17 @@
 @section('content')
         <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
             <a href="{{ route('person.show', $person->id) }}">
-                <button class="w-44 border rounded bg-blue-500 px-4 py-2">
+                <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300">
                     Show
-                </button>
+                </x-button-default>
             </a>
 
             <form method="POST" action="{{ route('person.destroy', $person->id) }}"> {{-- TODO FE should have a warning? and a toast message when done delete? --}}
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+                <x-button-default class="bg-red-500 hover:bg-red-600 focus:ring-red-300">
+                    Delete
+                </x-button-default>
             </form>
         </div>
 
@@ -86,9 +88,16 @@
 
             </div>
 
-            <x-input-text name="birth_place" class="w-5/12" value="{{ $person->birth_place }}" mandatory>
-                Nơi sinh
-            </x-input-text>
+            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                <div class="flex w-full justify-between items-center">
+                    <label for="birth_place">
+                        Địa chỉ hộ khẩu
+                    </label>
+                    <textarea name="birth_place" id="address" type="tex" oninput="auto_grow(this)"
+                              class="w-5/12 h-auto break-normal overflow-hidden resize-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->birth_place }}</textarea>
+                </div>
+                <span class="text-red-500">(*)</span>
+            </div>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between">
@@ -143,9 +152,16 @@
                 Số CMND/CCCD
             </x-input-text>
 
-            <x-input-text name="idn_receive_place" class="w-5/12" value="{{ $person->idn_receive_place }}">
-                Nơi cấp
-            </x-input-text>
+            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                <div class="flex w-full justify-between items-center">
+                    <label for="idn_receive_place">
+                        Nơi cấp
+                    </label>
+                    <textarea name="idn_receive_place" id="address" type="tex" oninput="auto_grow(this)"
+                              class="w-5/12 h-auto break-normal overflow-hidden resize-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->idn_receive_place }}</textarea>
+                </div>
+                <span class="text-red-500 invisible">(*)</span>
+            </div>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between gap-x-1">
@@ -169,9 +185,16 @@
                 <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
             </div>
 
-            <x-input-text name="register_place" class="w-5/12" value="{{ $person->register_place }}">
-                Nơi dang ki
-            </x-input-text>
+            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                <div class="flex w-full justify-between items-center">
+                    <label for="register_place">
+                        Nơi đăng ký
+                    </label>
+                    <textarea name="register_place" id="address" type="tex" oninput="auto_grow(this)"
+                              class="w-5/12 h-auto break-normal overflow-hidden resize-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->register_place }}</textarea>
+                </div>
+                <span class="text-red-500 invisible">(*)</span>
+            </div>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between gap-x-1">
@@ -200,17 +223,23 @@
             </x-input-text>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full justify-between">
+                <div class="flex w-full justify-between items-center">
                     <label for="note">
                         Ghi chú
                     </label>
-                    <textarea name="note" id="note" type="tex"
-                              class="w-5/12 h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $person->note }}</textarea>
+                    <textarea name="note" id="note" type="tex" oninput="auto_grow(this)"
+                              class="w-5/12 h-auto break-normal overflow-hidden resize-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->note }}</textarea>
                 </div>
-                <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
+                <span class="text-red-500 invisible">(*)</span>
             </div>
         </div>
         <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
     </form>
 
 @endsection
+<script>
+    function auto_grow(element) {
+        element.style.height = "5px";
+        element.style.height = (element.scrollHeight)+"px";
+    }
+</script>

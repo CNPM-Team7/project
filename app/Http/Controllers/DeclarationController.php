@@ -12,6 +12,8 @@ use App\Models\Person;
 
 class DeclarationController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *

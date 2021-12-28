@@ -40,28 +40,29 @@
         <div class="w-full items-center divide-gray-300 divide-y divide-solid">
 
             <div class="w-full select-none flex flex-row justify-between mb-4">
+
                 <a href="{{ route('staying.create') }}">
-                    <button class="w-44 border rounded bg-yellow-500 px-4 py-2">
+                    <x-button-default class="bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300">
                         Khai báo tạm trú
-                    </button>
+                    </x-button-default>
                 </a>
 
                 <a href="{{ route('absent') }}">
-                    <button class="w-44 border rounded bg-blue-500 px-4 py-2">
+                    <x-button-default class="bg-blue-400 hover:bg-blue-500 focus:ring-blue-300">
                         Khai báo tạm vắng
-                    </button>
+                    </x-button-default>
                 </a>
 
                 <a href="{{ route('person.create') }}">
-                    <button class="w-44 border rounded bg-green-500 px-4 py-2">
+                    <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300">
                         Thêm mới
-                    </button>
+                    </x-button-default>
                 </a>
 
                 <a>
-                    <button class="w-44 border rounded bg-red-500 px-4 py-2">
+                    <x-button-default class="bg-red-500 hover:bg-red-600 focus:ring-red-300">
                         Khai tử
-                    </button>
+                    </x-button-default>
                 </a>
             </div>
 
@@ -95,7 +96,9 @@
 
                 </div>
                 <div class="flex flex-row items-center">
-                    <button class="w-28 border rounded bg-blue-500 px-4 py-2" onclick="search()">Tìm kiếm</button>
+                    <x-button-outline class="text-teal-500 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28" onclick="search()">
+                        Tìm kiếm
+                    </x-button-outline>
                 </div>
             </div>
 
@@ -105,6 +108,22 @@
             <div class="overflow-x-auto w-full">
                 <div class="py-2 align-middle inline-block min-w-full">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        <div class="w-full pl-3 flex flex-col">
+                            <span class="text-red-500">
+                                *
+                                <span class="italic">
+                                    Đưa con trỏ chuột vào trường in nghiêng để hiện thông tin chi tiết
+                                </span>
+                            </span>
+
+                            <span class="text-red-500">
+                                *
+                                <span class="underline underline-offset-4">
+                                    Bấm vào họ tên của một người để chỉnh sửa thông tin của người đó
+                                </span>
+                            </span>
+                        </div>
+
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-200">
                             <tr>
@@ -167,7 +186,7 @@
                                     <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
                                         class="px-6 py-4 whitespace-nowrap select-text">
                                         <div class="flex items-center">
-                                        <span class="text-sm font-medium text-gray-500">
+                                        <span class="text-sm font-medium text-gray-900 italic">
                                             {{ $person->id_number }}
                                         </span>
                                         </div>
@@ -193,15 +212,16 @@
 
                                     <td class="px-6 py-4 whitespace-nowrap select-text">
                                         <div class="flex items-center">
-                                        <span class="text-sm font-medium text-gray-500">
-                                            <a href="{{ route('person.show', $person->id) }}">{{ $person->name }}</a>
-                                        </span>
+                                            <a href="{{ route('person.show', $person->id) }}">
+                                                <span class="text-sm font-medium text-gray-900 underline">
+                                                    {{ $person->name }}
+                                                </span>
+                                            </a>
                                         </div>
                                     </td>
                                     <td data-tooltip-target="tooltip-birthday {{ $person->id_number }}"
                                         class="px-6 py-4 whitespace-nowrap">
-                                        <div
-                                            class="text-sm text-gray-500">{{ date('d/m/Y', strtotime($person->birthday)) }}</div>
+                                        <div class="text-sm text-gray-900 italic">{{ date('d/m/Y', strtotime($person->birthday)) }}</div>
                                     </td>
                                     <div id="tooltip-birthday {{ $person->id_number }}" role="tooltip"
                                          class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
@@ -214,7 +234,7 @@
                                         <div
                                             class="flex flex-row py-0.5 justify-center rounded-full bg-{{ $genderColors[$person->sex] }}-100">
                                             <span
-                                                class="text-xs leading-5 font-semibold text-{{ $genderColors[$person->sex] }}-500">
+                                                class="text-xs leading-5 font-semibold text-{{ $genderColors[$person->sex] }}-500 px-3 py-0.5">
                                                 {{ $genders[$person->sex] }}
                                             </span>
                                         </div>
@@ -228,7 +248,7 @@
                                     <td data-tooltip-target="tooltip-job {{ $person->id_number }}"
                                         class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">
-                                            <p class="truncate w-20">
+                                            <p class="truncate w-20 text-gray-900 italic">
                                                 {{ $person->job }}
                                             </p>
                                         </div>
@@ -270,16 +290,24 @@
                                                 <i class="material-icons-outlined text-base">visibility</i>
                                                 <span class="pt-0.5">Show</span>
                                             </div>
-
                                         </a>
+
                                         <a href="{{ route('person.edit', $person->id) }}"
                                            class="text-indigo-600 hover:text-indigo-500">
                                             <div class="flex flex-row space-x-2">
                                                 <i class="material-icons-outlined text-base">edit</i>
                                                 <span class="pt-0.5">Edit</span>
                                             </div>
-
                                         </a>
+
+                                        <a href="{{ route('declarations.create', $person->id) }}"
+                                           class="text-yellow-600 hover:text-yellow-500">
+                                            <div class="flex flex-row space-x-2">
+                                                <i class="material-icons-outlined text-base">edit</i>
+                                                <span class="pt-0.5">Declaration</span>
+                                            </div>
+                                        </a>
+
                                     </td>
                                 </tr>
                             @endforeach

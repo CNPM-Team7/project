@@ -53,7 +53,7 @@
 
 @section('content')
 
-    <form action="{{ route('person.store') }}" method="POST" class="flex flex-col gap-y-10 select-none"
+    <form action="{{ route('person.store') }}" method="POST" class="flex flex-col gap-y-10 select-none items-center"
           style="width: 900px">
         @csrf
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
@@ -194,7 +194,9 @@
                 <span class="text-red-500">(*)</span>
             </div>
         </div>
-        <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
+        <x-button-outline class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28">
+            Hoàn thành
+        </x-button-outline>
     </form>
 
 @endsection

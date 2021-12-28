@@ -141,7 +141,7 @@
                     <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
                         class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
-                        <span class="text-sm font-medium text-gray-500"> {{-- TODO FE ghi chu va in nghieng cac truong hover duoc --}}
+                        <span class="text-sm font-medium text-gray-500">
                             {{ $person->id_number }}
                         </span>
                         </div>

@@ -14,7 +14,7 @@
         <div class="w-auto flex flex-row items-center gap-x-2 pt-1">
             <div class="flex w-full items-center justify-between">
                 <div></div>
-                <small {{ $attributes ->merge(['class' => 'text-red-500']) }}>{{ $errors->first($name) ?? '' }}</small></div>
+                <small class="text-red-500">{{ $errors->first($name) ?? '' }}</small></div>
             <span class="text-red-500 invisible">(*)</span>
         </div>
     @endif

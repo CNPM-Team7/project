@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Person;
 use App\Http\Requests\PersonRequest;
-
+use App\Models\Temporary;
 class PersonController extends Controller
 {
 
@@ -19,7 +19,7 @@ class PersonController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard'); // TODO return data
+        return view('dashboard'); // TODO DISCUSS return data
     }
 
     /**
@@ -37,7 +37,6 @@ class PersonController extends Controller
             $likeQuery[] = [$key, 'like', '%'.$value.'%'];
         }
 
-        // TODO fix search
         $people = Person::where($likeQuery)->orderBy('id', 'desc')->paginate(10);
         return view('person.index', ['people' => $people, 'statuses' => $this->statuses, 'genders' => $this->genders]);
     }
@@ -121,11 +120,29 @@ class PersonController extends Controller
         return $data;
     }
 
-    public function staying(Request $request){
-        dd($request);
+    public function staying(Request $request){ // TODO DISCUSS what happen if the same person declare twice?
+        $personData = $this->filterRequest($request);
+        $personData['status'] = 3; // tam tru
+        $personData['owner_relation'] = $this->statuses[$personData['status']];
+        $person_id = Person::create($personData)->id;
+
+        $tempoData = $this->filterTempoRequest($request);
+        $tempoData['person_id'] = $person_id;
+        $tempoData['type'] = 0;
+        Temporary::create($tempoData);
+
+        return redirect()->route('person.show', $person_id);
     }
 
     public function absent(Request $request){
         dd($request);
+    }
+
+    public function filterTempoRequest($request){
+        $data = $request->all();
+        $data['register_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['register_date'])));
+        $data['start_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['start_date'])));
+        $data['end_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['end_date'])));
+        return $data;
     }
 }

@@ -10,7 +10,7 @@
         @csrf
         @method('PUT')
         <div class="grid grid-cols-2 gap-x-14 gap-y-4">
-            <x-input-text name="name" class="w-5/12" value="{{ $person->name }}" disabled>
+            <x-input-text name="name" class="w-5/12 bg-gray-300" value="{{ $person->name }}" disabled>
                 Họ và tên
             </x-input-text>
 
@@ -19,14 +19,14 @@
                     <label for="gender" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Giới
                         tính</label>
                     <select id="gender" value="{{ $person->sex }}" disabled
-                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class=" bg-gray-300 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="0">Nam</option>
                         <option value="1">Nữ</option>
                     </select>
                 </div>
             </div>
 
-            <x-input-text name="id_number" class="w-5/12" value="{{ $person->id_number }}" disabled> {{-- TODO FE css gray text --}}
+            <x-input-text name="id_number" class="w-5/12 bg-gray-300" value="{{ $person->id_number }}" disabled>
                 CMND/CCCD
             </x-input-text>
 
@@ -44,13 +44,13 @@
                         </div>
                         <input name="" datepicker="" datepicker-format="dd/mm/yyyy" type="text"
                             value="{{ date('d/m/Y',strtotime($person->birthday)) }}" disabled
-                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                            class=" bg-gray-300 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                         >
                     </div>
                 </div>
             </div>
 
-            <x-input-text name="phone_number" value="{{ $person->phone_number }}" disabled>
+            <x-input-text name="phone_number" value="{{ $person->phone_number }}" class="bg-gray-300" disabled>
                 Điện thoại
             </x-input-text>
 
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <x-input-text name="birth_place" value="{{ $person->birth_place }}" disabled>
+            <x-input-text name="birth_place" value="{{ $person->birth_place }}" class="bg-gray-300" disabled>
                 Nơi cư trú
             </x-input-text>
 

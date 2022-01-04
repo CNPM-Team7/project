@@ -295,7 +295,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Here' }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO FE them button khai bao tam tru/tam vang, khai bao covid --}}
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO FE them button khai bao tam vang --}}
                                         <a href="{{ route('person.show', $person->id) }}"
                                            class="text-green-600 hover:text-green-500">
                                             <div class="flex flex-row space-x-2">
@@ -337,6 +337,7 @@
     <script>
         function search() {
             const urlSearchParams = new URLSearchParams(window.location.search);
+            if(urlSearchParams.has('page')) urlSearchParams.delete('page')
             let queryParams = ['name', 'id_number', 'status']
             for (let param of queryParams) {
                 let val = document.getElementById(param).value

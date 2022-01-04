@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Declaration extends Model
+class Temporary extends Model
 {
     use HasFactory;
+
+    protected $table = 'temporary';
 
     /**
      * The attributes that are mass assignable.
@@ -17,11 +19,12 @@ class Declaration extends Model
 
     protected $fillable = [
         'person_id',
-        'status',
-        'test_result',
-        'test_date',
-        'isolation_date',
-        'health_state',
+        'type',
+        'register_date',
+        'start_date',
+        'end_date',
+        'reason',
+        'family_id',
     ];
 
     public function declarant()

@@ -91,7 +91,7 @@
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full justify-between items-center">
                     <label for="birth_place">
-                        Địa chỉ hộ khẩu
+                        Nơi cư trú
                     </label>
                     <textarea name="birth_place" id="address" type="tex" oninput="auto_grow(this)"
                               class="w-5/12 h-auto break-normal overflow-hidden resize-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->birth_place }}</textarea>

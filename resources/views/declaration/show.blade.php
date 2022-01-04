@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <x-input-text name="id_number" class="w-5/12" value="{{ $person->id_number }}" disabled> {{-- TODO css gray text --}}
+            <x-input-text name="id_number" class="w-5/12" value="{{ $person->id_number }}" disabled>
                 CMND/CCCD
             </x-input-text>
 

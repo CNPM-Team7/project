@@ -50,13 +50,15 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            {{ $declaration->id }}
+                                            <u><a href="{{ route('person.show', $declaration->declarant->id) }}">
+                                            {{ $declaration->declarant->name }}
+                                            </a></u>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
+                                        <div class="text-sm font-medium text-gray-900"> {{-- TODO F-1? --}}
                                             {{ $declaration->status == 3 ? '> F2' : 'F' . $declaration->status }}
                                         </div>
                                     </div>

@@ -51,7 +51,7 @@
             </button>
         </a>
 
-        <form method="POST" action="{{ route('families.destroy', $family->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
+        <form method="POST" action="{{ route('families.destroy', $family->id) }}"> {{-- TODO FE should have a warning, and a toast message when done delete --}}
             @csrf
             @method('DELETE')
             <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
@@ -75,7 +75,7 @@
     <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
         <div class="flex w-full items-center justify-between">
             <span>Chu ho:</span>
-            <p><a href="{{ route('families.show', $family->owner->id) }}"><u>{{ $family->owner->name }}</u></a></p>
+            <p><a href="{{ route('person.show', $family->owner->id) }}"><u>{{ $family->owner->name }}</u></a></p>
         </div>
     </div>
 
@@ -134,7 +134,6 @@
             </thead>
 
         <tbody class="bg-white divide-y divide-gray-200">
-{{-- TODO owner cung la thanh vien cua ho --}}
 
             @foreach ($family->members as $person)
                 <tr>

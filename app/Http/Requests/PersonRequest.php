@@ -23,7 +23,7 @@ class PersonRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => ['required'],
             'birthday' => ['required'],
             'birth_place' => ['required'],
@@ -31,7 +31,7 @@ class PersonRequest extends FormRequest
             'race' => ['required'],
             'job' => [],
             'work_place' => [],
-            'id_number' => [],
+            'id_number' => ['integer'],
             'idn_receive_place' => [],
             'idn_receive_date' => [],
             'register_place' => [],
@@ -42,6 +42,9 @@ class PersonRequest extends FormRequest
             'note' => [],
             'family_id' => [''],
         ];
+
+        if($this->family_id) $rules['family_id'] = ['exists:families,id'];
+        return $rules;
     }
 
     public function messages()

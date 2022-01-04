@@ -34,7 +34,7 @@
                 Ngày, tháng, năm sinh
             </x-input-text>
 
-            <x-input-text name="phone_number" class="w-7/12" value="{{ $person->phone_number }}" disabled>
+            <x-input-text name="phone_number" class="w-7/12 bg-gray-300" value="{{ $person->phone_number }}" disabled>
                 Điện thoại
             </x-input-text>
 
@@ -88,7 +88,7 @@
                 <span class="text-red-500 invisible">(*)</span>
             </div>
 
-            <x-input-text name="test_result" class="w-7/12"> {{-- TODO select ket qua --}}
+            <x-input-text name="test_result" class="w-7/12"> {{-- TODO DISCUSS select ket qua, nhung ket qua nao? --}}
                 Kết quả test covid
             </x-input-text>
 

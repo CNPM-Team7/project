@@ -42,7 +42,9 @@ class FamilyController extends Controller
      */
     public function store(FamilyRequest $request)
     {
-        $family_id = Family::create($request->all())->id;
+        $family = Family::create($request->all());
+        $family_id = $family->id;
+        $family->owner->update(['family_id' => $family_id]);
         return redirect()->route('families.show', $family_id);
     }
 
@@ -82,7 +84,9 @@ class FamilyController extends Controller
      */
     public function update(FamilyRequest $request, $id)
     {
-        Family::find($id)->update($request->all());
+        $family = Family::find($id);
+        $family->update($request->all());
+        $family->owner->update(['family_id' => $id]);
         return redirect()->route('families.show', $id);
     }
 
@@ -100,11 +104,13 @@ class FamilyController extends Controller
 
     public function split(){
         $data = request()->all();
-        $family_id = Family::create([
+        $family = Family::create([
             'house_id' => $data['house_id'],
             'owner_id' => $data['owner_id'],
             'address' => $data['address'],
         ])->id;
+        $family_id = $family->id;
+        $family->owner->update(['family_id' => $family_id]);
 
         foreach($data['members'] as $id => $relation){
             Person::find($id)->update([

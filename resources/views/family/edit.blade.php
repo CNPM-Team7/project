@@ -52,7 +52,7 @@
         </a>
 
         <form method="POST"
-              action="{{ route('families.destroy', $family->id) }}"> {{-- TODO should have a warning? and a toast message when done delete? --}}
+              action="{{ route('families.destroy', $family->id) }}"> {{-- TODO FE should have a warning, and a toast message when done delete --}}
             @csrf
             @method('DELETE')
             <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>

@@ -85,6 +85,10 @@
 
             </div>
 
+            <x-input-text name="birth_place" class="w-5/12" mandatory>
+                Nơi sinh
+            </x-input-text>
+
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between">
                     <label for="gender" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Giới
@@ -102,11 +106,15 @@
                 <span class="text-red-500">(*)</span>
             </div>
 
+            <x-input-text name="race" class="w-5/12" mandatory>
+                Dân tộc
+            </x-input-text>
+
             <x-input-text name="id_number" class="w-5/12" mandatory>
                 Số CMND/CCCD
             </x-input-text>
 
-            <x-input-text name="idn_receive_place" class="w-5/12" mandatory>
+            {{--<x-input-text name="idn_receive_place" class="w-5/12" mandatory>
                 Nơi cấp
             </x-input-text>
 
@@ -130,11 +138,37 @@
                     </div>
                 </div>
                 <span class="text-red-500">(*)</span>
-            </div>
+            </div>--}}
 
             <x-input-text name="move_to" class="w-5/12" mandatory>
                 Địa chỉ thường trú
             </x-input-text>
+
+            <x-input-text name="family_id" class="w-5/12" mandatory>
+                ID Ho khau
+            </x-input-text>
+
+            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                <div class="flex w-full items-center justify-between gap-x-1">
+                    <label for="register_date">Ngày khai bao</label>
+                    <div class="relative w-5/12 flex flex-row gap-x-2">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input id="register_date" name="register_date" datepicker=""
+                               datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
+                               required
+                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                               placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                    </div>
+                </div>
+                <span class="text-red-500">(*)</span>
+            </div>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between">
@@ -153,7 +187,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input id="start" name="start" datepicker=""
+                                <input id="start" name="start_date" datepicker=""
                                        datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                        required
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
@@ -173,7 +207,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input id="end" name="end" datepicker=""
+                                <input id="end" name="end_date" datepicker=""
                                        datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                        required
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"

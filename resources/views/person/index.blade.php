@@ -157,11 +157,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Quan hệ với chủ hộ
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Tên chủ hộ
+                                    Mã Hộ khẩu
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
@@ -269,14 +265,30 @@
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
 
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div
-                                            class="text-sm text-gray-500">{{ $person->family ? $person->owner_relation : 'No Info' }}</div>
+                                    <td @if($person->family_id) data-tooltip-target="tooltip-family {{ $person->id_number }}" @endif
+                                        class="px-6 py-4 whitespace-nowrap select-text">
+                                        <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-900 italic"> {{-- TODO fix italic --}}
+                                            {{ $person->family_id ?? 'No inf' }}
+                                        </span>
+                                        </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div
-                                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div>
-                                    </td>
+                                    <div id="tooltip-family {{ $person->id_number }}" role="tooltip"
+                                         class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
+                                        <div class="flex flex-col">
+                                            <span>
+                                                Họ tên chủ hộ: {{ $person->family->owner->name ?? 'No Info' }}
+                                            </span>
+                                            <span>
+                                                Quan hệ với chủ hộ: {{ $person->family ? $person->owner_relation : 'No Info' }}
+                                            </span>
+                                            <span>
+                                                Địa chỉ hộ khẩu: {{ $person->family ? $person->family->address : 'No Info' }}
+                                            </span>
+                                        </div>
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $person->note ?? 'Empty' }}</div>
                                     </td>
@@ -339,6 +351,7 @@
             const urlSearchParams = new URLSearchParams(window.location.search);
             const params = Object.fromEntries(urlSearchParams.entries());
             for (let i in params) {
+                if(i == 'page') continue;
                 document.getElementById(i).value = params[i]
             }
         }

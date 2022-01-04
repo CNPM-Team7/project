@@ -108,7 +108,7 @@ class FamilyController extends Controller
 
         foreach($data['members'] as $id => $relation){
             Person::find($id)->update([
-                'family_id' => $family_id, 
+                'family_id' => $family_id,
                 'owner_relation' => $relation,
             ]);
         }
@@ -116,7 +116,8 @@ class FamilyController extends Controller
 
     public function splitView()
     {
-        return view('family.split');
+        $families = Family::orderBy('id', 'desc')->paginate(10);
+        return view('family.split', ['families' => $families]);
     }
 
     public function members($id)

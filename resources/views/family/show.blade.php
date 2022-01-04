@@ -134,7 +134,7 @@
             </thead>
 
         <tbody class="bg-white divide-y divide-gray-200">
-
+{{-- TODO owner cung la thanh vien cua ho --}}
 
             @foreach ($family->members as $person)
                 <tr>

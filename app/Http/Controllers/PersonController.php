@@ -37,6 +37,7 @@ class PersonController extends Controller
             $likeQuery[] = [$key, 'like', '%'.$value.'%'];
         }
 
+        // TODO fix search
         $people = Person::where($likeQuery)->orderBy('id', 'desc')->paginate(10);
         return view('person.index', ['people' => $people, 'statuses' => $this->statuses, 'genders' => $this->genders]);
     }

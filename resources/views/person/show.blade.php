@@ -44,6 +44,8 @@
 @endsection
 
 @section('content')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
+
     <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid" style="width: 900px">
 
         <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
@@ -161,7 +163,7 @@
                 <span>{{ date('d/m/Y', strtotime($person->register_date)) ?? 'Chưa điền' }}</span>
             </div>
         </div>
-        
+
         @if($person->move_to)
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
@@ -211,7 +213,9 @@
                 <span>Cac thanh vien trong Ho Khau:</span>
             </div>
         </div>
-        
+
+        {{--TODO bo bang, them dia chi, them bang tam tru/tam vang--}}
+
         @php
             $genderColors = ['blue', 'red', 'green']
         @endphp
@@ -396,5 +400,5 @@
         </table>
     </div>
     @endif
-
+    </div>
 @endsection

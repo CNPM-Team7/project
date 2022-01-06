@@ -46,7 +46,57 @@
 @endsection
 
 @section('content')
-    <div class="flex flex-col space-y-10 items-center">
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
+
+    <div class="flex flex-col space-y-10 items-center"
+         x-data="{
+                family_id: '',
+                members: [],
+                selecteds: [],
+                getMembers() {
+                    let url = '/families/members/' + this.family_id
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.members = data
+                            //check xem da duoc chon hay chua
+                            this.selecteds.forEach(selected_item =>{
+                                this.members = this.members.filter(member_item =>{
+                                    return member_item.id !== selected_item.id
+                                })
+                            })
+                        })
+                },
+                select(item){
+                    let index = this.members.indexOf(item)
+                    if (index !== -1)
+                        this.members.splice(index, 1)
+                    this.selecteds.push(item)
+                },
+                unselect(item){
+                    let index = this.selecteds.indexOf(item)
+                        if (index !== -1)
+                    this.selecteds.splice(index, 1)
+                    if (item.family_id === this.family_id)
+                        this.members.push(item)
+                },
+                submit(){
+                    if (this.selecteds.length == 0){
+                        return alert('selecteds is null')
+                    }
+
+                    fetch('/families/split',{
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.selecteds),
+                    }).then(response => { // TODO redirect to families index
+                        console.log(response)
+                    });
+                }
+             }">
         {{--        <div class="flex flex-col w-80">--}}
         {{--            <x-input-text name="house_id" mandatory>--}}
         {{--                House ID--}}
@@ -72,7 +122,7 @@
         {{--            --}}{{-- TODO tim theo ten thanh vien? --}}
         {{--            <div id="members"></div>--}}
         {{--            <br>--}}
-        {{--            <div>SELECTED:</div> --}}{{-- TODO FE css these, pretify button --}}
+        {{--            <div>SELECTED:</div> --}}
         {{--            <div id="selected"></div>--}}
         {{--            <br>--}}
         {{--            <x-input-text name="owner_id" mandatory>--}}
@@ -80,24 +130,10 @@
         {{--            </x-input-text>--}}
         {{--        </div>--}}
 
-        <div class="flex flex-col w-80"
-             x-data="{
-                family_id: '',
-                members: {},
-                getMembers() {
-                    let url = '/families/members/' + this.family_id
-                    fetch(url)
-                        .then(response => response.json())
-                        .then(data => {
-                        console.log(data)
-                            this.members = data
-                        })
-                }
-             }"
-        >
-            <div class="flex flex-row space-x-8">
+        <div class="flex flex-col w-full">
+            <div class="flex flex-row w-full justify-between">
                 <div class="w-auto flex flex-row items-center gap-x-2">
-                    <div class="flex w-full items-center justify-between">
+                    <div class="flex w-full items-center justify-between space-x-4">
                         <label for="family_id">
                             Mã hộ khẩu
                         </label>
@@ -109,23 +145,40 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col">
-                    <div></div>
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                             width="40" height="40"
-                             viewBox="0 0 172 172"
-                             style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><path d="M86,172c-47.49649,0 -86,-38.50351 -86,-86v0c0,-47.49649 38.50351,-86 86,-86v0c47.49649,0 86,38.50351 86,86v0c0,47.49649 -38.50351,86 -86,86z" fill="#ffffff"></path><g id="original-icon" fill="#2ecc71"><path d="M138.44938,41.9223c-0.68674,0.0205 -1.34272,0.3075 -1.82447,0.80974l-50.62386,50.62386l-50.62386,-50.62386c-0.49199,-0.51249 -1.16848,-0.78924 -1.87572,-0.78924c-1.07623,0 -2.02947,0.64574 -2.43946,1.62972c-0.39974,0.99423 -0.164,2.12171 0.60474,2.86995l54.3343,54.3343l54.3343,-54.3343c0.77899,-0.74824 1.01473,-1.90647 0.60474,-2.9007c-0.42024,-0.99423 -1.40422,-1.63997 -2.49071,-1.61947zM138.44938,76.03371c-0.68674,0.0205 -1.34272,0.3075 -1.82447,0.80974l-50.62386,50.62386l-50.62386,-50.62386c-0.49199,-0.51249 -1.16848,-0.78924 -1.87572,-0.79949c-1.07623,0.01025 -2.02947,0.65599 -2.43946,1.63997c-0.39974,0.99423 -0.164,2.12171 0.60474,2.86995l54.3343,54.3343l54.3343,-54.3343c0.77899,-0.74824 1.01473,-1.90647 0.60474,-2.9007c-0.42024,-0.99423 -1.40422,-1.63997 -2.49071,-1.61947z"></path></g></g>
-                        </svg>
-                    </button>
-                    <div>
+                <div class="flex flex-col space-y-4 w-72">
+                    <div class="bg-red-500 rounded-lg px-5 py-3 h-32">
+                        <ul class="space-y-1">
+                            <template x-for="item in members" :key="item.id">
+                                <li>
+                                    <button x-text="item.name" @click="select(item)"></button>
+                                </li>
 
+                            </template>
+                        </ul>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="w-auto rounded-full p-1.5 bg-yellow-300 hover:bg-yellow-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                 width="30" height="30"
+                                 viewBox="0 0 172 172"
+                                 style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M143.27734,34.32161c-1.51229,0.03575 -2.94918,0.66766 -3.99765,1.75807l-53.27969,53.27969l-53.27969,-53.27969c-1.07942,-1.10959 -2.56163,-1.73559 -4.10963,-1.73568c-2.33303,0.00061 -4.43307,1.41473 -5.31096,3.57628c-0.8779,2.16155 -0.3586,4.6395 1.31331,6.26669l57.33333,57.33333c2.23904,2.23811 5.86825,2.23811 8.10729,0l57.33333,-57.33333c1.70419,-1.63875 2.22781,-4.1555 1.31865,-6.33798c-0.90916,-2.18248 -3.06468,-3.58317 -5.42829,-3.52739zM143.27734,74.45495c-1.51229,0.03575 -2.94918,0.66767 -3.99765,1.75808l-53.27969,53.27969l-53.27969,-53.27969c-1.07942,-1.10959 -2.56162,-1.73559 -4.10963,-1.73568c-2.33303,0.00061 -4.43307,1.41473 -5.31097,3.57628c-0.8779,2.16155 -0.3586,4.6395 1.31331,6.26669l57.33333,57.33333c2.23904,2.23811 5.86825,2.23811 8.10729,0l57.33333,-57.33333c1.70419,-1.63875 2.22781,-4.1555 1.31865,-6.33798c-0.90916,-2.18248 -3.06468,-3.58317 -5.42829,-3.52739z"></path></g></g></svg>
+                        </button>
+                    </div>
+                    <div class="bg-blue-500 rounded-lg px-4 py- h-32">
+                        <ul class="space-y-1">
+                            <template x-for="item in selecteds" :key="item.id">
+                                <li>
+                                    <button x-text="item.name" @click="unselect(item)"></button>
+                                </li>
+
+                            </template>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300">
+        <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300" @click="submit">
             Hoàn thành
         </x-button-default>
     </div>
@@ -182,91 +235,34 @@
         <br>
         <div>{{ $families->links() }}</div>
     </div>
+    </div>
 @endsection
-<script>
-    let selected = [];
-    let selectedClass = 'text-red-500';
+{{--<script>--}}
+{{--    let selected = [];--}}
+{{--    let selectedClass = 'text-red-500';--}}
 
-    // function getMembers(familyId, members) {
-    //     console.log(familyId)
-    //     fetch("/families/members/" + familyId)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data.items.map(item => item))
-    //             members = data.items.map(item => item)
-    //         })
-    //
-    //     console.log(members)
-    //         //     members = data
-    //         //     const membersDiv = document.getElementById('members')
-    //         //     membersDiv.innerHTML = ''
-    //         //
-    //         //     members.forEach((element, index) => {
-    //         //         let isSelected = false
-    //         //         for (let i in selected) {
-    //         //             if (selected[i].id == element.id) {
-    //         //                 isSelected = true
-    //         //                 break
-    //         //             }
-    //         //         }
-    //         //         membersDiv.innerHTML += `
-    //         //             <div id="memberNo.${index}" onclick="select(${index})" class="${isSelected ? 'text-red-500' : ''}">
-    //         //                 ${element.name}
-    //         //             </div>
-    //         //         `
-    //         //     });
-    //         // })
-    // }
+{{--    function done() {--}}
+{{--        if (selected.length == 0) return alert('Haven\'t select any one.')--}}
+{{--        let data = {--}}
+{{--            'house_id': document.querySelector('input[name=house_id]').value,--}}
+{{--            'address': document.querySelector('input[name=address]').value,--}}
+{{--            'owner_id': document.querySelector('input[name=owner_id]').value,--}}
+{{--            'members': {},--}}
+{{--        }--}}
+{{--        if (!data.house_id || !data.address || !data.owner_id) return alert('Required field can\'t be blank.')--}}
+{{--        selected.forEach(member => {--}}
+{{--            data.members[member.id] = document.getElementById('memberRelationNo.' + member.id).value || 'Con'--}}
+{{--        })--}}
 
-    function select({ memberIndex }) {
-        const memberDiv = document.getElementById('memberNo.' + memberIndex)
-        if (memberDiv.classList.contains('text-red-500')) {
-            for (let i in selected) {
-                if (selected[i].id == members[memberIndex].id) {
-                    selected.splice(i, 1)
-                    break
-                }
-            }
-            memberDiv.classList.remove(selectedClass)
-        } else {
-            selected.push(members[memberIndex])
-            memberDiv.classList.add(selectedClass)
-        }
-
-        const selectedDiv = document.getElementById('selected')
-        selectedDiv.innerHTML = ''
-
-        selected.forEach((element, index) => {
-            selectedDiv.innerHTML += `
-                    <x-input-text name="memberRelationNo.${element.id}" value="${element.owner_relation}" placeholder="Con">
-                        ${element.name} (ID: ${element.id})
-                    </x-input-text>
-                `
-        }); // TODO FE css cho dep hon
-    }
-
-    function done() {
-        if (selected.length == 0) return alert('Haven\'t select any one.')
-        let data = {
-            'house_id': document.querySelector('input[name=house_id]').value,
-            'address': document.querySelector('input[name=address]').value,
-            'owner_id': document.querySelector('input[name=owner_id]').value,
-            'members': {},
-        }
-        if (!data.house_id || !data.address || !data.owner_id) return alert('Required field can\'t be blank.')
-        selected.forEach(member => {
-            data.members[member.id] = document.getElementById('memberRelationNo.' + member.id).value || 'Con'
-        })
-
-        fetch("/families/split", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
-            },
-            body: JSON.stringify(data),
-        }).then(response => { // TODO redirect to families index
-            console.log(response)
-        });
-    }
-</script>
+{{--        fetch("/families/split", {--}}
+{{--            method: 'POST',--}}
+{{--            headers: {--}}
+{{--                'Content-Type': 'application/json',--}}
+{{--                "X-CSRF-TOKEN": "{{ csrf_token() }}",--}}
+{{--            },--}}
+{{--            body: JSON.stringify(data),--}}
+{{--        }).then(response => { // TODO redirect to families index--}}
+{{--            console.log(response)--}}
+{{--        });--}}
+{{--    }--}}
+{{--</script>--}}

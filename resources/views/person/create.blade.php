@@ -52,6 +52,8 @@
 @endsection
 
 @section('content')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
+
     <form action="{{ route('person.store') }}" method="POST" class="flex flex-col gap-y-10 select-none"
           style="width: 900px">
         @csrf
@@ -220,5 +222,5 @@
             Hoàn thành
         </x-button-outline>
     </form>
-
+    </div>
 @endsection

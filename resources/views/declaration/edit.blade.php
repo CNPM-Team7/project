@@ -6,6 +6,8 @@
 @endsection
 
 @section('content')
+
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
     <form action="{{ route('declarations.update', $declaration->id) }}" method="POST" class="flex flex-col gap-y-10 select-none">
         @csrf
         @method('PUT')
@@ -95,7 +97,7 @@
             <x-input-text name="test_result" value="{{ $declaration->test_result }}">
                 Kết quả test covid
             </x-input-text>
-            
+
             <div class="w-full flex flex-row items-center gap-x-2">
                 <div class="flex w-full items-center justify-between gap-x-2">
                     <label for="test_date">Ngày Test</label>
@@ -179,7 +181,7 @@
         </div>
 
     </form>
-
+</div>
     <script>
         function change(key, value){
             let health = JSON.parse(document.getElementById('health_state').value)

@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
     <form action="{{ route('declarations.store') }}" method="POST" class="flex flex-col gap-y-10 select-none">
         @csrf
         <div class="inline-grid grid-cols-2 gap-x-14 gap-y-4">
@@ -88,7 +89,7 @@
                 <span class="text-red-500 invisible">(*)</span>
             </div>
 
-            <x-input-text name="test_result" class="w-7/12"> {{-- TODO DISCUSS select ket qua, nhung ket qua nao? --}}
+            <x-input-text name="test_result" class="w-7/12"> {{-- TODO FE sua thong tin khai bao, neu da test thi hien, neu chua thi an --}}
                 Kết quả test covid
             </x-input-text>
 
@@ -185,4 +186,5 @@
             document.getElementById('health_state').value = JSON.stringify(health)
         }
     </script>
+    </div>
 @endsection

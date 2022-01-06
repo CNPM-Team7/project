@@ -32,6 +32,8 @@
 @endsection
 
 @section('content')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
+
     @php
         $genderColors = ['blue', 'red', 'green']
     @endphp
@@ -147,6 +149,8 @@
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                     Dân tộc
                                 </th>
+
+                                {{-- TODO neu tam tru thi hien thong tin tam tru --}}
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                     Trạng thái
@@ -176,7 +180,7 @@
 
                             <tbody class="bg-white divide-y divide-gray-200">
 
-
+                            {{-- TODO FE neu la tam tru thi khong duoc khai bao tam vang va nguoc lai --}}
                             @foreach ($people as $person)
                                 <tr>
                                     <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
@@ -241,6 +245,8 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ $statuses[$person->status] }}</div>
                                     </td>
+
+                                    {{-- TODO check that nghiep --}}
                                     <td data-tooltip-target="tooltip-job {{ $person->id_number }}"
                                         class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">
@@ -332,7 +338,7 @@
             <div>{{ $people->links() }}</div>
         </div>
     </div>
-
+    </div>
 
     <script>
         function search() {

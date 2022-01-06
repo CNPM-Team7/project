@@ -38,7 +38,7 @@
 <!-- Page Content -->
     <main>
         <div class="w-full flex flex-row mx-auto sm:px-6 lg:px-8 py-12 justify-center">
-            <div class="w-auto bg-gray-100 overflow-hidden shadow-xl sm:rounded-lg px-10 py-5">
+
                 @yield('content')
             </div>
         </div>

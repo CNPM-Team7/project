@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
 
     <div class="w-full flex flex-col select-none">
 
@@ -46,12 +46,13 @@
 
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($declarations as $declaration)
+                                {{-- TODO check exist --}}
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            <u><a href="{{ route('person.show', $declaration->declarant->id) }}">
-                                            {{ $declaration->declarant->name }}
+{{--                                            <u><a href="{{ route('person.show', $declaration->declarant->id) }}">--}}
+{{--                                            {{ $declaration->declarant->name }}--}}
                                             </a></u>
                                         </div>
                                     </div>
@@ -104,5 +105,6 @@
             <br>
             {{ $declarations->links() }}
         </div>
+    </div>
     </div>
 @endsection

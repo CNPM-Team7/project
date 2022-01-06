@@ -52,6 +52,7 @@
 @endsection
 
 @section('content')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
 
     <form action="{{ route('staying.store') }}" method="POST" class="flex flex-col gap-y-10 select-none"
           style="width: 900px">
@@ -234,5 +235,5 @@
         </div>
         <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
     </form>
-
+    </div>
 @endsection

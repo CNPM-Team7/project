@@ -43,6 +43,7 @@
 @endsection
 
 @section('content')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
     <form action="{{ route('families.store') }}" method="POST" class="flex flex-col gap-y-10 select-none">
         @csrf
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
@@ -60,4 +61,5 @@
         </div>
         <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
     </form>
+    </div>
 @endsection

@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('header')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
     <div class="flex flex-col gap-y-4">
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -54,5 +55,5 @@
         </div>
 
     </div>
-
+    </div>
 @endsection

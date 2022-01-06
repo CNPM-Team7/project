@@ -44,6 +44,7 @@
 @endsection
 
 @section('content')
+    <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
     <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
         <a href="{{ route('families.show', $family->id) }}">
             <button class="w-44 border rounded bg-blue-500 px-4 py-2">
@@ -88,11 +89,13 @@
         </div>
         <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
     </form>
+    </div>
+    <script>
+        function auto_grow(element) {
+            element.style.height = "5px";
+            element.style.height = (element.scrollHeight) + "px";
+        }
+    </script>
 @endsection
 
-<script>
-    function auto_grow(element) {
-        element.style.height = "5px";
-        element.style.height = (element.scrollHeight) + "px";
-    }
-</script>
+

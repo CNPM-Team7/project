@@ -62,6 +62,7 @@ Route::post('/absent', [PersonController::class, 'absent'])->name('absent.store'
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
+Route::get('/person/get/{id}', [PersonController::class, 'get'])->name('person.get');
 Route::resource('person', PersonController::class);
 
 Route::name('families.')->prefix('families')->group(function () {

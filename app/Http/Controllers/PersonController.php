@@ -162,8 +162,9 @@ class PersonController extends Controller
         return $data;
     }
 
-    public function getPerson(Request $request)
+    public function get($id)
     {
-        return $request;
+        $response = 1;
+        return $id;
     }
 }

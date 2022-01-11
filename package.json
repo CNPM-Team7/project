@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@kurkle/color": "^0.1.9",
+        "@ryangjchandler/alpine-tooltip": "^0.4.0",
         "alpinejs": "^3.7.0",
         "chart.js": "^3.6.2",
         "chartjs-adapter-luxon": "^1.1.0",

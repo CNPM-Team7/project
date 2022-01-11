@@ -225,7 +225,7 @@
                                     </td>
                                     <div id="tooltip-birthday {{ $person->id_number }}" role="tooltip"
                                          class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
-                                        <span>
+                                        <span class="select-text">
                                             Birthday Place: <u>{{ $person->birth_place }}</u>
                                         </span>
                                         <div class="tooltip-arrow" data-popper-arrow></div>

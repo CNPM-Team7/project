@@ -62,6 +62,7 @@
                 Họ và tên
             </x-input-text>
 
+            {{--TODO FE check ngay sinh, gia su chon ngay sinh nam 2040??--}}
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between gap-x-1">
                     <label for="birthday">Ngày, tháng, năm sinh</label>

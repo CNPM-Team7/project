@@ -121,7 +121,23 @@ class PersonController extends Controller
     }
 
     public function staying(Request $request){ // TODO DISCUSS what happen if the same person declare twice?
+
+//        "name" => "adsad"
+//        "birthday" => "2022-01-11"
+//        "id_number" => "1234"
+//        "sex" => "0"
+//        "move_to" => "asdd"
+//        "family_id" => "1"
+//        "owner_name" => "12"
+//        "family_address" => "3986 Terry CrossingNew Haileyburgh, OH 01242"
+//        "register_date" => "2022-01-12"
+//        "start_date" => "26/01/2022"
+//        "end_date" => "24/01/2022"
+//        "reason" => "asdasd"
+
+
         $personData = $this->filterRequest($request);
+        dd($personData);
         $personData['status'] = 3; // tam tru
         $personData['owner_relation'] = $this->statuses[$personData['status']];
         $person_id = Person::create($personData)->id;
@@ -144,5 +160,10 @@ class PersonController extends Controller
         $data['start_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['start_date'])));
         $data['end_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['end_date'])));
         return $data;
+    }
+
+    public function getPerson(Request $request)
+    {
+        return $request;
     }
 }

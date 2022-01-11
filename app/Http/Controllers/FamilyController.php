@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Family;
@@ -102,7 +103,9 @@ class FamilyController extends Controller
         return redirect()->route('families.index');
     }
 
-    public function split(){
+    public function split()
+    {
+
         $data = request()->all();
         $family = Family::create([
             'house_id' => $data['house_id'],
@@ -129,5 +132,10 @@ class FamilyController extends Controller
     public function members($id)
     {
         return Family::find($id)->members;
+    }
+
+    public function getFamilyInf($id)
+    {
+        return Family::findOrFail($id);
     }
 }

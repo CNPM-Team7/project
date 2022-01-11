@@ -110,6 +110,13 @@
                         <span class="text-red-500 invisible">(*)</span>
                     </div>
 
+                    <div>
+                        <x-input-text name="iso_add" class="w-7/12 bg-gray-50">
+                            Nơi cách ly
+                        </x-input-text>
+                    </div>
+
+
                     <div class="w-full flex flex-row items-center gap-x-2 pt-5"
                         x-data="{
                             test_level: -1,
@@ -136,10 +143,8 @@
                             </label>
                             <select id="test_result" name="test_result" style="height: 34px;" x-model="test_level" @change="check_test_level()" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-1.5">
                                 <option value="-1" selected>Chưa xét nghiệm</option>
-                                <option value="0">F0</option>
-                                <option value="1">F1</option>
-                                <option value="2">F2</option>
-                                <option value="3">F3+</option>
+                                <option value="0">Âm tính</option>
+                                <option value="1">Dương tính</option>
                             </select>
                         </div>
                         <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>

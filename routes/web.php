@@ -67,6 +67,7 @@ Route::resource('person', PersonController::class);
 Route::name('families.')->prefix('families')->group(function () {
     Route::get('/split', [FamilyController::class, 'splitView'])->name('splitView');
     Route::get('/members/{id}', [FamilyController::class, 'members']);
+    Route::get('getInf/{id}', [FamilyController::class, 'getFamilyInf'])->name('family.getInf');
     Route::post('/split', [FamilyController::class, 'split'])->name('split');
 }); // must declare these routes before resource routes
 

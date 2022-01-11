@@ -96,8 +96,6 @@
                 <div class="flex flex-col my-4">
 
                     <span class="text-yellow-500">Tạm trú: 999</span>
-                    <span class="text-green-500">Tạm vắng: 999</span>
-
 
                     <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -107,47 +105,31 @@
                                     <tr>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            ID Number {{--hover will show register date, place, recieve date, place--}}
+                                            Số CMND/CCCD
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Name
+                                            Họ tên
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Ngày chuyển tới/chuyển đi {{--hover will show birth place--}}
+                                            Giới tính
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Gender
+                                            Từ ngày
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Race
+                                            Đến ngày
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Status
+                                            Địa chỉ tạm trú
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Job {{--hover will show work place--}}
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Owner Relation
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Family Owner
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Note
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Move to
+                                            Ghi chú
                                         </th>
                                         <th scope="col" class="relative px-6 py-3">
                                             <span class="sr-only">Edit</span>
@@ -161,54 +143,40 @@
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap select-text">
                                             <div class="flex items-center">
-                                        <span class="text-sm font-medium text-gray-500">
-                                            132
-                                        </span>
+                                                <span class="text-sm font-medium text-gray-500">
+                                                    132
+                                                </span>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap select-text">
                                             <div class="flex items-center">
-                                        <span class="text-sm font-medium text-gray-500">
-                                            abc
-                                        </span>
+                                                <span class="text-sm font-medium text-gray-500">
+                                                    abc
+                                                </span>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div
-                                                class="text-sm text-gray-500">1231
+                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
+                                            <span
+                                                class="text-xs leading-5 font-semibold text-red-500 px-3 py-0.5">
+                                                    Nữ
+                                            </span>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
-                                            ád {{--set length--}}
-                                        </span>
+                                            <div class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">abc</div>
+                                            <div class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">abc</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-500">abc
-                                            </div> {{--qua dai, rut gon bang '...'--}}
+                                            <div class="text-sm text-gray-500">Hà Nội</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div
-                                                class="text-sm text-gray-500">abc
+                                                class="text-sm text-gray-500">Không
                                             </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-500">abc
-                                            </div> {{--nhan vao se ra trang info famliy--}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">abc</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">abc</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">{{--show, edit and delete--}}
                                             <a href=""
@@ -221,6 +189,102 @@
                             </div>
                         </div>
                     </div>
+
+                    <span class="text-green-500">Tạm vắng: 999</span>
+
+                    <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-200">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Số CMND/CCCD
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Họ tên
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Giới tính
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Từ ngày
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Đến ngày
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Địa chỉ tạm trú
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Ghi chú
+                                        </th>
+                                        <th scope="col" class="relative px-6 py-3">
+                                            <span class="sr-only">Edit</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="bg-white divide-y divide-gray-200">
+
+
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap select-text">
+                                            <div class="flex items-center">
+                                                <span class="text-sm font-medium text-gray-500">
+                                                    132
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap select-text">
+                                            <div class="flex items-center">
+                                                <span class="text-sm font-medium text-gray-500">
+                                                    abc
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div
+                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
+                                            <span
+                                                class="text-xs leading-5 font-semibold text-red-500 px-3 py-0.5">
+                                                    Nữ
+                                            </span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">Hà Nội</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div
+                                                class="text-sm text-gray-500">Không
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">{{--show, edit and delete--}}
+                                            <a href=""
+                                               class="text-indigo-600 hover:text-indigo-500">Edit</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
                     <br>
 
                 </div>

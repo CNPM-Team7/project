@@ -13,6 +13,7 @@
     />
     <!-- Styles -->
     <link rel="stylesheet" href="/css/flowbite.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 

@@ -41,7 +41,8 @@
                                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                   clip-rule="evenodd"></path>
                         </svg>
-                        <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Khai báo tạm trú</span>
+                        <span
+                            class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Khai báo tạm trú</span>
                     </div>
                 </li>
             </ol>
@@ -54,186 +55,206 @@
 @section('content')
     <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
 
-    <form action="{{ route('staying.store') }}" method="POST" class="flex flex-col gap-y-10 select-none"
-          style="width: 900px">
-        @csrf
-        <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
-            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory>
-                Họ và tên
-            </x-input-text>
+        <form action="{{ route('staying.store') }}" method="POST" class="flex flex-col gap-y-10 select-none"
+              style="width: 900px">
+            @csrf
+            <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
+                <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory>
+                    Họ và tên
+                </x-input-text>
 
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full items-center justify-between gap-x-1">
-                    <label for="birthday">Ngày, tháng, năm sinh</label>
-                    <div class="relative w-5/12 flex flex-row gap-x-2">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
+                <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                    <div class="flex w-full items-center justify-between gap-x-1">
+                        <label for="birthday">Ngày, tháng, năm sinh</label>
+                        <div class="relative w-5/12 flex flex-row gap-x-2">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input id="birthday" name="birthday" datepicker=""
+                                   datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
+                                   required
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                   placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                         </div>
-                        <input id="birthday" name="birthday" datepicker=""
-                               datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
-                               required
-                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
-                               placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                     </div>
+
+                    <span class="text-red-500">(*)</span>
+
                 </div>
 
-                <span class="text-red-500">(*)</span>
+                <x-input-text name="id_number" class="w-5/12" mandatory>
+                    Số CMND/CCCD
+                </x-input-text>
 
-            </div>
-
-            <x-input-text name="birth_place" class="w-5/12" mandatory>
-                Nơi sinh
-            </x-input-text>
-
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full items-center justify-between">
-                    <label for="gender" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Giới
-                        tính</label>
-                    @php
-                        $genders = ['Nam', 'Nữ', 'Khác'];
-                    @endphp
-                    <select id="gender" name="sex"
-                            class="required bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        @foreach ($genders as $index => $gender)
-                            <option value="{{ $index }}">{{ $gender }}</option>
-                        @endforeach
-                    </select>
+                <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                    <div class="flex w-full items-center justify-between">
+                        <label for="gender" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Giới
+                            tính</label>
+                        @php
+                            $genders = ['Nam', 'Nữ', 'Khác'];
+                        @endphp
+                        <select id="gender" name="sex"
+                                class="required bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach ($genders as $index => $gender)
+                                <option value="{{ $index }}">{{ $gender }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <span class="text-red-500">(*)</span>
                 </div>
-                <span class="text-red-500">(*)</span>
-            </div>
 
-            <x-input-text name="race" class="w-5/12" mandatory>
-                Dân tộc
-            </x-input-text>
+                <x-input-text name="move_to" class="w-5/12" mandatory>
+                    Địa chỉ thường trú
+                </x-input-text>
 
-            <x-input-text name="id_number" class="w-5/12" mandatory>
-                Số CMND/CCCD
-            </x-input-text>
+                <div class="w-auto flex flex-row items-center gap-x-2 pt-5"
+                     x-data="{
+                    family_id: '',
+                    getMembersByFamily() {
+                        let url = '/families/getInf/' + this.family_id
+                        fetch(url).then(response => {
+                            if(response.ok)
+                            {
+                                response.json().then(data => {
+                                    document.getElementsByName('family_inf').forEach(el => {
+                                        el.classList.remove('hidden');
+                                        el.classList.add('visible');
+                                    })
 
-            {{--<x-input-text name="idn_receive_place" class="w-5/12" mandatory>
-                Nơi cấp
-            </x-input-text>
+                                    document.getElementById('owner_name').value = data.owner_id //TODO chuyen thanh ten chu ho
+                                    document.getElementById('family_address').value = data.address
+                                    document.getElementById('family_id').setCustomValidity('')
+                                })
+                            }
+                            else
+                            {
+                                document.getElementsByName('family_inf').forEach(el => {
+                                    el.classList.add('hidden');
+                                    el.classList.remove('visible');
+                                })
 
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full items-center justify-between gap-x-1">
-                    <label for="idn_receive_date">Ngày cấp</label>
-                    <div class="relative w-5/12 flex flex-row gap-x-2">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
+                                document.getElementById('owner_name').value = null
+                                document.getElementById('family_address').value = null
+
+                                document.getElementById('family_id').setCustomValidity('Khong tim thay thong tin ho khau')
+                            }
+                        })
+                    },
+                }">
+                    <div class="flex w-full items-center justify-between">
+                        <label for="family_id">
+                            Mã hộ khẩu tạm trú
+                        </label>
+
+                        <input name="family_id" id="family_id" type="text"
+                               class="w-5/12 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                               x-model="family_id" @input.debounce="getMembersByFamily()">
+                    </div>
+                    <span class="text-red-500 visible">(*)</span>
+                </div>
+
+                <div class="hidden" name="family_inf">
+                    <x-input-text name="owner_name" class="w-5/12 bg-gray-300" mandatory>
+                        Họ tên chủ hộ
+                    </x-input-text>
+                </div>
+
+                <div class="hidden" name="family_inf">
+                    <x-input-text name="family_address" class="w-5/12 bg-gray-300" mandatory>
+                        Địa chỉ hộ
+                    </x-input-text>
+                </div>
+
+                <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                    <div class="flex w-full items-center justify-between gap-x-1">
+                        <label for="register_date">Ngày khai báo</label>
+                        <div class="relative w-5/12 flex flex-row gap-x-2">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input id="register_date" name="register_date" datepicker=""
+                                   datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
+                                   required
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                   placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                         </div>
-                        <input id="idn_receive_date" name="idn_receive_date" datepicker=""
-                               datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
-                               required
-                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
-                               placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                     </div>
+                    <span class="text-red-500">(*)</span>
                 </div>
-                <span class="text-red-500">(*)</span>
-            </div>--}}
 
-            <x-input-text name="move_to" class="w-5/12" mandatory>
-                Địa chỉ thường trú
-            </x-input-text>
+                <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                    <div class="flex w-full items-center justify-between">
+                        <label for="period">Khoảng thời gian</label>
 
-            <x-input-text name="family_id" class="w-5/12" mandatory>
-                ID Ho khau
-            </x-input-text>
+                        <div class="flex flex-row w-5/12 gap-x-2">
+                            <div class="flex flex-row items-center gap-x-2">
+                                <label for="start">Từ</label>
+                                <div class="relative flex flex-row gap-x-2">
 
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full items-center justify-between gap-x-1">
-                    <label for="register_date">Ngày khai bao</label>
-                    <div class="relative w-5/12 flex flex-row gap-x-2">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <input id="register_date" name="register_date" datepicker=""
-                               datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
-                               required
-                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
-                               placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
-                    </div>
-                </div>
-                <span class="text-red-500">(*)</span>
-            </div>
-
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full items-center justify-between">
-                    <label for="period">Khoảng thời gian</label>
-
-                    <div class="flex flex-row w-5/12 gap-x-2">
-                        <div class="flex flex-row items-center gap-x-2">
-                            <label for="start">Từ</label>
-                            <div class="relative flex flex-row gap-x-2">
-
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                              clip-rule="evenodd"></path>
-                                    </svg>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <input id="start" name="start_date" datepicker=""
+                                           datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
+                                           required
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                           placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                                 </div>
-                                <input id="start" name="start_date" datepicker=""
-                                       datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
-                                       required
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
-                                       placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                            </div>
+
+                            <div class="flex flex-row items-center gap-x-2">
+                                <label for="end">đến</label>
+                                <div class="relative flex flex-row gap-x-2">
+
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <input id="end" name="end_date" datepicker=""
+                                           datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
+                                           required
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                           placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="flex flex-row items-center gap-x-2">
-                            <label for="end">đến</label>
-                            <div class="relative flex flex-row gap-x-2">
 
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                              clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <input id="end" name="end_date" datepicker=""
-                                       datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
-                                       required
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
-                                       placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
-                            </div>
-                        </div>
                     </div>
-
-
+                    <span class="text-red-500">(*)</span>
                 </div>
-                <span class="text-red-500">(*)</span>
-            </div>
 
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full justify-between">
-                    <label for="reason">
-                        Lý do
-                    </label>
-                    <textarea name="reason" id="reason" type="text"
-                              class="w-5/12 required h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                    <div class="flex w-full justify-between">
+                        <label for="reason">
+                            Lý do
+                        </label>
+                        <textarea name="reason" id="reason" type="text"
+                                  class="w-5/12 required h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    </div>
+                    <span class="text-red-500">(*)</span>
                 </div>
-                <span class="text-red-500">(*)</span>
             </div>
-        </div>
-        <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
-    </form>
+            <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
+        </form>
     </div>
 @endsection

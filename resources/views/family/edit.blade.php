@@ -45,19 +45,64 @@
 
 @section('content')
     <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
-    <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
+    <div x-data="{show: false}" class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
         <a href="{{ route('families.show', $family->id) }}">
             <button class="w-44 border rounded bg-blue-500 px-4 py-2">
                 Show
             </button>
         </a>
 
-        <form method="POST"
-              action="{{ route('families.destroy', $family->id) }}"> {{-- TODO FE should have a warning, and a toast message when done delete --}}
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
-        </form>
+        <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+
+        {{--Modal--}}
+        <div x-show="show"
+             @keydown.esc.prevent.stop="show = false"
+             class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+
+            <div x-show="show" class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+                <div x-show="show"
+                     @click="show = false"
+                     class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+                <!-- This element is to trick the browser into centering the modal contents. -->
+                <span x-show="show" class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                    XÓA HỘ KHẨU
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        Chac chan muon xoa hộ khau nay? Hanh dong nay khong the quay lai.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+
+                        <form method="POST"
+                              action="{{ route('families.destroy', $family->id) }}"> {{-- TODO FE should have a warning, and a toast message when done delete --}}
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                Xoa
+                            </button>
+                        </form>
+
+                        <button @click="show = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            Huy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <form action="{{ route('families.update', $family->id) }}" method="POST" class="flex flex-col gap-y-10 select-none">

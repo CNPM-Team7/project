@@ -97,7 +97,7 @@
                                     Địa chỉ
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+
                                 </th>
                             </tr>
                             </thead>
@@ -135,7 +135,7 @@
                                            class="text-green-600 hover:text-green-500">
                                             <div class="flex flex-row space-x-2">
                                                 <i class="material-icons-outlined text-base">visibility</i>
-                                                <span class="pt-0.5">Show</span>
+                                                <span class="pt-0.5">Thông tin chi tiết</span>
                                             </div>
 
                                         </a>
@@ -143,7 +143,7 @@
                                            class="text-indigo-600 hover:text-indigo-500">
                                             <div class="flex flex-row space-x-2">
                                                 <i class="material-icons-outlined text-base">edit</i>
-                                                <span class="pt-0.5">Edit</span>
+                                                <span class="pt-0.5">Chỉnh sửa</span>
                                             </div>
 
                                         </a>

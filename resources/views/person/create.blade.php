@@ -123,11 +123,11 @@
             </div>
 
             <x-input-text name="owner_relation" class="w-5/12" mandatory>
-                Vai trò với chủ hộ
+                Quan hệ với chủ hộ
             </x-input-text>
 
             <x-input-text name="family_id" class="w-5/12"> {{--lam 1 cai seach hay gi do--}}
-                ID Ho Khau
+                Mã hộ khẩu
             </x-input-text>
 
             {{-- <x-input-text name="native_land">
@@ -184,12 +184,12 @@
             </div>
 
             <x-input-text name="register_place" class="w-5/12">
-                Nơi dang ki
+                Nơi đăng ký
             </x-input-text>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between gap-x-1">
-                    <label for="register_date">Ngày dang ki</label>
+                    <label for="register_date">Ngày đăng ký</label>
                     <div class="relative w-5/12 flex flex-row gap-x-2">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"

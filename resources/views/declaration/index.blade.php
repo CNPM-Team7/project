@@ -19,27 +19,27 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Person ID
+                                    Mã nhân khẩu
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Status
+                                    Trạng thái cách ly
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Test Result
+                                    Kết quả xét nghiệm
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Test Date
+                                    Ngày xét nghiệm
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Isolation Date
+                                    Ngày cách ly
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                    Action
+
                                 </th>
                             </tr>
                             </thead>
@@ -72,17 +72,17 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $declaration->test_date }}</div>
+                                    <div class="text-sm text-gray-900">{{ date('d/m/Y', strtotime($declaration->test_date)) }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $declaration->isolation_date }}</div>
+                                    <div class="text-sm text-gray-900">{{ date('d/m/Y', strtotime($declaration->isolation_date)) }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{{ route('declarations.show', $declaration->id) }}"
                                        class="text-green-600 hover:text-green-500">
                                         <div class="flex flex-row space-x-2">
                                             <i class="material-icons-outlined text-base">visibility</i>
-                                            <span class="pt-0.5">Show</span>
+                                            <span class="pt-0.5">Thông tin chi tiết</span>
                                         </div>
 
                                     </a>
@@ -90,7 +90,7 @@
                                        class="text-indigo-600 hover:text-indigo-500">
                                         <div class="flex flex-row space-x-2">
                                             <i class="material-icons-outlined text-base">edit</i>
-                                            <span class="pt-0.5">Edit</span>
+                                            <span class="pt-0.5">Chỉnh sửa</span>
                                         </div>
 
                                     </a>

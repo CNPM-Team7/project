@@ -49,15 +49,15 @@
         <form action="{{ route('families.store') }}" method="POST" class="flex flex-col gap-y-10 select-none w-96">
             @csrf
             <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid w-full">
-                <x-input-text name="owner_id" mandatory>
+                <x-input-text name="owner_id" mandatory value="{{ old('owner_id') }}">
                     ID chủ hộ
                 </x-input-text>
 
-                <x-input-text name="house_id" mandatory>
+                <x-input-text name="house_id" mandatory value="{{ old('house_id') }}">
                     ID hộ khẩu
                 </x-input-text>
 
-                <x-input-text name="address" mandatory>
+                <x-input-text name="address" mandatory value="{{ old('address') }}">
                     Địa chỉ hộ
                 </x-input-text>
             </div>

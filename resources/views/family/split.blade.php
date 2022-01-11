@@ -159,7 +159,7 @@
                             <label for="family_id">
                                 Ma ho khau
                             </label>
-                            <input name="family_id" id="family_id" type="text"
+                            <input name="family_id" id="family_id" type="text" value="{{ old('family_id') }}"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
                                    x-model="family_id"
                                    @input.debounce="getMembersByFamily()"

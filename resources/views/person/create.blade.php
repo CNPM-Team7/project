@@ -225,6 +225,5 @@
             Hoàn thành
         </x-button-outline>
     </form>
-    {{$errors}}
     </div>
 @endsection

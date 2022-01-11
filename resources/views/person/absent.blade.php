@@ -58,7 +58,7 @@
           style="width: 900px">
         @csrf
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
-            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory> {{-- TODO 1 file, all required field, back end, validate --}}
+            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory value="{{ old('name') }}"> {{-- TODO 1 file, all required field, back end, validate --}}
                 Họ và tên
             </x-input-text>
 
@@ -77,7 +77,7 @@
                         <input id="birthday" name="birthday" datepicker="" datepicker-buttons
                                datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
-                               placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
+                               placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}" value="{{ old('birthday') }}">
                     </div>
                 </div>
 
@@ -92,8 +92,9 @@
                     @php
                         $genders = ['Nam', 'Nữ', 'Khác'];
                     @endphp
-                    <select id="gender" name="sex"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="gender" name="sex" value="{{ old('gender') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
                         @foreach ($genders as $index => $gender)
                             <option value="{{ $index }}">{{ $gender }}</option>
                         @endforeach
@@ -102,11 +103,11 @@
                 <span class="text-red-500">(*)</span>
             </div>
 
-            <x-input-text name="id_number" class="w-5/12" mandatory>
+            <x-input-text name="id_number" class="w-5/12" mandatory value="{{ old('id_number') }}">
                 Số CMND/CCCD
             </x-input-text>
 
-            <x-input-text name="idn_receive_place" class="w-5/12" mandatory>
+            <x-input-text name="idn_receive_place" class="w-5/12" mandatory value="{{ old('idn_receive_place') }}">
                 Nơi cấp
             </x-input-text>
 
@@ -122,7 +123,7 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input id="birthday" name="idn_receive_date" datepicker="" datepicker-buttons
+                        <input id="idn_receive_date" name="idn_receive_date" datepicker="" datepicker-buttons value="{{ old('idn_receive_date') }}"
                                datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
@@ -131,7 +132,7 @@
                 <span class="text-red-500">(*)</span>
             </div>
 
-            <x-input-text name="move_to" class="w-5/12" mandatory>
+            <x-input-text name="move_to" class="w-5/12" mandatory value="{{ old('move_to') }}">
                 Địa chỉ thường trú
             </x-input-text>
 
@@ -152,7 +153,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input id="start" name="idn_receive_date" datepicker="" datepicker-buttons
+                                <input id="start" name="start" datepicker="" datepicker-buttons value="{{ old('start') }}"
                                        datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                        placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
@@ -171,7 +172,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input id="end" name="idn_receive_date" datepicker="" datepicker-buttons
+                                <input id="end" name="end"  datepicker="" datepicker-buttons value="{{ old('end') }}"
                                        datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                        placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
@@ -189,7 +190,7 @@
                     <label for="reason">
                         Lý do
                     </label>
-                    <textarea name="reason" id="reason" type="text"
+                    <textarea name="reason" id="reason" type="text" value="{{ old('reason') }}"
                               class="w-5/12 h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                 </div>
                 <span class="text-red-500">(*)</span>

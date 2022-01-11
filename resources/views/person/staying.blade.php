@@ -151,7 +151,7 @@
                             Mã hộ khẩu tạm trú
                         </label>
 
-                        <input name="family_id" id="family_id" type="text"
+                        <input name="family_id" id="family_id" type="text" value="{{ old('family_id') }}"
                                class="w-5/12 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
                                x-model="family_id" @input.debounce="getMembersByFamily()">
                     </div>
@@ -159,13 +159,13 @@
                 </div>
 
                 <div class="hidden" name="family_inf">
-                    <x-input-text name="owner_name" class="w-5/12 bg-gray-300" mandatory>
+                    <x-input-text name="owner_name" class="w-5/12 bg-gray-300" value="{{ old('owner_name') }}" mandatory>
                         Họ tên chủ hộ
                     </x-input-text>
                 </div>
 
                 <div class="hidden" name="family_inf">
-                    <x-input-text name="family_address" class="w-5/12 bg-gray-300" mandatory>
+                    <x-input-text name="family_address" class="w-5/12 bg-gray-300" value="{{ old('family_address') }}" mandatory>
                         Địa chỉ hộ
                     </x-input-text>
                 </div>
@@ -182,7 +182,7 @@
                                           clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input id="register_date" name="register_date" datepicker=""
+                            <input id="register_date" name="register_date" datepicker="" value="{{ old('register_date') }}"
                                    datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                    required
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
@@ -198,7 +198,7 @@
 
                         <div class="flex flex-row w-5/12 gap-x-2">
                             <div class="flex flex-row items-center gap-x-2">
-                                <label for="start">Từ</label>
+                                <label for="start_date">Từ</label>
                                 <div class="relative flex flex-row gap-x-2">
 
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -209,7 +209,7 @@
                                                   clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <input id="start" name="start_date" datepicker=""
+                                    <input id="start_date" name="start_date" datepicker="" value="{{ old('start_date') }}"
                                            datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                            required
                                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
@@ -218,7 +218,7 @@
                             </div>
 
                             <div class="flex flex-row items-center gap-x-2">
-                                <label for="end">đến</label>
+                                <label for="end_date">đến</label>
                                 <div class="relative flex flex-row gap-x-2">
 
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -229,7 +229,7 @@
                                                   clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <input id="end" name="end_date" datepicker=""
+                                    <input id="end_date" name="end_date" datepicker="" value="{{ old('end_date') }}"
                                            datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                            required
                                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
@@ -249,7 +249,7 @@
                             Lý do
                         </label>
                         <textarea name="reason" id="reason" type="text"
-                                  class="w-5/12 required h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                  class="w-5/12 required h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ old('reason') }}</textarea>
                     </div>
                     <span class="text-red-500">(*)</span>
                 </div>

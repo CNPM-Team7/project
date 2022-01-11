@@ -100,7 +100,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input name="isolation_date" datepicker="" datepicker-format="dd/mm/yyyy"
+                                <input name="isolation_date" datepicker="" datepicker-format="dd/mm/yyyy" value="{{ old('isolation_date') }}"
                                        type="text"
                                        style="height: 34px;"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input"
@@ -111,7 +111,7 @@
                     </div>
 
                     <div>
-                        <x-input-text name="iso_add" class="w-7/12 bg-gray-50">
+                        <x-input-text name="iso_add" class="w-7/12 bg-gray-50" value="{{ old('iso_add') }}">
                             Nơi cách ly
                         </x-input-text>
                     </div>
@@ -163,7 +163,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy"
+                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy" value="{{ old('test_date') }}"
                                        type="text"
                                        style="height: 34px;"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input"
@@ -186,7 +186,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy"
+                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy" value="{{ old('test_date') }}"
                                        type="text"
                                        style="height: 34px;"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input"

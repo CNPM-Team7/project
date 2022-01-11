@@ -46,7 +46,7 @@
 
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($declarations as $declaration)
-                                {{-- TODO check exist --}}
+                                {{-- TODO check exist, if person is deleted --}}
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">

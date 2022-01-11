@@ -25,13 +25,13 @@ class PersonRequest extends FormRequest
     {
         $rules = [
             'name' => ['required'],
-            'birthday' => ['required'],
+            'birthday' => ['required', 'before:'.date('d/m/Y')],
             'birth_place' => ['required'],
             'sex' => ['required'],
             'race' => ['required'],
             'job' => [],
             'work_place' => [],
-            'id_number' => ['integer'],
+            'id_number' => [],
             'idn_receive_place' => [],
             'idn_receive_date' => [],
             'register_place' => [],
@@ -44,6 +44,7 @@ class PersonRequest extends FormRequest
         ];
 
         if($this->family_id) $rules['family_id'] = ['exists:families,id'];
+        if($this->id_number) $rules['id_number'] = ['integer'];
         return $rules;
     }
 

@@ -58,7 +58,7 @@
           style="width: 900px">
         @csrf
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
-            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory>
+            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" value="{{ old('name') }}" mandatory>
                 Họ và tên
             </x-input-text>
 
@@ -75,7 +75,7 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input id="birthday" name="birthday" datepicker="" datepicker-buttons
+                        <input id="birthday" name="birthday" value="{{ old('birthday') }}" datepicker="" datepicker-buttons
                                datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
@@ -86,7 +86,7 @@
 
             </div>
 
-            <x-input-text name="birth_place" class="w-5/12" mandatory>
+            <x-input-text name="birth_place" class="w-5/12" value="{{ old('birth_place') }}" mandatory>
                 Nơi sinh
             </x-input-text>
 
@@ -94,7 +94,7 @@
                 <div class="flex w-full items-center justify-between">
                     <label for="gender" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Giới
                         tính</label>
-                    <select id="gender" name="sex"
+                    <select id="gender" name="sex" value="{{ old('gender') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($genders as $index => $gender)
                             <option value="{{ $index }}">{{ $gender }}</option>
@@ -104,7 +104,7 @@
                 <span class="text-red-500">(*)</span>
             </div>
 
-            <x-input-text name="race" class="w-5/12" mandatory>
+            <x-input-text name="race" class="w-5/12" value="{{ old('race') }}" mandatory>
                 Dân tộc
             </x-input-text>
 
@@ -112,7 +112,7 @@
                 <div class="flex w-full items-center justify-between">
                     <label for="status" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Trạng
                         thái</label>
-                    <select id="status" name="status"
+                    <select id="status" name="status" value="{{ old('status') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($statuses as $index => $status)
                             <option value="{{ $index }}">{{ $status }}</option>
@@ -122,11 +122,11 @@
                 <span class="text-red-500">(*)</span>
             </div>
 
-            <x-input-text name="owner_relation" class="w-5/12" mandatory>
+            <x-input-text name="owner_relation" class="w-5/12" value="{{ old('owner_relation') }}" mandatory>
                 Quan hệ với chủ hộ
             </x-input-text>
 
-            <x-input-text name="family_id" class="w-5/12"> {{--lam 1 cai seach hay gi do--}}
+            <x-input-text name="family_id" class="w-5/12" value="{{ old('family_id') }}"> {{--lam 1 cai seach hay gi do--}}
                 Mã hộ khẩu
             </x-input-text>
 
@@ -142,23 +142,23 @@
                 Tôn giáo
             </x-input-text> --}}
 
-            <x-input-text name="job" class="w-5/12">
+            <x-input-text name="job" class="w-5/12" value="{{ old('job') }}">
                 Nghề nghiệp
             </x-input-text>
 
-            <x-input-text name="work_place" class="w-5/12">
+            <x-input-text name="work_place" class="w-5/12" value="{{ old('work_place') }}">
                 Nơi làm việc
             </x-input-text>
 
-            <x-input-text name="phone_number" class="w-5/12">
+            <x-input-text name="phone_number" class="w-5/12" value="{{ old('phone_number') }}">
                 Số điện thoại
             </x-input-text>
 
-            <x-input-text name="id_number" class="w-5/12">
+            <x-input-text name="id_number" class="w-5/12" value="{{ old('id_number') }}">
                 Số CMND/CCCD
             </x-input-text>
 
-            <x-input-text name="idn_receive_place" class="w-5/12">
+            <x-input-text name="idn_receive_place" class="w-5/12" value="{{ old('idn_receive_place') }}">
                 Nơi cấp
             </x-input-text>
 
@@ -174,7 +174,7 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input id="idn_receive_date" name="idn_receive_date" datepicker="" datepicker-buttons
+                        <input id="idn_receive_date" name="idn_receive_date" value="{{ old('idn_receive_date') }}" datepicker="" datepicker-buttons
                                datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
@@ -183,7 +183,7 @@
                 <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
             </div>
 
-            <x-input-text name="register_place" class="w-5/12">
+            <x-input-text name="register_place" class="w-5/12" value="{{ old('register_place') }}">
                 Nơi đăng ký
             </x-input-text>
 
@@ -199,7 +199,7 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input id="register_date" name="register_date" datepicker="" datepicker-buttons
+                        <input id="register_date" name="register_date" value="{{ old('register_date') }}" datepicker="" datepicker-buttons
                                datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
@@ -213,15 +213,18 @@
                     <label for="note">
                         Ghi chú
                     </label>
-                    <textarea name="note" id="note" type="tex"
-                              class="w-5/12 h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    <textarea name="note" id="note" type="text"
+                              class="w-5/12 h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        {{ old('note') }}
+                    </textarea>
                 </div>
                 <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
             </div>
         </div>
-        <x-button-outline class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28 self-center">
+        <x-button-outline type="submit" class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28 self-center">
             Hoàn thành
         </x-button-outline>
     </form>
+    {{$errors}}
     </div>
 @endsection

@@ -159,13 +159,13 @@
                 </div>
 
                 <div class="hidden" name="family_inf">
-                    <x-input-text name="owner_name" class="w-5/12 bg-gray-300" value="{{ old('owner_name') }}" mandatory>
+                    <x-input-text name="owner_name" class="w-5/12 bg-gray-300 select-none" disabled="" mandatory>
                         Họ tên chủ hộ
                     </x-input-text>
                 </div>
 
                 <div class="hidden" name="family_inf">
-                    <x-input-text name="family_address" class="w-5/12 bg-gray-300" value="{{ old('family_address') }}" mandatory>
+                    <x-input-text name="family_address" class="w-5/12 bg-gray-300 select-none" disabled="" mandatory>
                         Địa chỉ hộ
                     </x-input-text>
                 </div>

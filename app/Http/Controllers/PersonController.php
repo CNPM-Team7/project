@@ -19,7 +19,7 @@ class PersonController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard'); // TODO DISCUSS return data
+        return view('dashboard',['people' => Person::all()]); // TODO DISCUSS return data
     }
 
     /**
@@ -162,9 +162,21 @@ class PersonController extends Controller
         return $data;
     }
 
-    public function get($id)
+    //theo ID, theo ten, theo so CMND/CCCD
+    public function get($type, $data = null)
     {
-        $response = 1;
-        return $id;
+        if ($data == null) {
+            if($type == 'all'){
+               return Person::all();
+            }
+            return \response('', 404);
+        }
+
+        switch ($type){
+            case 'id': return Person::firstWhere('id', $data);
+            case 'name': return Person::query()->where('name', 'LIKE', "%{$data}")->get();
+            case 'id_number': return Person::firstWhere('id_number', $data);
+            default: return \response('', 404);
+        }
     }
 }

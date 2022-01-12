@@ -172,11 +172,6 @@ class PersonController extends Controller
             return \response('', 404);
         }
 
-        switch ($type){
-            case 'id': return Person::firstWhere('id', $data);
-            case 'name': return Person::query()->where('name', 'LIKE', "%{$data}")->get();
-            case 'id_number': return Person::firstWhere('id_number', $data);
-            default: return \response('', 404);
-        }
+        return Person::query()->where($type, 'LIKE', "%{$data}%")->get();
     }
 }

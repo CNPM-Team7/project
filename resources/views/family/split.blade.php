@@ -52,21 +52,57 @@
         <div class="w-full flex flex-col space-y-10 items-center"
              x-data="{
                 family_id: '',
+                name: '',
+                id_number: '',
                 members: [],
                 selecteds: [],
-                getMembersByFamily() {
-                    let url = '/families/members/' + this.family_id //TODO loc nhung nguoi dang tam tru ra
+                getMemberByName() {
+                    this.id_number = ''
+                    this.family_id = ''
+                    let url = '/person/get/name/' + this.name //TODO loc nhung nguoi dang tam tru ra
                     fetch(url)
-                        .then(response => response.json())
-                        .then(data => {
-                            this.members = data
-                            //check xem da duoc chon hay chua
-                            this.selecteds.forEach(selected_item =>{
-                                this.members = this.members.filter(member_item =>{
-                                    return member_item.id !== selected_item.id
-                                })
+                    .then(response => response.json())
+                    .then(data => {
+                        this.members = data
+                        //check xem da duoc chon hay chua
+                        this.selecteds.forEach(selected_item =>{
+                            this.members = this.members.filter(member_item =>{
+                                return member_item.id !== selected_item.id
                             })
                         })
+                    })
+                },
+                getMemberByIdNumber() {
+                    this.name = ''
+                    this.family_id = ''
+                    let url = '/person/get/id_number/' + this.id_number //TODO loc nhung nguoi dang tam tru ra
+                    fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.members = data
+                        //check xem da duoc chon hay chua
+                        this.selecteds.forEach(selected_item =>{
+                            this.members = this.members.filter(member_item =>{
+                                return member_item.id !== selected_item.id
+                            })
+                        })
+                    })
+                },
+                getMembersByFamily() {
+                    this.id_number = ''
+                    this.name = ''
+                    let url = '/families/members/' + this.family_id //TODO loc nhung nguoi dang tam tru ra
+                    fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.members = data
+                        //check xem da duoc chon hay chua
+                        this.selecteds.forEach(selected_item =>{
+                            this.members = this.members.filter(member_item =>{
+                                return member_item.id !== selected_item.id
+                            })
+                        })
+                    })
                 },
                 select(item){
                     let index = this.members.indexOf(item)
@@ -131,12 +167,12 @@
                     <div class="flex flex-row items-center gap-x-2">
                         <div class="flex items-center justify-between space-x-4">
                             <label for="family_id">
-                                Ho ten
+                                Họ tên
                             </label>
                             <input name="family_id" id="family_id" type="text"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
-                                   x-model="family_id"
-                                   @input.debounce="getMembersByName()"
+                                   x-model="name"
+                                   @input.debounce="getMemberByName()"
                             >
                         </div>
                     </div>
@@ -144,12 +180,12 @@
                     <div class="flex flex-row items-center gap-x-2">
                         <div class="flex items-center justify-between space-x-4">
                             <label for="family_id">
-                                So MCND/CCCD
+                                Số MCND/CCCD
                             </label>
                             <input name="family_id" id="family_id" type="text"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
-                                   x-model="family_id"
-                                   @input.debounce="getMembersById()"
+                                   x-model="id_number"
+                                   @input.debounce="getMemberByIdNumber()"
                             >
                         </div>
                     </div>
@@ -157,7 +193,7 @@
                     <div class="flex flex-row items-center gap-x-2">
                         <div class="flex items-center justify-between space-x-4">
                             <label for="family_id">
-                                Ma ho khau
+                                Mã hộ khẩu
                             </label>
                             <input name="family_id" id="family_id" type="text" value="{{ old('family_id') }}"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"

@@ -29,7 +29,7 @@
                                   clip-rule="evenodd"></path>
                         </svg>
                         <a href="{{ route('person.index') }}"
-                           class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Nhân
+                           class="inline-flex items-center font-medium text-sm text-gray-700 hover:text-gray-900">Nhân
                             khẩu</a>
                     </div>
                 </li>
@@ -54,14 +54,14 @@
 @section('content')
     <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
 
-    <form action="{{ route('absent.store') }}" method="POST" class="flex flex-col gap-y-10 select-none items-center"
+    <form action="{{ route('absent.store') }}" method="POST" class="flex flex-col gap-y-10 select-none"
           style="width: 900px">
         @csrf
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
             <input name="person_id" value="{{ request()->id }}" style="display: none" />
             <input name="type" value="1" style="display: none" />
 
-            <x-input-text name="family_id" value="{{ $person->family->address ?? '' }}" mandatory>
+            <x-input-text name="family_id" class="w-5/12" value="{{ $person->family->address ?? '' }}" mandatory>
                 Family ID
             </x-input-text>
 
@@ -145,7 +145,7 @@
                 <span class="text-red-500">(*)</span>
             </div>
         </div> {{-- TODO FE show error --}}
-        <x-button-outline type="submit" class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28">
+        <x-button-outline type="submit" class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28 self-center">
             Hoàn thành
         </x-button-outline>
     </form>

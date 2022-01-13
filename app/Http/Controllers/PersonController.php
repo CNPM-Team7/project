@@ -17,7 +17,7 @@ class PersonController extends Controller
 
     protected array $statuses = ['Bình thường', 'Mới sinh', 'Just Died', 'Tạm trú', 'Đã chuyển đi', 'Dead'];
 
-    protected array $genders = ['Nam', 'Nữ', 'Khác'];
+    protected array $genders = ['Nam', 'Nữ'];
 
     public function dashboard()
     {

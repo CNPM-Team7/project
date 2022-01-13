@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('header')
     <div class="flex flex-col gap-y-4">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Chi tiết hộ khẩu') }}
+        </h2>
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -23,8 +26,7 @@
                                   clip-rule="evenodd"></path>
                         </svg>
                         <a href="{{ route('families.index') }}"
-                           class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Hộ
-                            khẩu</a>
+                           class="inline-flex items-center font-medium text-sm text-gray-700 hover:text-gray-900">Hộ khẩu</a>
                     </div>
                 </li>
                 <li aria-current="page">
@@ -36,7 +38,7 @@
                                   clip-rule="evenodd"></path>
                         </svg>
                         <span
-                            class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Chi tiet hộ khẩu</span>
+                            class="inline-flex items-center font-medium text-sm text-gray-400">Chi tiết hộ khẩu</span>
                     </div>
                 </li>
             </ol>

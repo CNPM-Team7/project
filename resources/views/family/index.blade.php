@@ -3,6 +3,9 @@
 @section('header')
     <div class="flex flex-col gap-y-4">
         <div class="flex flex-col gap-y-4">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Thông tin hộ khẩu') }}
+            </h2>
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">

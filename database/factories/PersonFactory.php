@@ -25,9 +25,9 @@ class PersonFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'birthday' => $this->faker->dateTimeBetween('1990-01-01', '2012-12-31'),
+            'birthday' => $this->faker->dateTimeBetween('1952-01-01', '2022-01-01'),
             'birth_place' => $this->faker->address(),
-            'sex' => $this->faker->randomElement(['other' => 0, 'male' => 1, 'female' => 2]),
+            'sex' => $this->faker->randomElement(['male' => 0, 'female' => 1]),
             'race' => $this->faker->randomElement(['Kinh', 'Tày', 'Mường', 'Dao']),
             'job' => $this->faker->jobTitle(),
             'work_place' => $this->faker->address(),

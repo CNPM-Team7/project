@@ -35,15 +35,15 @@
                 </div>
 
                 <div class="flex flex-row w-full items-center justify-between pr-7">
-                    <span>Điện thoại</span> {{-- TODO FE why is height different? --}}
+                    <span>Số điện thoại</span>
                     <span
-                        class="w-7/12 bg-gray-300 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->phone_number }}</span>
+                        class="w-7/12 bg-gray-300 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 h-8">{{ $person->phone_number ?? '' }}</span>
                 </div>
 
                 <div class="flex flex-row w-full items-center justify-between pr-7">
                     <span>Địa chỉ thường trú</span>
                     <span
-                        class="w-7/12 bg-gray-300 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->family->address ?? '' }}</span>
+                        class="w-7/12 bg-gray-300 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 h-8">{{ $person->family->address ?? '' }}</span>
                 </div>
             </div>
         </div>

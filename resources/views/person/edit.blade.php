@@ -23,8 +23,7 @@
                                   clip-rule="evenodd"></path>
                         </svg>
                         <a href="{{ route('person.index') }}"
-                           class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Nhân
-                            khẩu</a>
+                           class="ml-1 text-sm  text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Nhân khẩu</a>
                     </div>
                 </li>
                 <li aria-current="page">
@@ -54,7 +53,7 @@
                     Show
                 </button>
             </a>
-            
+
             @if(!$person->family || $person->id != $person->family->owner_id)
                 <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
             @endif

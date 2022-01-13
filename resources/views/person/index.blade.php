@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('header')
     <div class="flex flex-col gap-y-4">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Thông tin nhân khẩu') }}
+        </h2>
+
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -35,13 +39,13 @@
     <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
 
         @php
-            $genderColors = ['blue', 'red', 'green']
+            $genderColors = ['blue', 'red']
         @endphp
         <div class="w-full flex flex-col select-none">
 
             <div class="w-full items-center divide-gray-300 divide-y divide-solid">
 
-                <div class="w-full select-none flex flex-row justify-between mb-4">
+                <div class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
 
                     <a href="{{ route('staying.create') }}">
                         <x-button-default class="bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300">
@@ -51,7 +55,7 @@
 
                     <a href="{{ route('person.create') }}">
                         <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300">
-                            Thêm mới
+                            Thêm mới nhân khẩu
                         </x-button-default>
                     </a>
 
@@ -307,7 +311,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Trống' }}</div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO FE bo tri lai vi tri cac button cho dep hon --}}
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="{{ route('person.show', $person->id) }}"
                                                class="text-green-600 hover:text-green-500">
                                                 <div class="flex flex-row space-x-2">

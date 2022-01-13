@@ -5,7 +5,7 @@
     <div class="flex flex-col gap-y-4">
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Thống kê') }}
+            {{ __('Trang chủ') }}
         </h2>
 
         <nav class="flex" aria-label="Breadcrumb">
@@ -339,7 +339,7 @@
         document.getElementById('female').innerText = female.length.toString()
 
         const data = [{
-            data: [male.length, female.length], // TODO chart
+            data: [male.length, female.length],
             labels: ['Nam', 'Nữ'],
             backgroundColor: [
                 'rgba(54, 162, 235, 1)',
@@ -389,6 +389,7 @@
 
         male.forEach(e => {
             let age = calulateAge(e.birthday)
+            console.log(age)
             if(0 <= age && age <= 5) {
                 maleAge[0] += 1
             }
@@ -398,9 +399,11 @@
             if(11 <= age && age <= 14) {
                 maleAge[2] += 1
             }
-            if(15 <= age && age <= 60){
+            if(15 <= age && age <= 17) {
+                maleAge[3] += 1
+            }
+            if(18 <= age && age <= 60){
                 maleAge[4] += 1
-                if(age <= 17) maleAge[3] += 1
             }
             if(age > 60) {
                 maleAge[5] += 1
@@ -420,24 +423,27 @@
             if(11 <= age && age <= 14) {
                 femaleAge[2] += 1
             }
-            if(15 <= age && age <= 55){
+            if(15 <= age && age <= 17) {
+                maleAge[3] += 1
+            }
+
+            if(18 <= age && age <= 55){
                 femaleAge[4] += 1
-                if(age <= 17) maleAge[3] += 1
             }
             if(age > 55) {
                 femaleAge[5] += 1
             }
         })
 
-        console.log(maleAge.reverse().map(e => e * (-1)))
-        console.log(femaleAge.reverse())
+        console.log(maleAge.map(e => e * (-1)))
+        console.log(femaleAge)
 
         {{--const maleData = [];--}}
         {{--const male1 = {!! json_encode($data, JSON_HEX_TAG) !!};--}}
         {{--male1.forEach(element => maleData.push(element * (-1)));--}}
 
         const data2 = {
-            labels: ['Nghỉ hưu', 'Độ tuổi lao động', 'Cấp 3', 'Cấp 2', 'Cấp 1', 'Mẫu giáo'],
+            labels: ['Nghỉ hưu', 'Trưởng thành: >= 18', 'Cấp 3: 15-17', 'Cấp 2: 12-14', 'Cấp 1: 6-10', 'Mẫu giáo: 0-5'],
             datasets: [
                 {
                     label: 'Nam',

@@ -262,8 +262,7 @@
                     <span class="text-red-500">(*)</span>
                 </div>
             </div>
-            <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
-            {{$errors}}
+            <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center hover:bg-green-600">Hoàn thành</button>
         </form>
     </div>
 @endsection

@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make('1'),
         ]);
-        Person::factory(50)->create();
-        Family::factory(20)->create();
-        Declaration::factory(30)->create();
+        Person::factory(200)->create();
+        Family::factory(80)->create();
+        Declaration::factory(200)->create();
     }
 }

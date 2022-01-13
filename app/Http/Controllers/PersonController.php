@@ -179,7 +179,6 @@ class PersonController extends Controller
             }
             return \response('', 404);
         }
-        // TODO check family owner
-        return Person::query()->where($type, 'LIKE', "%{$data}%")->where('family_id', '!=', null)->get(); // neu tam tru se ko co family_id
+        return Person::with('family')->where($type, 'LIKE', "%{$data}%")->where('family_id', '!=', null)->get(); // neu tam tru se ko co family_id
     }
 }

@@ -61,7 +61,7 @@
                 getMemberByName() {
                     this.id_number = ''
                     this.family_id = ''
-                    let url = '/person/get/name/' + this.name //TODO loc nhung nguoi dang tam tru ra
+                    let url = '/person/get/name/' + this.name
                     fetch(url)
                     .then(response => response.json())
                     .then(data => {
@@ -77,7 +77,7 @@
                 getMemberByIdNumber() {
                     this.name = ''
                     this.family_id = ''
-                    let url = '/person/get/id_number/' + this.id_number //TODO loc nhung nguoi dang tam tru ra
+                    let url = '/person/get/id_number/' + this.id_number
                     fetch(url)
                     .then(response => response.json())
                     .then(data => {
@@ -245,6 +245,7 @@
 
                             <template x-if="members.length !== 0">
                                 <template x-for="item in members" :key="item.id">
+                                    <template x-if="item.id != item.family.owner_id">
                                     <tr class="hover:bg-gray-100 cursor-pointer" @click="select(item)">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex justify-center">
@@ -257,6 +258,7 @@
                                             <div class="flex items-center">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     <span x-text="item.name" class="truncate"></span>
+                                                    <span x-text="item.family.owner_id" class="truncate"></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -275,6 +277,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    </template>
                                 </template>
 
                             </template>

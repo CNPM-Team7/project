@@ -258,7 +258,6 @@
                                             <div class="flex items-center">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     <span x-text="item.name" class="truncate"></span>
-                                                    <span x-text="item.family.owner_id" class="truncate"></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -375,6 +374,16 @@
                 </div>
             </div>
 
+            <x-input-text name="address" class="w-5/12" mandatory>
+                Address
+            </x-input-text>
+            <x-input-text name="house_id" class="w-5/12" mandatory>
+                House ID
+            </x-input-text>
+            <x-input-text name="owner_id" class="w-5/12" mandatory>
+                Owner ID
+            </x-input-text>
+
             <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300" @click="submit">
                 Hoàn thành
             </x-button-default>
@@ -466,6 +475,17 @@
 
 <script>
     function send_request(data) {
+        let sendData = {
+            'house_id': document.querySelector('input[name=house_id]').value,
+            'address': document.querySelector('input[name=address]').value,
+            'owner_id': document.querySelector('input[name=owner_id]').value,
+            'members': {},
+        }
+        if (!data.house_id || !data.address || !data.owner_id) return alert('Required field can\'t be blank.')
+        
+        data.forEach(member => {
+            sendData.members[member.id] = 'Con' // TODO FE input relation
+        })
         fetch('/families/split', {
             method: 'POST',
             credentials: 'same-origin',
@@ -474,8 +494,10 @@
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(sendData),
         })
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(r => console.log(r))
+            .catch(e => console.log(e));
     }
 </script>

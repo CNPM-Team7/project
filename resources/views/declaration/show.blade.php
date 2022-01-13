@@ -6,10 +6,7 @@
 @endsection
 
 @section('content')
-    <div class="flex flex-col space-y-4">
-        <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
-            a
-        </div>
+    <div class="flex flex-col space-y-4" style="pointer-events: none">
         <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
             <div class="w-full h-full">
                 <form action="{{ route('declarations.update', $declaration->id) }}" method="POST"
@@ -203,11 +200,6 @@
                         <label for="Yes"
                                class="text-sm font-medium text-gray-900 mb-2 mr-2 dark:text-gray-400">Có</label>
                     </div>
-
-                    <div class="self-center">
-                        <button class="w-32 border rounded bg-green-500 mr-3 px-4 py-2 inline-block">Hoàn thành</button>
-                    </div>
-
                 </form>
             </div>
         </div>
@@ -229,4 +221,4 @@
 
         setDeclaration()
     </script>
-@endsection {{-- TODO FE make all inputs become divs --}}
+@endsection

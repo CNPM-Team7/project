@@ -25,7 +25,7 @@ class PersonRequest extends FormRequest
     {
         $rules = [
             'name' => ['required'],
-            'birthday' => ['required', 'before:'.date('d/m/Y')],
+            'birthday' => ['required', 'date_format:d/m/Y', 'before:now'],
             'birth_place' => ['required'],
             'sex' => ['required'],
             'race' => ['required'],

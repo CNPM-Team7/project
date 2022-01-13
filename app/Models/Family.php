@@ -29,4 +29,12 @@ class Family extends Model
     {
         return $this->belongsTo(Person::class, 'owner_id');
     }
+
+    protected static function boot() {
+        parent::boot();
+    
+        static::deleting(function($family) { 
+            $family->members->each->update(['family_id' => null]);
+        });
+    }
 }

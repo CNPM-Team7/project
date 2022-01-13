@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Person;
 use App\Http\Requests\PersonRequest;
+use App\Http\Requests\TemporaryRequest;
 use App\Models\Temporary;
+
 class PersonController extends Controller
 {
 
@@ -120,7 +122,7 @@ class PersonController extends Controller
         return $data;
     }
 
-    public function staying(Request $request){ // TODO DISCUSS what happen if the same person declare twice?
+    public function staying(TemporaryRequest $request){
 
 //        "name" => "adsad"
 //        "birthday" => "2022-01-11"
@@ -137,9 +139,9 @@ class PersonController extends Controller
 
 
         $personData = $this->filterRequest($request);
-        dd($personData);
         $personData['status'] = 3; // tam tru
         $personData['owner_relation'] = $this->statuses[$personData['status']];
+        $personData['family_id'] = null;
         $person_id = Person::create($personData)->id;
 
         $tempoData = $this->filterTempoRequest($request);
@@ -150,8 +152,12 @@ class PersonController extends Controller
         return redirect()->route('person.show', $person_id);
     }
 
-    public function absent(Request $request){
-        dd($request);
+    public function absent(TemporaryRequest $request){
+        $tempoData = $this->filterTempoRequest($request);
+        Temporary::create($tempoData);
+        Person::find($tempoData['person_id'])->update(['status' => 3]);
+
+        return redirect()->route('person.show', $tempoData['person_id']);
     }
 
     public function filterTempoRequest($request){

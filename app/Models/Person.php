@@ -46,4 +46,9 @@ class Person extends Model
     {
         return $this->hasMany(Declaration::class);
     }
+
+    public function temporaryDeclarations()
+    {
+        return $this->hasMany(Temporary::class);
+    }
 }

@@ -57,8 +57,10 @@
                     Edit
                 </button>
             </a>
-
-            <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+            
+            @if(!$person->family || $person->id != $person->family->owner_id)
+                <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+            @endif
 
             {{--Modal--}}
             <div x-show="show"
@@ -152,7 +154,7 @@
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Trạng thái</span>
-                <span>{{ $person->status }}</span>
+                <span>{{ $statuses[$person->status] }}</span>
             </div>
         </div>
 
@@ -248,7 +250,7 @@
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Chu Ho Khau:</span>
-                <p><a href="{{ route('person.show', $person->family->owner->id) }}"><u>{{ $person->family->owner->name }}</u></a></p>
+                <p><a href="{{ route('person.show', $person->family->owner_id) }}"><u>{{ $person->family->owner->name ?? '' }}</u></a></p>
             </div>
         </div>
 
@@ -258,198 +260,77 @@
                 <p>{{ $person->owner_relation }}</p>
             </div>
         </div>
+    </div>
+    @endif
+    <br>
+    <h4>Khai bao tam tru / tam vang:</h4>
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-200">
+        <tr>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                Type
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                Register Date
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                Start Date
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                End Date
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                Family ID
+            </th>
+        </tr>
+        </thead>
 
-        <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
-            <div class="flex w-full items-center justify-between">
-                <span>Cac thanh vien trong Ho Khau:</span>
-            </div>
-        </div>
-
-        {{--TODO bo bang, them dia chi, them bang tam tru/tam vang--}}
-
-        @php
-            $genderColors = ['blue', 'red', 'green']
-        @endphp
-        <table class="min-w-full divide-y divide-gray-200"> {{-- TODO FE overflow auto --}}
-            <thead class="bg-gray-200">
-            <tr>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    ID Number
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Name
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Birthday
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Gender
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Race
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Status
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Job
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Owner Relation
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Family Owner
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Note
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Move to
-                </th>
-                <th scope="col" class="relative px-6 py-3">
-                    <span class="sr-only">Edit</span>
-                </th>
-            </tr>
-            </thead>
-
-            <tbody class="bg-white divide-y divide-gray-200">
-
-
-            @foreach ($person->family->members as $person)
+        <tbody class="bg-white divide-y divide-gray-200">
+            @foreach ($person->temporaryDeclarations as $tempo)
                 <tr>
-                    <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
-                        class="px-6 py-4 whitespace-nowrap select-text">
-                        <div class="flex items-center">
-                        <span class="text-sm font-medium text-gray-500">
-                            {{ $person->id_number }}
-                        </span>
-                        </div>
-                    </td>
-                    <div id="tooltip-id_number {{ $person->id_number }}" role="tooltip"
-                         class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
-                        <div class="flex flex-col">
-                            <span>
-                                Register Date: <u>{{ date('d/m/Y', strtotime($person->register_date)) }}</u>
-                            </span>
-                            <span>
-                                Register Place: <u>{{ $person->register_place }}</u>
-                            </span>
-                            <span>
-                                Receive Date: <u>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</u>
-                            </span>
-                            <span>
-                                Receive Place: <u>{{ $person->idn_receive_place }}</u>
-                            </span>
-                        </div>
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-
                     <td class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
                         <span class="text-sm font-medium text-gray-500">
-                            <a href="{{ route('person.show', $person->id) }}">{{ $person->name }}</a>
+                            {{ $tempo->type ? 'Tam vang' : 'Tam tru' }}
                         </span>
                         </div>
                     </td>
-                    <td data-tooltip-target="tooltip-birthday {{ $person->id_number }}"
-                        class="px-6 py-4 whitespace-nowrap">
-                        <div
-                            class="text-sm text-gray-500">{{ date('d/m/Y', strtotime($person->birthday)) }}</div>
-                    </td>
-                    <div id="tooltip-birthday {{ $person->id_number }}" role="tooltip"
-                         class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
-                        <span>
-                            Birthday Place: <u>{{ $person->birth_place }}</u>
+                    <td class="px-6 py-4 whitespace-nowrap select-text">
+                        <div class="flex items-center">
+                        <span class="text-sm font-medium text-gray-500">
+                            {{ $tempo->register_date }}
                         </span>
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div
-                            class="flex flex-row py-0.5 justify-center rounded-full bg-{{ $genderColors[$person->sex] }}-100">
-                            <span
-                                class="text-xs leading-5 font-semibold text-{{ $genderColors[$person->sex] }}-500">
-                                {{ $genders[$person->sex] }}
-                            </span>
                         </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $person->race }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $statuses[$person->status] }}</div>
-                    </td>
-                    <td data-tooltip-target="tooltip-job {{ $person->id_number }}"
-                        class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">
-                            <p class="truncate w-20">
-                                {{ $person->job }}
-                            </p>
+                    <td class="px-6 py-4 whitespace-nowrap select-text">
+                        <div class="flex items-center">
+                        <span class="text-sm font-medium text-gray-500">
+                            {{ $tempo->start_date }}
+                        </span>
                         </div>
-
                     </td>
-                    <div id="tooltip-job {{ $person->id_number }}" role="tooltip"
-                         class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
-
-                        <div class="flex flex-col">
-                            <span>
-                                Job: <u>{{ $person->job }}</u>
-                            </span>
-                            <span>
-                                Work Place: <u>{{ $person->work_place }}</u>
-                            </span>
+                    <td class="px-6 py-4 whitespace-nowrap select-text">
+                        <div class="flex items-center">
+                        <span class="text-sm font-medium text-gray-500">
+                            {{ $tempo->end_date }}
+                        </span>
                         </div>
-
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div
-                            class="text-sm text-gray-500">{{ $person->family ? $person->owner_relation : 'No Info' }}</div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div
-                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'No Info' }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $person->note ?? 'Empty' }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Here' }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('person.show', $person->id) }}"
-                           class="text-green-600 hover:text-green-500">
-                            <div class="flex flex-row space-x-2">
-                                <i class="material-icons-outlined text-base">visibility</i>
-                                <span class="pt-0.5">Show</span>
-                            </div>
-
-                        </a>
-                        <a href="{{ route('person.edit', $person->id) }}"
-                           class="text-indigo-600 hover:text-indigo-500">
-                            <div class="flex flex-row space-x-2">
-                                <i class="material-icons-outlined text-base">edit</i>
-                                <span class="pt-0.5">Edit</span>
-                            </div>
-
-                        </a>
+                    <td class="px-6 py-4 whitespace-nowrap select-text">
+                        <div class="flex items-center">
+                        <span class="text-sm font-medium text-gray-500">
+                            <a href="{{ route('families.show', $tempo->family_id) }}"><u>{{ $tempo->family_id }}</u></a>
+                        </span>
+                        </div>
                     </td>
                 </tr>
             @endforeach
-            </tbody>
-        </table>
-    </div>
-    @endif
+        </tbody>
+    </table>
     </div>
 @endsection

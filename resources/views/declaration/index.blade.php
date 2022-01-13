@@ -46,28 +46,28 @@
 
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($declarations as $declaration)
-                                {{-- TODO check exist, if person is deleted --}}
+                            @if($declaration->declarant)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-{{--                                            <u><a href="{{ route('person.show', $declaration->declarant->id) }}">--}}
-{{--                                            {{ $declaration->declarant->name }}--}}
+                                            <u><a href="{{ route('person.show', $declaration->declarant->id) }}">
+                                                {{ $declaration->declarant->name }}
                                             </a></u>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900"> {{-- TODO F-1? --}}
-                                            {{ $declaration->status == 3 ? '> F2' : 'F' . $declaration->status }}
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {{ $declaration->status == 3 ? '> F2' : $declaration->status == -1 ? 'Chua xet nghiem' : 'F' . $declaration->status }}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="text-sm font-medium text-gray-900">
-                                            {{ $declaration->test_result }}
+                                            {{ $declaration->test_result == -1 ? 'Chua xet nghiem' : !$declaration->test_result ? 'Am tinh' : 'Duong tinh' }}
                                         </div>
                                     </div>
                                 </td>
@@ -96,6 +96,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                             </tbody>
                         </table>

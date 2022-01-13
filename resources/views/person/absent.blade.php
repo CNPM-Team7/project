@@ -54,17 +54,20 @@
 @section('content')
     <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg">
 
-    <form action="{{ route('person.store') }}" method="POST" class="flex flex-col gap-y-10 select-none items-center"
+    <form action="{{ route('absent.store') }}" method="POST" class="flex flex-col gap-y-10 select-none items-center"
           style="width: 900px">
         @csrf
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
-            <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory value="{{ old('name') }}"> {{-- TODO 1 file, all required field, back end, validate --}}
-                Họ và tên
+            <input name="person_id" value="{{ request()->id }}" style="display: none" />
+            <input name="type" value="1" style="display: none" />
+
+            <x-input-text name="family_id" value="{{ $person->family->address ?? '' }}" mandatory>
+                Family ID
             </x-input-text>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between gap-x-1">
-                    <label for="birthday">Ngày, tháng, năm sinh</label>
+                    <label for="register_date">Ngày khai báo</label>
                     <div class="relative w-5/12 flex flex-row gap-x-2">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -74,57 +77,9 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input id="birthday" name="birthday" datepicker="" datepicker-buttons
+                        <input id="register_date" name="register_date" datepicker="" value="{{ old('register_date') }}"
                                datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
-                               placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}" value="{{ old('birthday') }}">
-                    </div>
-                </div>
-
-                <span class="text-red-500">(*)</span>
-
-            </div>
-
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full items-center justify-between">
-                    <label for="gender" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Giới
-                        tính</label>
-                    @php
-                        $genders = ['Nam', 'Nữ', 'Khác'];
-                    @endphp
-                    <select id="gender" name="sex" value="{{ old('gender') }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    >
-                        @foreach ($genders as $index => $gender)
-                            <option value="{{ $index }}">{{ $gender }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <span class="text-red-500">(*)</span>
-            </div>
-
-            <x-input-text name="id_number" class="w-5/12" mandatory value="{{ old('id_number') }}">
-                Số CMND/CCCD
-            </x-input-text>
-
-            <x-input-text name="idn_receive_place" class="w-5/12" mandatory value="{{ old('idn_receive_place') }}">
-                Nơi cấp
-            </x-input-text>
-
-            <div class="w-full flex flex-row items-center gap-x-2 pt-5">
-                <div class="flex w-full items-center justify-between gap-x-1">
-                    <label for="birthday">Ngày cấp</label>
-                    <div class="relative w-5/12 flex flex-row gap-x-2">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <input id="idn_receive_date" name="idn_receive_date" datepicker="" datepicker-buttons value="{{ old('idn_receive_date') }}"
-                               datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
+                               required
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                     </div>
@@ -132,17 +87,13 @@
                 <span class="text-red-500">(*)</span>
             </div>
 
-            <x-input-text name="move_to" class="w-5/12" mandatory value="{{ old('move_to') }}">
-                Địa chỉ thường trú
-            </x-input-text>
-
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full items-center justify-between">
                     <label for="period">Khoảng thời gian</label>
 
                     <div class="flex flex-row w-5/12 gap-x-2">
                         <div class="flex flex-row items-center gap-x-2">
-                            <label for="start">Từ</label>
+                            <label for="start_date">Từ</label>
                             <div class="relative flex flex-row gap-x-2">
 
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -153,7 +104,7 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input id="start" name="start" datepicker="" datepicker-buttons value="{{ old('start') }}"
+                                <input id="start_date" name="start_date" datepicker="" datepicker-buttons value="{{ old('start_date') }}"
                                        datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                        placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
@@ -161,7 +112,7 @@
                         </div>
 
                         <div class="flex flex-row items-center gap-x-2">
-                            <label for="end">đến</label>
+                            <label for="end_date">đến</label>
                             <div class="relative flex flex-row gap-x-2">
 
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -172,15 +123,13 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input id="end" name="end"  datepicker="" datepicker-buttons value="{{ old('end') }}"
+                                <input id="end_date" name="end_date"  datepicker="" datepicker-buttons value="{{ old('end_date') }}"
                                        datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                        placeholder="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <span class="text-red-500">(*)</span>
             </div>
@@ -195,8 +144,8 @@
                 </div>
                 <span class="text-red-500">(*)</span>
             </div>
-        </div>
-        <x-button-outline class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28">
+        </div> {{-- TODO FE show error --}}
+        <x-button-outline type="submit" class="text-teal-500 w-32 hover:text-white border-teal-500 hover:bg-teal-500 focus:ring-yellow-300 w-28">
             Hoàn thành
         </x-button-outline>
     </form>

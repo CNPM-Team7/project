@@ -21,7 +21,7 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        $families = Family::orderBy('id', 'desc')->paginate(10); // TODO search
+        $families = Family::orderBy('id', 'desc')->paginate(10);
         return view('family.index', ['families' => $families]);
     }
 
@@ -131,7 +131,8 @@ class FamilyController extends Controller
 
     public function members($id)
     {
-        return Family::find($id)->members;
+        $family = Family::find($id);
+        return $family->members->where('id', '!=', $family->owner_id)->where('status', 0); // not owner and normal
     }
 
     public function getFamilyInf($id)

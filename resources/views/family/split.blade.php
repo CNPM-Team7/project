@@ -55,7 +55,7 @@
                 members: [],
                 selecteds: [],
                 getMembersByFamily() {
-                    let url = '/families/members/' + this.family_id //TODO loc nhung nguoi dang tam tru ra
+                    let url = '/families/members/' + this.family_id
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {

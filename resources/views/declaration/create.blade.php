@@ -33,6 +33,18 @@
                     <span
                         class="w-7/12 bg-gray-300 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ date('d/m/Y', strtotime($person->birthday)) }}</span>
                 </div>
+
+                <div class="flex flex-row w-full items-center justify-between pr-7">
+                    <span>Điện thoại</span> {{-- TODO FE why is height different? --}}
+                    <span
+                        class="w-7/12 bg-gray-300 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->phone_number }}</span>
+                </div>
+
+                <div class="flex flex-row w-full items-center justify-between pr-7">
+                    <span>Địa chỉ thường trú</span>
+                    <span
+                        class="w-7/12 bg-gray-300 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">{{ $person->family->address ?? '' }}</span>
+                </div>
             </div>
         </div>
 
@@ -40,17 +52,6 @@
             <form action="{{ route('declarations.store') }}" method="POST" class="flex flex-col gap-y-10 select-none">
                 @csrf
                 <div class="inline-grid grid-cols-2 gap-x-14 gap-y-4">
-
-                    <x-input-text name="phone_number" class="w-7/12 bg-gray-50" value="{{ $person->phone_number }}">
-                        Điện thoại
-                    </x-input-text>
-
-                    <x-input-text name="address" class="w-7/12 bg-gray-50"
-                                  value="{{ $person->address }}"> {{-- TODO person chưa có địa chỉ thường trú??? --}}
-                        Địa chỉ thường trú
-                    </x-input-text>
-
-
                     <div class="w-full flex flex-row items-center gap-x-2 pt-5"
                         x-data="{
                             iso_level: -1,

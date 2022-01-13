@@ -49,23 +49,17 @@
                         </x-button-default>
                     </a>
 
-                    <a href="{{ route('absent') }}">
-                        <x-button-default class="bg-blue-400 hover:bg-blue-500 focus:ring-blue-300">
-                            Khai báo tạm vắng
-                        </x-button-default>
-                    </a>
-
                     <a href="{{ route('person.create') }}">
                         <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300">
                             Thêm mới
                         </x-button-default>
                     </a>
 
-                    <a>
+                    {{-- <a>
                         <x-button-default class="bg-red-500 hover:bg-red-600 focus:ring-red-300">
                             Khai tử
                         </x-button-default>
-                    </a>
+                    </a> --}}
                 </div>
 
 
@@ -151,8 +145,6 @@
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                         Dân tộc
                                     </th>
-
-                                    {{-- TODO neu tam tru thi hien thong tin tam tru --}}
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                         Trạng thái
@@ -182,10 +174,9 @@
 
                                 <tbody class="bg-white divide-y divide-gray-200">
 
-                                {{-- TODO FE neu la tam tru thi khong duoc khai bao tam vang va nguoc lai --}}
                                 @foreach ($people as $person)
                                     <tr>
-                                        <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
+                                        <td @if($person->id_number) data-tooltip-target="tooltip-id_number {{ $person->id_number }}" @endif
                                             class="px-6 py-4 whitespace-nowrap select-text">
                                             <div class="flex items-center">
                                         <span class="text-sm font-medium text-gray-900 italic">
@@ -249,8 +240,7 @@
                                             <div class="text-sm text-gray-500">{{ $statuses[$person->status] }}</div>
                                         </td>
 
-                                        {{-- TODO check that nghiep --}}
-                                        <td data-tooltip-target="tooltip-job {{ $person->id_number }}"
+                                        <td @if($person->job) data-tooltip-target="tooltip-job {{ $person->id_number }}" @endif
                                             class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-500">
                                                 @if($person->job)
@@ -317,7 +307,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-500">{{ $person->move_to ?? 'Trống' }}</div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO FE them button khai bao tam vang --}}
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> {{-- TODO FE bo tri lai vi tri cac button cho dep hon --}}
                                             <a href="{{ route('person.show', $person->id) }}"
                                                class="text-green-600 hover:text-green-500">
                                                 <div class="flex flex-row space-x-2">
@@ -341,6 +331,15 @@
                                                     <span class="pt-0.5">Khai báo y tế</span>
                                                 </div>
                                             </a>
+                                            @if($person->family_id)
+                                            <a href="{{ route('absent', $person->id) }}"
+                                                class="text-yellow-600 hover:text-yellow-500">
+                                                <div class="flex flex-row space-x-2">
+                                                    <i class="material-icons-outlined text-base">edit</i>
+                                                    <span class="pt-0.5">Khai báo tạm vắng</span>
+                                                </div>
+                                            </a>
+                                            @endif
 
                                         </td>
                                     </tr>

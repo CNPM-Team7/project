@@ -41,10 +41,6 @@
 
         <div class="w-full flex flex-row justify-between my-4">
             <div class="justify-self-end flex flex-row">
-                <label for="search" class="w-28 self-center">Tìm kiếm</label>
-                <input
-                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="search" type="text" placeholder="Nguyễn Văn A">
             </div>
 
             <div class="flex justify-around gap-2">
@@ -61,11 +57,11 @@
                     </x-button-default>
                 </a>
 
-                <a>
+                {{-- <a>
                     <x-button-default class="bg-red-500 hover:bg-red-600 focus:ring-red-300">
                         Chuyển đi
                     </x-button-default>
-                </a>
+                </a> --}}
             </div>
 
 

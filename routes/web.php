@@ -52,7 +52,7 @@ Route::post('/staying',
     [PersonController::class, 'staying']
 )->name('staying.store');
 
-Route::get('/absent', function () {
+Route::get('/absent/{id}', function () {
     return view('person.absent');
 })->name('absent');
 

@@ -125,7 +125,7 @@
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
                 <span>Chu ho:</span>
-                <p><a href="{{ route('person.show', $family->owner->id) }}"><u>{{ $family->owner->name }}</u></a></p>
+                <p><a href="{{ route('person.show', $family->owner_id) }}"><u>{{ $family->owner->name ?? '' }}</u></a></p>
             </div>
         </div>
 

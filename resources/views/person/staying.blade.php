@@ -59,7 +59,7 @@
               style="width: 900px">
             @csrf
             <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
-                <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" mandatory>
+                <x-input-text name="name" class="w-5/12" placeholder="Nguyễn Văn A" value="{{ old('name') }}" mandatory>
                     Họ và tên
                 </x-input-text>
 
@@ -75,7 +75,7 @@
                                           clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input id="birthday" name="birthday" datepicker=""
+                            <input id="birthday" name="birthday" datepicker="" value="{{ old('birthday') }}"
                                    datepicker-orientation="top" datepicker-format="dd/mm/yyyy" type="text"
                                    required
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
@@ -87,7 +87,15 @@
 
                 </div>
 
-                <x-input-text name="id_number" class="w-5/12" mandatory>
+                <x-input-text name="birth_place" class="w-5/12" value="{{ old('birth_place') }}" mandatory>
+                    Noi sinh
+                </x-input-text>
+
+                <x-input-text name="race" class="w-5/12" value="{{ old('race') }}" mandatory>
+                    Dan toc
+                </x-input-text>
+
+                <x-input-text name="id_number" class="w-5/12" value="{{ old('id_number') }}" mandatory>
                     Số CMND/CCCD
                 </x-input-text>
 
@@ -108,7 +116,7 @@
                     <span class="text-red-500">(*)</span>
                 </div>
 
-                <x-input-text name="move_to" class="w-5/12" mandatory>
+                <x-input-text name="move_to" class="w-5/12" value="{{ old('move_to') }}" mandatory>
                     Địa chỉ thường trú
                 </x-input-text>
 
@@ -126,7 +134,7 @@
                                         el.classList.add('visible');
                                     })
 
-                                    document.getElementById('owner_name').value = data.owner_id //TODO chuyen thanh ten chu ho
+                                    document.getElementById('owner_id').value = data.owner_id //TODO chuyen thanh ten chu ho
                                     document.getElementById('family_address').value = data.address
                                     document.getElementById('family_id').setCustomValidity('')
                                 })
@@ -138,7 +146,7 @@
                                     el.classList.remove('visible');
                                 })
 
-                                document.getElementById('owner_name').value = null
+                                document.getElementById('owner_id').value = null
                                 document.getElementById('family_address').value = null
 
                                 document.getElementById('family_id').setCustomValidity('Khong tim thay thong tin ho khau')
@@ -159,7 +167,7 @@
                 </div>
 
                 <div class="hidden" name="family_inf">
-                    <x-input-text name="owner_name" class="w-5/12 bg-gray-300" value="{{ old('owner_name') }}" mandatory>
+                    <x-input-text name="owner_id" class="w-5/12 bg-gray-300" value="{{ old('owner_id') }}" mandatory>
                         Họ tên chủ hộ
                     </x-input-text>
                 </div>
@@ -255,6 +263,7 @@
                 </div>
             </div>
             <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
+            {{$errors}}
         </form>
     </div>
 @endsection

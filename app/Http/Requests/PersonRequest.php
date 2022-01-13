@@ -44,7 +44,7 @@ class PersonRequest extends FormRequest
         ];
 
         if($this->family_id) $rules['family_id'] = ['exists:families,id'];
-        if($this->id_number) $rules['id_number'] = ['integer'];
+        if($this->id_number) $rules['id_number'] = ['integer', 'unique:people'];
         return $rules;
     }
 

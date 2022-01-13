@@ -134,7 +134,7 @@
                                         el.classList.add('visible');
                                     })
 
-                                    document.getElementById('owner_id').value = data.owner_id //TODO chuyen thanh ten chu ho
+                                    document.getElementById('owner_id').value = data.owner_id
                                     document.getElementById('family_address').value = data.address
                                     document.getElementById('family_id').setCustomValidity('')
                                 })
@@ -261,8 +261,8 @@
                     </div>
                     <span class="text-red-500">(*)</span>
                 </div>
-            </div>
-            <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center hover:bg-green-600">Hoàn thành</button>
+            </div> {{-- TODO FE show error --}}
+            <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
         </form>
     </div>
 @endsection

@@ -21,7 +21,9 @@ class PersonController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard',['people' => Person::all()]); // TODO DISCUSS return data
+        $tempo = Temporary::with('declarant', 'stayAt')->orderBy('created_at', 'desc')->get()->groupBy('person_id');
+
+        return view('dashboard',['people' => Person::all(), 'tempo' => $tempo]);
     }
 
     /**
@@ -177,7 +179,7 @@ class PersonController extends Controller
             }
             return \response('', 404);
         }
-
-        return Person::query()->where($type, 'LIKE', "%{$data}%")->get();
+        // TODO check family owner
+        return Person::query()->where($type, 'LIKE', "%{$data}%")->where('family_id', '!=', null)->get(); // neu tam tru se ko co family_id
     }
 }

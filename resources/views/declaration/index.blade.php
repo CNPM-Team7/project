@@ -90,14 +90,14 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="text-sm font-medium text-gray-900">
-                                                        {{ $declaration->status == 3 ? '> F2' : $declaration->status == -1 ? 'Chua xet nghiem' : 'F' . $declaration->status }}
+                                                        {{ $declaration->status == 3 ? '> F2' : $declaration->status == -1 ? 'Chưa xét nghiệm' : 'F' . $declaration->status }} {{--TODO chưa xét nghiệm nhưng có kết quả--}}
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="text-sm font-medium text-gray-900">
-                                                        {{ $declaration->test_result == -1 ? 'Chua xet nghiem' : !$declaration->test_result ? 'Am tinh' : 'Duong tinh' }}
+                                                        {{ $declaration->test_result == -1 ? 'Chưa xét nghiệm' : !$declaration->test_result ? 'Âm tính' : 'Dương tính' }}
                                                     </div>
                                                 </div>
                                             </td>

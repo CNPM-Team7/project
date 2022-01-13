@@ -131,11 +131,16 @@
                                 <tr>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                        SỐ ID
+                                        ID NHÂN KHẨU
                                     </th>
+
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                                         Họ và tên
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                        SỐ CMND/CCCD
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
@@ -180,14 +185,14 @@
 
                                 @foreach ($people as $person)
                                     <tr>
-                                        <td @if($person->id_number) data-tooltip-target="tooltip-id_number {{ $person->id_number }}" @endif
-                                            class="px-6 py-4 whitespace-nowrap select-text">
+                                        <td class="px-6 py-4 whitespace-nowrap select-text">
                                             <div class="flex items-center">
-                                        <span class="text-sm font-medium text-gray-900 italic">
-                                            {{ $person->id_number }}
-                                        </span>
+                                                <span class="text-sm font-medium text-gray-900 italic">
+                                                    {{ $person->id }}
+                                                </span>
                                             </div>
                                         </td>
+
                                         <div id="tooltip-id_number {{ $person->id_number }}" role="tooltip"
                                              class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
                                             <div class="flex flex-col">
@@ -214,6 +219,14 @@
                                                     {{ $person->name }}
                                                 </span>
                                                 </a>
+                                            </div>
+                                        </td>
+                                        <td @if($person->id_number) data-tooltip-target="tooltip-id_number {{ $person->id_number }}" @endif
+                                        class="px-6 py-4 whitespace-nowrap select-text">
+                                            <div class="flex items-center">
+                                                <span class="text-sm font-medium text-gray-900 italic">
+                                                    {{ $person->id_number }}
+                                                </span>
                                             </div>
                                         </td>
                                         <td data-tooltip-target="tooltip-birthday {{ $person->id_number }}"

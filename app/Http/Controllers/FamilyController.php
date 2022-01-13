@@ -58,8 +58,8 @@ class FamilyController extends Controller
     public function show($id)
     {
         $family = Family::find($id);
-        $statuses = ['Normal', 'Just Born', 'Just Died', 'Temporary', 'Moved', 'Dead'];
-        $genders = ['Nam', 'Nữ', 'Khác'];
+        $statuses = ['Bình thường', 'Mới sinh', 'Mới mất', 'Tạm trú', 'Đã chuyển đi', 'Đã mất'];
+        $genders = ['Nam', 'Nữ'];
 
         return view('family.show', ['family' => $family, 'statuses' => $statuses, 'genders' => $genders]);
     }
@@ -111,14 +111,14 @@ class FamilyController extends Controller
             'house_id' => $data['house_id'],
             'owner_id' => $data['owner_id'],
             'address' => $data['address'],
-        ])->id;
+        ]);
         $family_id = $family->id;
         $family->owner->update(['family_id' => $family_id]);
 
         foreach($data['members'] as $id => $relation){
             Person::find($id)->update([
                 'family_id' => $family_id,
-                'owner_relation' => $relation,
+                'owner_relation' => $id == $data['owner_id'] ? 'Chủ hộ' : $relation,
             ]);
         }
     }
@@ -132,7 +132,7 @@ class FamilyController extends Controller
     public function members($id)
     {
         $family = Family::find($id);
-        return $family->members->where('id', '!=', $family->owner_id)->where('status', 0); // not owner and normal
+        return $family->members->where('id', '!=', $family->owner_id); // not owner and normal
     }
 
     public function getFamilyInf($id)

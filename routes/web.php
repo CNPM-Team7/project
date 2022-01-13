@@ -19,62 +19,61 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//Route::middleware('guest')->
-Route::name('auth.')->group(function () {
-    Route::get('/login', [LoginController::class, 'create'])
-        ->name('login.create');
+Route::middleware('guest')->group(function (){
+    Route::name('auth.')->group(function () {
+        Route::get('/login', [LoginController::class, 'create'])
+            ->name('login.create');
 
-    Route::post('/login', [LoginController::class, 'login'])
-        ->name('login');
+        Route::post('/login', [LoginController::class, 'login'])
+            ->name('login');
 
-    Route::get('/register', function () {
-        return view('authenticate.register');
-    })->name('register.create');
+        Route::get('/register', function () {
+            return view('authenticate.register');
+        })->name('register.create');
 
-    Route::post('/register', [RegisterController::class, 'register'])
-        ->name('register');
+        Route::post('/register', [RegisterController::class, 'register'])
+            ->name('register');
+    });
 });
 
-//Route::middleware('auth:web')->group(function () {
 
-Route::get('', [PersonController::class, 'dashboard']);
-Route::get('/dashboard', [PersonController::class, 'dashboard'])->name('dashboard');
+Route::middleware('auth:web')->group(function () {
+    Route::get('', [PersonController::class, 'dashboard']);
+    Route::get('/dashboard', [PersonController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/profile', function () {
-    return view('authenticate.profile');
-})->name('profile');
+    Route::get('/profile', function () {
+        return view('authenticate.profile');
+    })->name('profile');
 
-Route::get('/staying', function () {
-    return view('person.staying');
-})->name('staying.create');
+    Route::get('/staying', function () {
+        return view('person.staying');
+    })->name('staying.create');
 
-Route::post('/staying',
-    [PersonController::class, 'staying']
-)->name('staying.store');
+    Route::post('/staying',
+        [PersonController::class, 'staying']
+    )->name('staying.store');
 
-Route::get('/absent/{id}', function () {
-    return view('person.absent');
-})->name('absent');
+    Route::get('/absent/{id}', [PersonController::class, 'absentView'])->name('absent');
 
-Route::post('/absent', [PersonController::class, 'absent'])->name('absent.store');
+    Route::post('/absent', [PersonController::class, 'absent'])->name('absent.store');
 
 
-Route::post('/logout', [LoginController::class, 'logout'])
-    ->name('logout');
+    Route::post('/logout', [LoginController::class, 'logout'])
+        ->name('logout');
 
-Route::get('/person/get/{type}/{data?}', [PersonController::class, 'get'])->name('person.get');
-Route::resource('person', PersonController::class);
+    Route::get('/person/get/{type}/{data?}', [PersonController::class, 'get'])->name('person.get');
+    Route::resource('person', PersonController::class);
 
-Route::name('families.')->prefix('families')->group(function () {
-    Route::get('/split', [FamilyController::class, 'splitView'])->name('splitView');
-    Route::get('/members/{id}', [FamilyController::class, 'members']);
-    Route::get('getInf/{id}', [FamilyController::class, 'getFamilyInf'])->name('family.getInf');
-    Route::post('/split', [FamilyController::class, 'split'])->name('split');
-}); // must declare these routes before resource routes
+    Route::name('families.')->prefix('families')->group(function () {
+        Route::get('/split', [FamilyController::class, 'splitView'])->name('splitView');
+        Route::get('/members/{id}', [FamilyController::class, 'members']);
+        Route::get('getInf/{id}', [FamilyController::class, 'getFamilyInf'])->name('family.getInf');
+        Route::post('/split', [FamilyController::class, 'split'])->name('split');
+    }); // must declare these routes before resource routes
 
-Route::resource('families', FamilyController::class);
+    Route::resource('families', FamilyController::class);
 
-Route::get('/declarations/create/{id}', [DeclarationController::class, 'create'])->name('declarations.create');
+    Route::get('/declarations/create/{id}', [DeclarationController::class, 'create'])->name('declarations.create');
 
-Route::resource('declarations', DeclarationController::class)->except(['create']);
-//});
+    Route::resource('declarations', DeclarationController::class)->except(['create']);
+});

@@ -53,7 +53,7 @@
                 @csrf
                 <div class="inline-grid grid-cols-2 gap-x-14 gap-y-4">
                     <div class="w-full flex flex-row items-center gap-x-2 pt-5"
-                        x-data="{
+                         x-data="{
                             iso_level: -1,
                             check_iso_level(){
                                 if (this.iso_level != -1){
@@ -73,7 +73,7 @@
                     >
                         <div class="flex w-full items-center justify-between items-center">
                             <label for="isolation_level"
-                                   class="text-sm font-medium text-gray-900 block dark:text-gray-400">Mức độ các
+                                   class="text-sm font-medium text-gray-900 block dark:text-gray-400">Mức độ cách
                                 ly</label>
                             <select id="status" name="status" style="height: 34px;" x-model="iso_level"
                                     @change="check_iso_level()"
@@ -85,7 +85,7 @@
                                 <option value="3">F3+</option>
                             </select>
                         </div>
-                        <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
+                        <span class="text-red-500">(*)</span>
                     </div>
 
                     <div name="iso_inf" class="w-full flex flex-row items-center gap-x-2 hidden">
@@ -101,25 +101,34 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input name="isolation_date" datepicker="" datepicker-format="dd/mm/yyyy" value="{{ old('isolation_date') }}"
+                                <input name="isolation_date" datepicker="" datepicker-format="dd/mm/yyyy"
+                                       value="{{ old('isolation_date') }}"
                                        type="text"
                                        style="height: 34px;"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input"
                                 >
                             </div>
                         </div>
-                        <span class="text-red-500 invisible">(*)</span>
+                        <span class="text-red-500">(*)</span>
                     </div>
 
-                    <div>
-                        <x-input-text name="iso_add" class="w-7/12 bg-gray-50" value="{{ old('iso_add') }}">
-                            Nơi cách ly
-                        </x-input-text>
+                    <div name="iso_inf" class="w-full flex flex-row items-center gap-x-2 hidden">
+                        <div class="w-full flex flex-row items-center gap-x-2 pt-5">
+                            <div class="flex w-full items-center justify-between">
+                                <label for="iso_add">
+                                    Nơi cách ly
+                                </label>
+                                <input {{ (!empty($mandatory) ? 'required' : null) }} name="iso_add" id="iso_add"
+                                       type="text" value="{{ old('iso_add') }}"
+                                       class="w-7/12 bg-gray-50 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
+                            </div>
+                            <span class="text-red-500">(*)</span>
+                        </div>
                     </div>
 
 
                     <div class="w-full flex flex-row items-center gap-x-2 pt-5"
-                        x-data="{
+                         x-data="{
                             test_level: -1,
                             check_test_level(){
                                 if (this.test_level != -1){
@@ -135,20 +144,22 @@
                                     el.classList.add('hidden');
                                 });
                             }
-                        }",
+                        }" ,
                     >
                         <div class="flex w-full items-center justify-between items-center">
                             <label for="test_result"
                                    class="text-sm font-medium text-gray-900 block dark:text-gray-400">
                                 Kết quả xét nghiệm Covid-19
                             </label>
-                            <select id="test_result" name="test_result" style="height: 34px;" x-model="test_level" @change="check_test_level()" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-1.5">
+                            <select id="test_result" name="test_result" style="height: 34px;" x-model="test_level"
+                                    @change="check_test_level()"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-1.5">
                                 <option value="-1" selected>Chưa xét nghiệm</option>
                                 <option value="0">Âm tính</option>
                                 <option value="1">Dương tính</option>
                             </select>
                         </div>
-                        <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
+                        <span class="text-red-500">(*)</span>
                     </div>
 
                     <div name="test_inf" class="w-full flex flex-row items-center gap-x-2 hidden">
@@ -164,14 +175,15 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy" value="{{ old('test_date') }}"
+                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy"
+                                       value="{{ old('test_date') }}"
                                        type="text"
                                        style="height: 34px;"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input"
                                 >
                             </div>
                         </div>
-                        <span class="text-red-500 invisible">(*)</span>
+                        <span class="text-red-500">(*)</span>
                     </div>
 
                     <div name="test_inf" class="w-full flex flex-row items-center gap-x-2 hidden">
@@ -187,14 +199,15 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy" value="{{ old('test_date') }}"
+                                <input name="test_date" datepicker="" datepicker-format="dd/mm/yyyy"
+                                       value="{{ old('test_date') }}"
                                        type="text"
                                        style="height: 34px;"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 datepicker-input"
                                 >
                             </div>
                         </div>
-                        <span class="text-red-500 invisible">(*)</span>
+                        <span class="text-red-500">(*)</span>
                     </div>
 
                 </div>

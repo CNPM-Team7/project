@@ -15,7 +15,7 @@ use App\Models\Temporary;
 class PersonController extends Controller
 {
 
-    protected array $statuses = ['Bình thường', 'Mới sinh', 'Just Died', 'Tạm trú', 'Đã chuyển đi', 'Dead'];
+    protected array $statuses = ['Bình thường', 'Mới sinh', 'Mới mất', 'Tạm trú', 'Đã chuyển đi', 'Đã mất'];
 
     protected array $genders = ['Nam', 'Nữ'];
 
@@ -152,6 +152,10 @@ class PersonController extends Controller
         Temporary::create($tempoData);
 
         return redirect()->route('person.show', $person_id);
+    }
+
+    public function absentView($id){
+        return \view('person.absent', ['person' => Person::find($id)]);
     }
 
     public function absent(TemporaryRequest $request){

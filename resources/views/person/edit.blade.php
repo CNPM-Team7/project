@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('header')
     <div class="flex flex-col gap-y-4">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Chỉnh sửa thông tin nhân khẩu') }}
+        </h2>
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -50,12 +53,12 @@
         >
             <a href="{{ route('person.show', $person->id) }}">
                 <button class="w-44 border rounded bg-blue-500 px-4 py-2">
-                    Show
+                    Hiển thị chi tiết
                 </button>
             </a>
 
             @if(!$person->family || $person->id != $person->family->owner_id)
-                <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+                <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Xóa nhân khẩu</button>
             @endif
 
             {{--Modal--}}
@@ -78,11 +81,11 @@
                             <div class="sm:flex sm:items-start">
                                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                     <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                        Xoa nhan khau
+                                        Xóa nhân khẩu
                                     </h3>
                                     <div class="mt-2">
                                         <p class="text-sm text-gray-500">
-                                            Chac chan muon xoa nhan khau nay? Hanh dong nay khong the quay lai.
+                                            Chắc chắn muốn xóa nhân khẩu này? Hành động sẽ không thể hoàn tác.
                                         </p>
                                     </div>
                                 </div>
@@ -196,7 +199,7 @@
 
                 <x-input-text name="family_id" class="w-5/12"
                               value="{{ $person->family_id }}"> {{--lam 1 cai seach hay gi do--}}
-                    ID Ho Khau
+                    ID Hộ khẩu
                 </x-input-text>
 
                 <x-input-text name="job" class="w-5/12" value="{{ $person->job }}">
@@ -224,7 +227,7 @@
 
                 <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                     <div class="flex w-full items-center justify-between gap-x-1">
-                        <label for="idn_receive_date">Ngày cap</label>
+                        <label for="idn_receive_date">Ngày cấp</label>
                         <div class="relative w-5/12 flex flex-row gap-x-2">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -257,7 +260,7 @@
 
                 <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                     <div class="flex w-full items-center justify-between gap-x-1">
-                        <label for="register_date">Ngày dang ki</label>
+                        <label for="register_date">Ngày đăng ký</label>
                         <div class="relative w-5/12 flex flex-row gap-x-2">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -278,7 +281,7 @@
                 </div>
 
                 <x-input-text name="move_to" class="w-5/12" value="{{ $person->move_to }}">
-                    Địa chỉ sap chuyển đến
+                    Địa chỉ sắp chuyển đến
                 </x-input-text>
 
                 <div class="w-full flex flex-row items-center gap-x-2 pt-5">

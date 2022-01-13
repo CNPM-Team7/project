@@ -121,7 +121,7 @@
 
             <div class="w-full flex flex-row items-center gap-x-2">
                 <div class="flex w-full items-center justify-between gap-x-2">
-                    <label for="isolation_date">Ngày cach ly</label>
+                    <label for="isolation_date">Ngày cách ly</label>
                     <div class="relative w-7/12 flex flex-row gap-x-2">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -138,7 +138,7 @@
                 </div>
             </div>
 
-            <x-input-text name="test_result" value="{{ $declaration->test_result }}">
+            <x-input-text name="test_result" value="{{ $declaration->test_result }}"> {{-- TODO hiển thị kết quả test  --}}
                 Kết quả test covid
             </x-input-text>
 

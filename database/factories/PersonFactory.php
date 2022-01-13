@@ -36,7 +36,7 @@ class PersonFactory extends Factory
             'idn_receive_date'=> $this->faker->dateTimeBetween('1990-01-01', '2012-12-31'),
             'register_place' => $this->faker->address,
             'register_date' => $this->faker->dateTimeBetween('1990-01-01', '2012-12-31'),
-            'owner_relation' => $this->faker->randomElement(['Con', 'Vợ', 'Cháu', 'Chăt']),
+            'owner_relation' => $this->faker->randomElement(['Con', 'Vợ', 'Cháu', 'Chắt']),
             'status' => $this->faker->randomElement([0, 1, 2, 3]),
         ];
     }

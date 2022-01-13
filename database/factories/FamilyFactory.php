@@ -25,7 +25,13 @@ class FamilyFactory extends Factory
 
         $person_id = Person::all()->pluck('id')->toArray();
         return [
-            'owner_id' => $this->faker->randomElement($person_id),
+            'owner_id' => function() use ($person_id) {
+                $random_id = $this->faker->randomElement($person_id);
+                if (($key = array_search($random_id, $person_id)) !== false) {
+                    unset($person_id[$key]);
+                }
+                return $random_id;
+            },
             'house_id' => $this->faker->numerify('###'),
             'address' => $this->faker->address,
         ];

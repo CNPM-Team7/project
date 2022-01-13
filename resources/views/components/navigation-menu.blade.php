@@ -18,10 +18,10 @@
                             {{ __('Đăng nhâp') }}
                         </x-navigation-menu.nav-link>
 
-                        <x-navigation-menu.nav-link href="{{ route('auth.register.create') }}"
-                                                    :active="request()->routeIs('auth.register.create')">
-                            {{ __('Đăng ký') }}
-                        </x-navigation-menu.nav-link>
+{{--                        <x-navigation-menu.nav-link href="{{ route('auth.register.create') }}"--}}
+{{--                                                    :active="request()->routeIs('auth.register.create')">--}}
+{{--                            {{ __('Đăng ký') }}--}}
+{{--                        </x-navigation-menu.nav-link>--}}
                     </div>
             @else
                 <!-- Navigation Links -->

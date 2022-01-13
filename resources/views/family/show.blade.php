@@ -44,7 +44,6 @@
             </ol>
         </nav>
     </div>
-    {{-- TODO check tung trang xem tieu de da dung chua, da chuyen het text ve tieng viet chua, the <title> cung phai co noi dung giong tieu de, sua icon --}}
 @endsection
 
 @section('content')
@@ -53,11 +52,11 @@
         <div x-data="{ show: false }" class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
             <a href="{{ route('families.edit', $family->id) }}">
                 <button class="w-44 border rounded bg-yellow-500 px-4 py-2">
-                    Edit
+                    Chỉnh sửa
                 </button>
             </a>
 
-            <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+            <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Xóa hộ khẩu</button>
 
             {{--Modal--}}
             <div x-show="show"
@@ -83,7 +82,7 @@
                                     </h3>
                                     <div class="mt-2">
                                         <p class="text-sm text-gray-500">
-                                            Chac chan muon xoa hộ khau nay? Hanh dong nay khong the quay lai.
+                                            Chắc chắn muốn xóa hộ khẩu này? Hành động này không thể hoàn tác.
                                         </p>
                                     </div>
                                 </div>
@@ -96,12 +95,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                    Xoa
+                                    Xóa
                                 </button>
                             </form>
 
                             <button @click="show = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                Huy
+                                Hủy
                             </button>
                         </div>
                     </div>
@@ -112,75 +111,67 @@
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>House Id:</span>
+                <span>Mã hộ khẩu</span>
                 <p>{{ $family->house_id }}</p>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Address:</span>
+                <span>Địa chỉ</span>
                 <p>{{ $family->address }}</p>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Chu ho:</span>
+                <span>Chủ hộ</span>
                 <p><a href="{{ route('person.show', $family->owner_id) }}"><u>{{ $family->owner->name ?? '' }}</u></a></p>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Thanh vien</span>
+                <span>Thành viên</span>
             </div>
         </div>
 
         @php
             $genderColors = ['blue', 'red', 'green']
         @endphp
-        <table class="min-w-full divide-y divide-gray-200">
+        <table class="min-w-full divide-y divide-gray-200 mt-4">
             <thead class="bg-gray-200">
             <tr>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    ID Number
+                    ID nhân khẩu
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Name
+                    Họ tên
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Birthday
+                    Số CMND/CCCD
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Gender
+                    Ngày sinh
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Race
+                    Giới tính
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Status
+                    Trạng thái
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Job
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Owner Relation
-                </th>
-                <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Family Owner
+                    Quan hệ với chủ hộ
                 </th>
                 <th scope="col" class="relative px-6 py-3">
-                    <span class="sr-only">Edit</span>
+                    <span class="sr-only"></span>
                 </th>
             </tr>
             </thead>
@@ -189,40 +180,45 @@
 
             @foreach ($family->members as $person)
                 <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div
+                            class="text-sm text-gray-500">{{ $person->id }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap select-text">
+                        <div class="flex items-center">
+                        <span class="text-sm font-medium text-gray-900">
+                            <a href="{{ route('person.show', $person->id) }}"><u>{{ $person->name }}</u></a>
+                        </span>
+                        </div>
+                    </td>
                     <td data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
                         class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
-                        <span class="text-sm font-medium text-gray-500">
-                            {{ $person->id_number }}
-                        </span>
+                            <span class="text-sm font-medium text-gray-500">
+                                {{ $person->id_number }}
+                            </span>
                         </div>
                     </td>
                     <div id="tooltip-id_number {{ $person->id_number }}" role="tooltip"
                          class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
                         <div class="flex flex-col">
                             <span>
-                                Register Date: <u>{{ date('d/m/Y', strtotime($person->register_date)) }}</u>
+                                Ngày đăng ký: <u>{{ date('d/m/Y', strtotime($person->register_date)) }}</u>
                             </span>
                             <span>
-                                Register Place: <u>{{ $person->register_place }}</u>
+                                Nơi đăng ký: <u>{{ $person->register_place }}</u>
                             </span>
                             <span>
-                                Receive Date: <u>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</u>
+                                Ngày nhận: <u>{{ date('d/m/Y', strtotime($person->idn_receive_date)) }}</u>
                             </span>
                             <span>
-                                Receive Place: <u>{{ $person->idn_receive_place }}</u>
+                                Nơi nhận: <u>{{ $person->idn_receive_place }}</u>
                             </span>
                         </div>
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
 
-                    <td class="px-6 py-4 whitespace-nowrap select-text">
-                        <div class="flex items-center">
-                        <span class="text-sm font-medium text-gray-500">
-                            <a href="{{ route('person.show', $person->id) }}"><u>{{ $person->name }}</u></a>
-                        </span>
-                        </div>
-                    </td>
+
                     <td data-tooltip-target="tooltip-birthday {{ $person->id_number }}"
                         class="px-6 py-4 whitespace-nowrap">
                         <div
@@ -231,7 +227,7 @@
                     <div id="tooltip-birthday {{ $person->id_number }}" role="tooltip"
                          class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
                         <span>
-                            Birthday Place: <u>{{ $person->birth_place }}</u>
+                            Nơi sinh: <u>{{ $person->birth_place }}</u>
                         </span>
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
@@ -245,42 +241,12 @@
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">{{ $person->race }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-500">{{ $statuses[$person->status] }}</div>
                     </td>
-                    <td data-tooltip-target="tooltip-job {{ $person->id_number }}"
-                        class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">
-                            <p class="truncate w-20">
-                                {{ $person->job }}
-                            </p>
-                        </div>
-
-                    </td>
-                    <div id="tooltip-job {{ $person->id_number }}" role="tooltip"
-                         class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 duration-300 transition-opacity invisible dark:bg-gray-700">
-
-                        <div class="flex flex-col">
-                            <span>
-                                Job: <u>{{ $person->job }}</u>
-                            </span>
-                            <span>
-                                Work Place: <u>{{ $person->work_place }}</u>
-                            </span>
-                        </div>
-
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
 
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div
                             class="text-sm text-gray-500">{{ $person->family ? $person->owner_relation : 'Chưa điền' }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div
-                            class="text-sm text-gray-500">{{ $person->family->owner->name ?? 'Chưa điền' }}</div>
                     </td>
 
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

@@ -91,11 +91,11 @@
                     })
                 },
                 getMembersByFamily() {
-                    let url = '/families/members/' + this.family_id
+                    let url = '/families/members/' + this.family_id //fix khong hien thong tin chu ho
                     fetch(url)
                     .then(response => response.json())
                     .then(data => {
-                        this.members = data
+                        this.members = Object.values(data)
                         //check xem da duoc chon hay chua
                         this.selecteds.forEach(selected_item =>{
                             this.members = this.members.filter(member_item =>{
@@ -127,39 +127,6 @@
                     send_request(this.selecteds)
                 }
              }">
-            {{--        <div class="flex flex-col w-80">--}}
-            {{--            <x-input-text name="house_id" mandatory>--}}
-            {{--                House ID--}}
-            {{--            </x-input-text>--}}
-
-            {{--            <x-input-text name="address" mandatory>--}}
-            {{--                Address--}}
-            {{--            </x-input-text>--}}
-
-            {{--            <div>--}}
-            {{--                <div class="w-auto flex flex-row items-center gap-x-2 pt-5">--}}
-            {{--                    <div class="flex w-full items-center justify-between">--}}
-            {{--                        <label>--}}
-            {{--                            Family ID--}}
-            {{--                        </label>--}}
-            {{--                        <input id="family_id" onchange="getMembers()"--}}
-            {{--                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>--}}
-            {{--                    </div>--}}
-            {{--                    <span class="text-red-500">(*)</span>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
-
-            {{--            --}}{{-- TODO tim theo ten thanh vien? --}}
-            {{--            <div id="members"></div>--}}
-            {{--            <br>--}}
-            {{--            <div>SELECTED:</div> --}}
-            {{--            <div id="selected"></div>--}}
-            {{--            <br>--}}
-            {{--            <x-input-text name="owner_id" mandatory>--}}
-            {{--                Owner ID--}}
-            {{--            </x-input-text>--}}
-            {{--        </div>--}}
-
 
             <div class="flex flex-col justify-between space-y-8">
 
@@ -212,15 +179,15 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
-                                    Số CMND/CCCD
+                                    ID Nhân khẩu
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Họ tên
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Địa chỉ
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
+                                    Số CMND/CCCD
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
@@ -233,7 +200,7 @@
 
                             <template x-if="members.length === 0">
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap row-span-full" colspan="4">
+                                    <td class="px-6 py-4 whitespace-nowrap row-span-full" colspan="5">
                                         <div class="flex justify-center">
                                             <div class="text-sm font-medium text-gray-900">
                                                 <span class="font-medium py-8 text-gray-400">Không có thông tin</span>
@@ -245,12 +212,12 @@
 
                             <template x-if="members.length !== 0">
                                 <template x-for="item in members" :key="item.id">
-                                    <template x-if="item.id != item.family.owner_id">
+
                                     <tr class="hover:bg-gray-100 cursor-pointer" @click="select(item)">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex justify-center">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <span x-text="item.id_number"></span>
+                                                    <span x-text="item.id"></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -261,10 +228,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div class="flex items-center">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex justify-center">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <span x-text="item.address" class="truncate"></span>
+                                                    <span x-text="item.id_number"></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -276,7 +243,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    </template>
+
                                 </template>
 
                             </template>
@@ -310,15 +277,15 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
-                                    Số CMND/CCCD
+                                    ID nhân khẩu
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Họ tên
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Địa chỉ
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
+                                    Số CMND/CCCD
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
@@ -331,7 +298,7 @@
 
                             <template x-if="selecteds.length === 0">
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap row-span-full" colspan="4">
+                                    <td class="px-6 py-4 whitespace-nowrap row-span-full" colspan="5">
                                         <div class="flex justify-center">
                                             <div class="text-sm font-medium text-gray-900">
                                                 <span class="font-medium py-8 text-gray-400">Không có thông tin</span>
@@ -347,7 +314,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex justify-center">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <span x-text="item.id_number"></span>
+                                                    <span x-text="item.id"></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -358,11 +325,19 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            a
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex justify-center">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    <span x-text="item.id_number"></span>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            b
+                                            <div class="flex justify-center">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    <span x-text="item.owner_relation"></span>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </template>
@@ -374,104 +349,24 @@
                 </div>
             </div>
 
-            <x-input-text name="address" class="w-5/12" mandatory>
-                Address
-            </x-input-text>
-            <x-input-text name="house_id" class="w-5/12" mandatory>
-                House ID
-            </x-input-text>
-            <x-input-text name="owner_id" class="w-5/12" mandatory>
-                Owner ID
-            </x-input-text>
+            <div>
+                <x-input-text name="address" class="w-5/12" mandatory>
+                    Địa chỉ hộ khẩu
+                </x-input-text>
+                <x-input-text name="house_id" class="w-5/12" mandatory>
+                    Số nhà
+                </x-input-text>
+                <x-input-text name="owner_id" class="w-5/12" mandatory>
+                    ID chủ hộ
+                </x-input-text>
+            </div>
 
             <x-button-default class="bg-green-400 hover:bg-green-500 focus:ring-green-300" @click="submit">
                 Hoàn thành
             </x-button-default>
         </div>
-
-        {{--        <div class="flex flex-col my-4">--}}
-        {{--            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">--}}
-        {{--                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">--}}
-        {{--                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">--}}
-        {{--                        <table class="min-w-full divide-y divide-gray-200">--}}
-        {{--                            <thead class="bg-gray-200">--}}
-        {{--                            <tr>--}}
-        {{--                                <th scope="col"--}}
-        {{--                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
-        {{--                                    Mã hộ khẩu--}}
-        {{--                                </th>--}}
-        {{--                                <th scope="col"--}}
-        {{--                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
-        {{--                                    Họ tên chủ hộ--}}
-        {{--                                </th>--}}
-        {{--                                <th scope="col"--}}
-        {{--                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
-        {{--                                    Địa chỉ--}}
-        {{--                                </th>--}}
-        {{--                            </tr>--}}
-        {{--                            </thead>--}}
-
-        {{--                            <tbody class="bg-white divide-y divide-gray-200">--}}
-        {{--                            @foreach($families as $family)--}}
-        {{--                                <tr>--}}
-        {{--                                    <td class="px-6 py-4 whitespace-nowrap">--}}
-        {{--                                        <div class="flex justify-center">--}}
-        {{--                                            <div class="text-sm font-medium text-gray-900">--}}
-        {{--                                                {{ $family->id }}--}}
-        {{--                                            </div>--}}
-        {{--                                        </div>--}}
-        {{--                                    </td>--}}
-        {{--                                    <td class="px-6 py-4 whitespace-nowrap">--}}
-        {{--                                        <div class="flex items-center">--}}
-        {{--                                            <div class="text-sm font-medium text-gray-900">--}}
-        {{--                                                {{ $family->owner->name ?? '' }}--}}
-        {{--                                            </div>--}}
-        {{--                                        </div>--}}
-        {{--                                    </td>--}}
-        {{--                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--}}
-        {{--                                        {{ $family->address }}--}}
-        {{--                                    </td>--}}
-        {{--                                </tr>--}}
-        {{--                            @endforeach--}}
-        {{--                            </tbody>--}}
-        {{--                        </table>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--            <br>--}}
-        {{--            <div>{{ $families->links() }}</div>--}}
-        {{--        </div>--}}
     </div>
 @endsection
-{{--<script>--}}
-{{--    let selected = [];--}}
-{{--    let selectedClass = 'text-red-500';--}}
-
-{{--    function done() {--}}
-{{--        if (selected.length == 0) return alert('Haven\'t select any one.')--}}
-{{--        let data = {--}}
-{{--            'house_id': document.querySelector('input[name=house_id]').value,--}}
-{{--            'address': document.querySelector('input[name=address]').value,--}}
-{{--            'owner_id': document.querySelector('input[name=owner_id]').value,--}}
-{{--            'members': {},--}}
-{{--        }--}}
-{{--        if (!data.house_id || !data.address || !data.owner_id) return alert('Required field can\'t be blank.')--}}
-{{--        selected.forEach(member => {--}}
-{{--            data.members[member.id] = document.getElementById('memberRelationNo.' + member.id).value || 'Con'--}}
-{{--        })--}}
-
-{{--        fetch("/families/split", {--}}
-{{--            method: 'POST',--}}
-{{--            headers: {--}}
-{{--                'Content-Type': 'application/json',--}}
-{{--                "X-CSRF-TOKEN": "{{ csrf_token() }}",--}}
-{{--            },--}}
-{{--            body: JSON.stringify(data),--}}
-{{--        }).then(response => { // TODO redirect to families index--}}
-{{--            console.log(response)--}}
-{{--        });--}}
-{{--    }--}}
-{{--</script>--}}
 
 <script>
     function send_request(data) {
@@ -481,10 +376,10 @@
             'owner_id': document.querySelector('input[name=owner_id]').value,
             'members': {},
         }
-        if (!data.house_id || !data.address || !data.owner_id) return alert('Required field can\'t be blank.')
-        
+        if (!sendData.house_id || !sendData.address || !sendData.owner_id) return alert('Required field can\'t be blank.')
+
         data.forEach(member => {
-            sendData.members[member.id] = 'Con' // TODO FE input relation
+            sendData.members[member.id] = '_'
         })
         fetch('/families/split', {
             method: 'POST',

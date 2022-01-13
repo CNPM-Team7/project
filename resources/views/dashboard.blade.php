@@ -27,6 +27,10 @@
 @endsection
 
 @section('content')
+    @php
+        $genderColors = ['blue', 'red'];
+        $genders = ['Nam', 'Nữ'];
+    @endphp
     <div class="w-auto overflow-hidden sm:rounded-lg px-10 py-5 bg-gray-100 shadow-lg"
          id="statistic">
 
@@ -93,11 +97,12 @@
 
                 <div class="flex flex-col my-4">
 
+{{--                    TODO fe fix bảng thống kê tạm trú tạm vắng--}}
                     <span class="text-yellow-500">Tạm trú: {{ $tempo->reduce(function ($carry, $t) {
                         return (!$t[0]->type && $t[0]->declarant && $t[0]->stayAt) ? $carry + 1 : $carry;
                     }) }}</span>
 
-                    <span class="text-green-500">Tạm vang: {{ $tempo->reduce(function ($carry, $t) {
+                    <span class="text-green-500">Tạm vắng: {{ $tempo->reduce(function ($carry, $t) {
                         return ($t[0]->type && $t[0]->declarant && $t[0]->stayAt) ? $carry + 1 : $carry;
                     }) }}</span>
 
@@ -121,7 +126,7 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Tam tru / Tam vang
+                                            Tạm trú/Tạm vắng
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
@@ -166,17 +171,18 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div
-                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
-                                            <span
-                                                class="text-xs leading-5 font-semibold text-red-500 px-3 py-0.5">
-                                                {{ $t[0]->declarant->sex }}
-                                            </span>
+                                                class="flex flex-row py-0.5 justify-center rounded-full bg-{{ $genderColors[$t[0]->declarant->sex] }}-100">
+                                                <span
+                                                    class="text-xs leading-5 font-semibold text-{{ $genderColors[$t[0]->declarant->sex] }}-500 px-3 py-0.5">
+                                                    {{ $genders[$t[0]->declarant->sex] }}
+                                                </span>
                                             </div>
+
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div
-                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
-                                                {{ $t[0]->type ? 'Tam vang' : 'Tam tru' }}
+                                                class="flex flex-row py-0.5 justify-center rounded-full">
+                                                {{ $t[0]->type ? 'Tạm vắng' : 'Tạm trú' }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -206,115 +212,12 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
-
-                    {{--<span class="text-green-500">Tạm vắng: 999</span>
-
-                    <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-200">
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Số CMND/CCCD
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Họ tên
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Giới tính
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Từ ngày
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Đến ngày
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Địa chỉ tạm trú
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Ghi chú
-                                        </th>
-                                        <th scope="col" class="relative px-6 py-3">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="bg-white divide-y divide-gray-200">
-
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap select-text">
-                                            <div class="flex items-center">
-                                                <span class="text-sm font-medium text-gray-500">
-                                                    132
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap select-text">
-                                            <div class="flex items-center">
-                                                <span class="text-sm font-medium text-gray-500">
-                                                    abc
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
-                                            <span
-                                                class="text-xs leading-5 font-semibold text-red-500 px-3 py-0.5">
-                                                    Nữ
-                                            </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">Hà Nội</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-500">Không
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href=""
-                                               class="text-indigo-600 hover:text-indigo-500">Edit</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>--}}
-
                     <br>
-
                 </div>
-
-
             </div>
-
         </div>
     </div>
 

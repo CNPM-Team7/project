@@ -51,11 +51,11 @@
     <div x-data="{show: false}" class="w-full select-none flex flex-row justify-end space-x-4 mb-4">
         <a href="{{ route('families.show', $family->id) }}">
             <button class="w-44 border rounded bg-blue-500 px-4 py-2">
-                Show
+                Hiển thị chi tiết
             </button>
         </a>
 
-        <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+        <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Xóa</button>
 
         {{--Modal--}}
         <div x-show="show"
@@ -81,7 +81,7 @@
                                 </h3>
                                 <div class="mt-2">
                                     <p class="text-sm text-gray-500">
-                                        Chac chan muon xoa hộ khau nay? Hanh dong nay khong the quay lai.
+                                        Chắc chắn muốn xóa hộ khẩu này? Hành động này không thể hoàn tác.
                                     </p>
                                 </div>
                             </div>
@@ -94,12 +94,12 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                Xoa
+                                Xóa
                             </button>
                         </form>
 
                         <button @click="show = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                            Huy
+                            Hủy
                         </button>
                     </div>
                 </div>
@@ -113,15 +113,11 @@
         <input name="_method" value="PUT" style="display: none;"/>
         <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid">
             <x-input-text name="owner_id" value="{{ $family->owner_id }}" mandatory>
-                Owner ID
+                ID Chủ hộ
             </x-input-text>
 
             <x-input-text name="house_id" value="{{ $family->house_id }}" mandatory>
-                House ID
-            </x-input-text>
-
-            <x-input-text name="address" value="{{ $family->address }}" mandatory>
-                Address
+                ID Hộ khẩu
             </x-input-text>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
@@ -129,7 +125,7 @@
                     <label for="address">
                         Địa chỉ hộ khẩu
                     </label>
-                    <textarea name="address" id="address" type="tex" oninput="auto_grow(this)"
+                    <textarea name="address" id="address" type="tex"
                               class="w-7/12 overflow-hidden resize-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $family->address }}</textarea>
                 </div>
                 <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
@@ -138,12 +134,6 @@
         <button class="w-32 border rounded bg-green-500 px-4 py-2 self-center">Hoàn thành</button>
     </form>
     </div>
-    <script>
-        function auto_grow(element) {
-            element.style.height = "5px";
-            element.style.height = (element.scrollHeight) + "px";
-        }
-    </script>
 @endsection
 
 

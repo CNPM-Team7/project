@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('header')
     <div class="flex flex-col gap-y-4">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Thông tin chi tiết nhân khẩu') }}
+        </h2>
+
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -35,7 +39,7 @@
                                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                   clip-rule="evenodd"></path>
                         </svg>
-                        <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Chi tiet nhân khẩu</span>
+                        <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">Chi tiết nhân khẩu</span>
                     </div>
                 </li>
             </ol>
@@ -54,12 +58,12 @@
         >
             <a href="{{ route('person.edit', $person->id) }}">
                 <button class="w-44 border rounded bg-yellow-500 px-4 py-2">
-                    Edit
+                    Chỉnh sửa
                 </button>
             </a>
-            
+
             @if(!$person->family || $person->id != $person->family->owner_id)
-                <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Delete</button>
+                <button @click="show = true" type="button" class="w-44 border rounded bg-red-500 px-4 py-2">Xóa</button>
             @endif
 
             {{--Modal--}}
@@ -82,11 +86,11 @@
                             <div class="sm:flex sm:items-start">
                                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                     <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                        Xoa nhan khau
+                                        Xóa nhân khẩu
                                     </h3>
                                     <div class="mt-2">
                                         <p class="text-sm text-gray-500">
-                                            Chac chan muon xoa nhan khau nay? Hanh dong nay khong the quay lai.
+                                            Chắc chắn muốn xóa nhân khẩu này? Hành động sẽ không thể hoàn tác.
                                         </p>
                                     </div>
                                 </div>
@@ -99,12 +103,12 @@
                                   @csrf
                                 @method('DELETE')
                                 <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                    Xoa
+                                    Xóa
                                 </button>
                             </form>
 
                             <button @click="show = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                Huy
+                                Hủy
                             </button>
                         </div>
                     </div>
@@ -167,7 +171,7 @@
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>ID Ho Khau</span>
+                <span>ID Hộ khẩu</span>
                 <span>{{ $person->family_id ?? 'Chưa điền' }}</span>
             </div>
         </div>
@@ -200,19 +204,19 @@
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Ngày cap</span>
+                <span>Ngày cấp</span>
                 <span>{{ date('d/m/Y', strtotime($person->idn_receive_date)) ?? 'Chưa điền' }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Nơi dang ki</span>
+                <span>Nơi đăng ký</span>
                 <span>{{ $person->register_place ?? 'Chưa điền' }}</span>
             </div>
         </div>
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Ngày dang ki</span>
+                <span>Ngày đăng kí</span>
                 <span>{{ date('d/m/Y', strtotime($person->register_date)) ?? 'Chưa điền' }}</span>
             </div>
         </div>
@@ -220,7 +224,7 @@
         @if($person->move_to)
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Địa chỉ sap chuyển đến</span>
+                <span>Địa chỉ sắp chuyển đến</span>
                 <span>{{ $person->move_to }}</span>
             </div>
         </div>
@@ -242,50 +246,50 @@
     <div class="grid grid-cols-1 gap-y-5 divide-gray-300 divide-y divide-solid" style="width: 900px">
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>ID Ho Khau:</span>
+                <span>ID Hộ khẩu</span>
                 <p><a href="{{ route('families.show', $person->family_id) }}"><u>{{ $person->family_id }}</u></a></p>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Chu Ho Khau:</span>
+                <span>Chủ hộ</span>
                 <p><a href="{{ route('person.show', $person->family->owner_id) }}"><u>{{ $person->family->owner->name ?? '' }}</u></a></p>
             </div>
         </div>
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Quan he voi Chu Ho Khau:</span>
+                <span>Quan hệ với chủ hộ</span>
                 <p>{{ $person->owner_relation }}</p>
             </div>
         </div>
     </div>
     @endif
     <br>
-    <h4>Khai bao tam tru / tam vang:</h4>
+    <h4>Thống kê tạm trú/tạm vắng</h4>
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-200">
         <tr>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                Type
+                Loại
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                Register Date
+                Ngày đăng kí
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                Start Date
+                Ngày bắt đầu
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                End Date
+                Ngày kết thúc
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                Family ID
+                ID Hộ khẩu
             </th>
         </tr>
         </thead>
@@ -296,7 +300,7 @@
                     <td class="px-6 py-4 whitespace-nowrap select-text">
                         <div class="flex items-center">
                         <span class="text-sm font-medium text-gray-500">
-                            {{ $tempo->type ? 'Tam vang' : 'Tam tru' }}
+                            {{ $tempo->type ? 'Tạm vắng' : 'Tạm trú' }}
                         </span>
                         </div>
                     </td>

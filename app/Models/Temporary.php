@@ -31,4 +31,9 @@ class Temporary extends Model
     {
         return $this->belongsTo(Person::class, 'person_id');
     }
+
+    public function stayAt()
+    {
+        return $this->belongsTo(Family::class, 'family_id');
+    }
 }

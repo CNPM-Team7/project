@@ -87,14 +87,131 @@
             </div>
 
             <hr>
-
             <div class="w-full px-24 py-2 flex flex-col gap-x-5 gap-y-3 justify-between">
                 <span class="font-bold">Thống kê tạm trú/tạm vắng</span>
 
 
                 <div class="flex flex-col my-4">
 
-                    <span class="text-yellow-500">Tạm trú: 999</span>
+                    <span class="text-yellow-500">Tạm trú: {{ $tempo->reduce(function ($carry, $t) {
+                        return (!$t[0]->type && $t[0]->declarant && $t[0]->stayAt) ? $carry + 1 : $carry;
+                    }) }}</span>
+
+                    <span class="text-green-500">Tạm vang: {{ $tempo->reduce(function ($carry, $t) {
+                        return ($t[0]->type && $t[0]->declarant && $t[0]->stayAt) ? $carry + 1 : $carry;
+                    }) }}</span>
+
+                    <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-200">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Số CMND/CCCD
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Họ tên
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Giới tính
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Tam tru / Tam vang
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Từ ngày
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Đến ngày
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Địa chỉ tạm trú
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
+                                            Ghi chú
+                                        </th>
+                                        <th scope="col" class="relative px-6 py-3">
+                                            <span class="sr-only">Edit</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="bg-white divide-y divide-gray-200">
+
+                                    @foreach ($tempo as $t)
+                                    @if($t[0]->declarant && $t[0]->stayAt) {{-- check nhung person hoac family bi xoa --}}
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap select-text">
+                                            <div class="flex items-center">
+                                                <span class="text-sm font-medium text-gray-500">
+                                                    {{ $t[0]->declarant->id_number }}
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap select-text">
+                                            <div class="flex items-center">
+                                                <span class="text-sm font-medium text-gray-500">
+                                                    <u><a href="{{ route('person.show', $t[0]->declarant->id) }}">{{ $t[0]->declarant->name }}</a></u>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div
+                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
+                                            <span
+                                                class="text-xs leading-5 font-semibold text-red-500 px-3 py-0.5">
+                                                {{ $t[0]->declarant->sex }}
+                                            </span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div
+                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
+                                                {{ $t[0]->type ? 'Tam vang' : 'Tam tru' }}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div
+                                                class="text-sm text-gray-900">{{ date('d/m/Y', strtotime($t[0]->start_date)) }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div
+                                                class="text-sm text-gray-900">{{ date('d/m/Y', strtotime($t[0]->end_date)) }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">
+                                                <u><a href="{{ route('families.show', $t[0]->stayAt->id) }}">{{ $t[0]->stayAt->address }}</a></u>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div
+                                                class="text-sm text-gray-500">{{ $t[0]->reason }}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">{{--show, edit and delete--}}
+                                            <a href="{{ route('person.show', $t[0]->declarant->id) }}"
+                                               class="text-indigo-600 hover:text-indigo-500">Chi tiet</a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {{--<span class="text-green-500">Tạm vắng: 999</span>
 
                     <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -179,7 +296,7 @@
                                                 class="text-sm text-gray-500">Không
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">{{--show, edit and delete--}}
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href=""
                                                class="text-indigo-600 hover:text-indigo-500">Edit</a>
                                         </td>
@@ -189,104 +306,7 @@
 
                             </div>
                         </div>
-                    </div>
-
-                    <span class="text-green-500">Tạm vắng: 999</span>
-
-                    <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-200">
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Số CMND/CCCD
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Họ tên
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Giới tính
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Từ ngày
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Đến ngày
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Địa chỉ tạm trú
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                            Ghi chú
-                                        </th>
-                                        <th scope="col" class="relative px-6 py-3">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="bg-white divide-y divide-gray-200">
-
-
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap select-text">
-                                            <div class="flex items-center">
-                                                <span class="text-sm font-medium text-gray-500">
-                                                    132
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap select-text">
-                                            <div class="flex items-center">
-                                                <span class="text-sm font-medium text-gray-500">
-                                                    abc
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="flex flex-row py-0.5 justify-center rounded-full bg-red-100">
-                                            <span
-                                                class="text-xs leading-5 font-semibold text-red-500 px-3 py-0.5">
-                                                    Nữ
-                                            </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-900">{{ date('d/m/Y', strtotime('28/01/2001')) }}</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">Hà Nội</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div
-                                                class="text-sm text-gray-500">Không
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">{{--show, edit and delete--}}
-                                            <a href=""
-                                               class="text-indigo-600 hover:text-indigo-500">Edit</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
+                    </div>--}}
 
                     <br>
 
@@ -339,7 +359,7 @@
         document.getElementById('female').innerText = female.length.toString()
 
         const data = [{
-            data: [male.length, female.length], // TODO chart
+            data: [male.length, female.length],
             labels: ['Nam', 'Nữ'],
             backgroundColor: [
                 'rgba(54, 162, 235, 1)',

@@ -256,7 +256,7 @@
                         <label for="reason">
                             Lý do
                         </label>
-                        <textarea name="reason" id="reason" type="text"
+                        <textarea name="reason" id="reason" type="text" required
                                   class="w-5/12 required h-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ old('reason') }}</textarea>
                     </div>
                     <span class="text-red-500">(*)</span>

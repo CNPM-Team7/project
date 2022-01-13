@@ -21,7 +21,7 @@ class PersonController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard'); // TODO DISCUSS return data
+        return view('dashboard',['people' => Person::all()]); // TODO DISCUSS return data
     }
 
     /**
@@ -168,9 +168,16 @@ class PersonController extends Controller
         return $data;
     }
 
-    public function get($id)
+    //theo ID, theo ten, theo so CMND/CCCD
+    public function get($type, $data = null)
     {
-        $response = 1;
-        return $id;
+        if ($data == null) {
+            if($type == 'all'){
+               return Person::all();
+            }
+            return \response('', 404);
+        }
+
+        return Person::query()->where($type, 'LIKE', "%{$data}%")->get();
     }
 }

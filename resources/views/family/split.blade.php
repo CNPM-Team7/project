@@ -310,7 +310,7 @@
 
                             <template x-if="selecteds.length !== 0">
                                 <template x-for="item in selecteds" :key="item.id">
-                                    <tr class="hover:bg-gray-100 cursor-pointer" @click="unselect(item)">
+                                    <tr class="hover:bg-gray-100 cursor-pointer">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex justify-center">
                                                 <div class="text-sm font-medium text-gray-900">
@@ -318,14 +318,14 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap" @click="unselect(item)">
                                             <div class="flex items-center">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     <span x-text="item.name" class=""></span>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap" @click="unselect(item)">
                                             <div class="flex justify-center">
                                                 <div class="text-sm font-medium text-gray-900">
                                                     <span x-text="item.id_number"></span>
@@ -335,7 +335,9 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="flex justify-center">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    <span x-text="item.owner_relation"></span>
+                                                    <input name="new_owner_relation" id="new_owner_relation" type="text" value=""
+                                                           class="w-36 z-10 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                                                    >
                                                 </div>
                                             </div>
                                         </td>

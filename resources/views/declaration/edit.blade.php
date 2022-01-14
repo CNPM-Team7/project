@@ -138,9 +138,22 @@
                 </div>
             </div>
 
-            <x-input-text name="test_result" value="{{ $declaration->test_result }}"> {{-- TODO hiển thị kết quả test  --}}
+            {{-- <x-input-text name="test_result" value="{{ $declaration->test_result }}">
                 Kết quả test covid
-            </x-input-text>
+            </x-input-text> --}}
+
+            <div class="flex w-full items-center justify-between items-center">
+                <label for="test_result"
+                       class="text-sm font-medium text-gray-900 block dark:text-gray-400">
+                    Kết quả Test
+                </label>
+                <select id="test_result" name="test_result" style="height: 34px;" x-model="test_level"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-7/12 p-1.5">
+                    <option value="-1" selected>Chưa xét nghiệm</option>
+                    <option value="0">Âm tính</option>
+                    <option value="1">Dương tính</option>
+                </select>
+            </div>
 
             <div class="w-full flex flex-row items-center gap-x-2">
                 <div class="flex w-full items-center justify-between gap-x-2">

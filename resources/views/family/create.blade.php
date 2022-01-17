@@ -57,7 +57,7 @@
                 </x-input-text>
 
                 <x-input-text name="house_id" mandatory value="{{ old('house_id') }}">
-                    ID hộ khẩu
+                    Số nhà
                 </x-input-text>
 
                 <x-input-text name="address" mandatory value="{{ old('address') }}">

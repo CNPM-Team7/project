@@ -96,8 +96,6 @@
 
 
                 <div class="flex flex-col my-4">
-
-{{--                    TODO fe fix bảng thống kê tạm trú tạm vắng--}}
                     <span class="text-yellow-500">Tạm trú: {{ $tempo->reduce(function ($carry, $t) {
                         return (!$t[0]->type && $t[0]->declarant && $t[0]->stayAt) ? $carry + 1 : $carry;
                     }) }}</span>
@@ -225,28 +223,6 @@
     @php($data = [1, 2, 3, 4, 5, 6])
 
     <script>
-
-        // birth_place: "450 McCullough Manor Suite 615Botsfordview, TN 74693-2939"
-        // birthday: "1970-01-01"
-        // created_at: "2021-12-17T11:25:52.000000Z"
-        // family_id: 213
-        // id: 1
-        // id_number: 1709
-        // idn_receive_date: "1970-01-01"
-        // idn_receive_place: "4707 Metz Mills Suite 244Port Shayneshire, MS 14510-5318"
-        // job: "CSI"
-        // move_to: null
-        // name: "Jade Bashirian"
-        // note: null
-        // owner_relation: "Cháu"
-        // race: "Kinh"
-        // register_date: "1994-04-08"
-        // register_place: "1786 Liliane Passage Apt. 903New Guy, CT 08125-8421"
-        // sex: 0
-        // status: 0
-        // updated_at: "2021-12-22T06:40:59.000000Z"
-        // work_place: "724 Kuphal Junction Apt. 710North Alexander, VT 72012"
-
         let people = {!! json_encode($people, JSON_HEX_TAG) !!};
 
         document.getElementById('people_number').innerText = people.length
@@ -361,10 +337,6 @@
         console.log(maleAge.map(e => e * (-1)))
         console.log(femaleAge)
 
-        {{--const maleData = [];--}}
-        {{--const male1 = {!! json_encode($data, JSON_HEX_TAG) !!};--}}
-        {{--male1.forEach(element => maleData.push(element * (-1)));--}}
-
         const data2 = {
             labels: ['Nghỉ hưu', 'Trưởng thành: >= 18', 'Cấp 3: 15-17', 'Cấp 2: 12-14', 'Cấp 1: 6-10', 'Mẫu giáo: 0-5'],
             datasets: [
@@ -436,6 +408,4 @@
             config2
         );
     </script>
-
-
 @endsection

@@ -111,7 +111,7 @@
 
         <div class="w-auto flex flex-row items-center gap-x-2 pt-5">
             <div class="flex w-full items-center justify-between">
-                <span>Mã hộ khẩu</span>
+                <span>Số nhà</span>
                 <p>{{ $family->house_id }}</p>
             </div>
         </div>

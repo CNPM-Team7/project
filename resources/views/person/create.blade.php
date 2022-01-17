@@ -121,38 +121,6 @@
                 <span class="text-red-500">(*)</span>
             </div>
 
-            <x-input-text name="owner_relation" class="w-5/12" value="{{ old('owner_relation') }}" mandatory>
-                Quan hệ với chủ hộ
-            </x-input-text>
-
-            <x-input-text name="family_id" class="w-5/12" value="{{ old('family_id') }}"> {{--lam 1 cai seach hay gi do--}}
-                Mã hộ khẩu
-            </x-input-text>
-
-            {{-- <x-input-text name="native_land">
-                Quê quán
-            </x-input-text> --}}
-
-            {{-- <x-input-text name="nation">
-                Quốc tịch
-            </x-input-text> --}}
-
-            {{-- <x-input-text name="region" >
-                Tôn giáo
-            </x-input-text> --}}
-
-            <x-input-text name="job" class="w-5/12" value="{{ old('job') }}">
-                Nghề nghiệp
-            </x-input-text>
-
-            <x-input-text name="work_place" class="w-5/12" value="{{ old('work_place') }}">
-                Nơi làm việc
-            </x-input-text>
-
-            <x-input-text name="phone_number" class="w-5/12" value="{{ old('phone_number') }}">
-                Số điện thoại
-            </x-input-text>
-
             <x-input-text name="id_number" class="w-5/12" value="{{ old('id_number') }}">
                 Số CMND/CCCD
             </x-input-text>
@@ -206,6 +174,26 @@
                 </div>
                 <span class="text-red-500 {{$mandatory ?? 'opacity-0'}}">(*)</span>
             </div>
+
+            <x-input-text name="family_id" class="w-5/12" value="{{ old('family_id') }}"> {{--lam 1 cai seach hay gi do--}}
+                Mã hộ khẩu
+            </x-input-text>
+
+            <x-input-text name="owner_relation" class="w-5/12" value="{{ old('owner_relation') }}">
+                Quan hệ với chủ hộ
+            </x-input-text>
+
+            <x-input-text name="job" class="w-5/12" value="{{ old('job') }}">
+                Nghề nghiệp
+            </x-input-text>
+
+            <x-input-text name="work_place" class="w-5/12" value="{{ old('work_place') }}">
+                Nơi làm việc
+            </x-input-text>
+
+            <x-input-text name="phone_number" class="w-5/12" value="{{ old('phone_number') }}">
+                Số điện thoại
+            </x-input-text>
 
             <div class="w-full flex flex-row items-center gap-x-2 pt-5">
                 <div class="flex w-full justify-between">

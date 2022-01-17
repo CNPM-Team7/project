@@ -68,7 +68,7 @@
 
 
                 <div class="h-auto w-full flex flex-row items-center pt-4 space-x-8">
-                    <div class="flex w-full items-center justify-between">
+                    <div class="flex w-full items-center justify-start space-x-6">
                         <label for="name">
                             Họ và tên
                         </label>
@@ -76,7 +76,7 @@
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
 
-                    <div class="flex w-full items-center space-x-3 justify-between">
+                    <div class="flex w-full items-center space-x-3 justify-start space-x-4">
                         <label for="id_number">
                             CMND/CCCD
                         </label>
@@ -221,8 +221,9 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td @if($person->id_number) data-tooltip-target="tooltip-id_number {{ $person->id_number }}" @endif
-                                        class="px-6 py-4 whitespace-nowrap select-text">
+                                        <td @if($person->id_number) data-tooltip-target="tooltip-id_number {{ $person->id_number }}"
+                                            @endif
+                                            class="px-6 py-4 whitespace-nowrap select-text">
                                             <div class="flex items-center">
                                                 <span class="text-sm font-medium text-gray-900 italic">
                                                     {{ $person->id_number }}
@@ -257,7 +258,8 @@
                                             <div class="text-sm text-gray-500">{{ $statuses[$person->status] }}</div>
                                         </td>
 
-                                        <td @if($person->job) data-tooltip-target="tooltip-job {{ $person->id_number }}" @endif
+                                        <td @if($person->job) data-tooltip-target="tooltip-job {{ $person->id_number }}"
+                                            @endif
                                             class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-500">
                                                 @if($person->job)
@@ -334,7 +336,7 @@
                                             </a>
 
                                             <a href="{{ route('person.edit', $person->id) }}"
-                                               class="text-indigo-600 hover:text-indigo-500">
+                                               class="text-blue-600 hover:text-blue-500">
                                                 <div class="flex flex-row space-x-2">
                                                     <i class="material-icons-outlined text-base">edit</i>
                                                     <span class="pt-0.5">Chỉnh sửa</span>
@@ -349,13 +351,13 @@
                                                 </div>
                                             </a>
                                             @if($person->family_id)
-                                            <a href="{{ route('absent', $person->id) }}"
-                                                class="text-yellow-600 hover:text-yellow-500">
-                                                <div class="flex flex-row space-x-2">
-                                                    <i class="material-icons-outlined text-base">edit</i>
-                                                    <span class="pt-0.5">Khai báo tạm vắng</span>
-                                                </div>
-                                            </a>
+                                                <a href="{{ route('absent', $person->id) }}"
+                                                   class="text-yellow-600 hover:text-yellow-500">
+                                                    <div class="flex flex-row space-x-2">
+                                                        <i class="material-icons-outlined text-base">edit</i>
+                                                        <span class="pt-0.5">Khai báo tạm vắng</span>
+                                                    </div>
+                                                </a>
                                             @endif
 
                                         </td>

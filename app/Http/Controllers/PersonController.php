@@ -168,7 +168,6 @@ class PersonController extends Controller
 
     public function filterTempoRequest($request){
         $data = $request->all();
-        dd($data);
         $data['register_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['register_date'])));
         $data['start_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['start_date'])));
         $data['end_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['end_date'])));

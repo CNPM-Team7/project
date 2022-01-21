@@ -31,7 +31,7 @@
         <main class="h-full bg-cover" style="background-image: url({{ url('/assets/img/background.jpg') }})">
             <div class="h-full py-12">
                 <div class="w-auto mx-auto sm:px-6 lg:px-8 flex justify-center">
-                    <div class="w-1/2 h-auto bg-gray-100 overflow-hidden shadow-xl sm:rounded-lg px-10 py-5">
+                    <div class="w-1/3 h-auto bg-gray-100 overflow-hidden shadow-xl sm:rounded-lg px-10 py-5">
                         @yield('content')
                     </div>
                 </div>
